@@ -31,7 +31,7 @@
 
 	<nav class="nav-extended">
 		<div class="nav-wrapper">
-		  <a href="#" class="brand-logo">INSERIMENTO</a>  
+		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a>  
       <div class="chip">
         <img id="sliderTrigger" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
@@ -50,6 +50,7 @@
 		  </ul>
 		</div>
 	</nav>
+   <div class="compensatore"></div>
 	<div id="test1" class="col s12">
 		<div class="container">
 			<h2>Inserimento Alunno</h2>
@@ -93,7 +94,7 @@
                 
                 <div class="row">
 	                <div class="input-field col s12">
-	                    <select name="classe" id="classe">
+	                    <select name="classe" id="classeAl">
 	                      <option selected disabled value="" required><i> Scegli la Classe</i></option>
 	                      <?php
 
@@ -603,9 +604,9 @@
     <li><div class="user-view">
       <div style="background-color: red" class="background">
       </div>
-      <a href="#!user"><img class="circle" src="../assets/img/profile.jpg"></a>
-      <a href="#!name"><span class="white-text name"><?php echo $_SESSION["name"]; ?></span></a>
-      <a href="#!email"><span class="white-text email"><?php echo $_SESSION["mail"]; ?></span></a>
+      <img class="circle" src="../assets/img/profile.jpg">
+      <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
+      <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
     </div></li>
     <li><a href="#!">ESCI</a></li>
     <li><div class="divider"></div></li>

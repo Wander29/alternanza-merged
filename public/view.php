@@ -25,7 +25,14 @@
     <body>
         <nav class="nav-extended">
             <div class="nav-wrapper">
-              <div class="logo"><a href="#" class="brand-logo">Alternanza</a></div>
+              <div class="logo">
+                <a href="#" class="brand-logo"><i class="material-icons">visibility</i> VISUALIZZAZIONE</a></div>
+              <div class="chip">
+                <img id="sliderTrigger" src="../assets/img/profile.jpg" alt="Contact Person">
+                  <?php echo $_SESSION["name"] ?>
+              </div>
+              <a href="#" id="triggerat" data-activates="slide-out" class="button-collapse" style="display: none"></a>
+            </div>
             </div>
             <div class="nav-content">
               <ul class="tabs tabs-transparent">
@@ -36,6 +43,7 @@
               </ul>
             </div>
           </nav>
+          <div class="compensatore"></div>
         <div class="container">
             <div id="1classi" class="col s12"> <!-- CLASSI -->
                 <br>
@@ -69,7 +77,7 @@
                                                 $cogTut2 = $row2[2];
                                         ?>
                                         <li>
-                                            <div class="collapsible-header" <?php echo "id='" . $idClas2 . "'" ?> >
+                                            <div class="collapsible-header" <?php echo "id='" . $idClas2 . "'" ?> ><i class="material-icons">donut_large</i>
                                                 <table>
                                                     <tr>
                                                         <td><?php echo $idClas2 ?></td>
@@ -131,6 +139,7 @@
             ?>
             <li>
                 <div class="collapsible-header">
+                  <i class="material-icons">donut_large</i>
                   <?php echo $id4; ?>
                 </div>
                 <div class="collapsible-body">
@@ -159,7 +168,7 @@
                       <!-- TIROCINI -->
                       <ul class="collapsible" data-collapsible="accordion">
                           <?php
-                            $query6 = "SELECT tirocinio.Inizio, azienda.Nome, tirocinio.CodTir, tirocinio.Fine FROM tirocinio, azienda WHERE azienda.CodAz = tirocinio.FKAz AND tirocinio.FKAlu = {$ida5};";
+                            $query6 = "SELECT tirocinio.Inizio, azienda.Nome, tirocinio.CodTir, tirocinio.Fine, azienda.CodAz FROM tirocinio, azienda WHERE azienda.CodAz = tirocinio.FKAz AND tirocinio.FKAlu = {$ida5};";
 
                             $result6 = mysqli_query($connection, $query6);
                             if (!$result6) {
@@ -171,17 +180,18 @@
                                $az6 = $row6[1];
                                $idtir6 = $row6[2];
                                $fine6 = $row6[3];
+                               $idAz6 = $row6[4];
                           ?>
                           <li>
                             <div class="collapsible-header">
-                              <?php echo $az6 . " | " . $inizio6; ?>
+                              <i class="material-icons">work</i><?php echo $az6 . " | " . $inizio6; ?>
                             </div>
                             <div class="collapsible-body">
                               <!-- Info Aziende - Diari -->
                               <ul class="collapsible" data-collapsible="accordion">
                                 <li>
                                   <div class="collapsible-header">
-                                    Informazioni Tirocinio
+                                    <i class="material-icons">format_list_bulleted</i> Informazioni Tirocinio
                                   </div>
                                   <div class="collapsible-body">
                                     <?php
@@ -189,6 +199,7 @@
 
                                       $result7 = mysqli_query($connection, $query7);
                                       if (!$result7) {
+                                        echo $query7;
                                         die('Invalid query: ' . mysql_error());
                                       }
 
@@ -197,25 +208,56 @@
                                          $descr7 = $row7[1];
                                          $valtest7 = $row7[2];
                                          $valvoto7 = $row7[3];
+
+                                     $query7b = "SELECT a.SedeLegale, a.SedeTirocinio FROM azienda AS a WHERE a.CodAz = {$idAz6};";
+
+                                      $result7b = mysqli_query($connection, $query7b);
+                                      if (!$result7b) {
+                                        die('Invalid query: ' . mysql_error());
+                                      }
+
+                                      if($row7b = mysqli_fetch_array($result7b,MYSQLI_NUM)){
+                                         $sedeLeg7b = $row7b[0];
+                                         $sedeTir7b = $row7b[1];
                                     ?>
                                       <b>Azienda:</b> <?php echo $az6 ?><br>
                                       <b>Data Inizio:</b> <?php echo $inizio6 ?><br>
                                       <b>Data Fine:</b> <?php echo $fine6 ?><br>
                                       <b>Totale Ore:</b> <?php echo $totOre7 ?>h<br>
-                                      <?php if($descr7 != null){ ?>
-                                        <b>Descrizione</b><br> <?php echo $descr7 ?><br><br>
+
+                                      <?php 
+                                        if ($sedeTir7b != null) { 
+                                      ?>
+                                          <b>Sede Tirocinio:</b> <?php echo $sedeTir7b ?><br>
+                                          <b>Sede Legale:</b> <?php echo $sedeLeg7b ?><br>
+                                      <?php 
+                                        } else { 
+                                      ?>
+                                          <b>Sede Tirocinio (e Legale): </b><?php echo $sedeLeg7b ?><br>
                                       <?php } ?>
+
+                                      <?php 
+                                        if($descr7 != null){ 
+                                      ?>
+                                        <b>Descrizione</b><br> <?php echo $descr7 ?><br><br>
+                                      <?php 
+                                        } 
+                                      ?>
+
                                       <?php if($valtest7 != null){ ?>
                                         <b>Valutazione</b><br>
                                         <?php echo $valtest7 ?><br><br>
                                       <?php } ?>
+
                                       <b>Voto Tirocinio:</b> <?php echo $valvoto7 ?>
-                                    <?php } ?>
+                                    <?php }
+                                      }
+                                    ?>
                                   </div>
                                 </li>
                                 <li>
                                   <div class="collapsible-header">
-                                      Diari Giornalieri
+                                    <i class="material-icons">chrome_reader_mode</i> Diari Giornalieri
                                   </div>
                                   <div class="collapsible-body">
                                     <?php
@@ -324,30 +366,89 @@
           ?>
           <li>
             <div class="collapsible-header" >
-              <span><?php echo $nome10 ?></span>
+              <i class="material-icons">work</i><span><?php echo $nome10 ?></span>
             </div>
             <div class="collapsible-body">
               <ul class="collapsible" data-collapsible="accordion">
                 <li>
                     <div class="collapsible-header">
-                      Info Azienda
+                     <i class="material-icons">format_list_bulleted</i> Info Azienda
                     </div>
                     <div class="collapsible-body">
                       <?php
-                          $query11 = "SELECT a.SedeLegale, ta.nome FROM azienda AS a, tutor_aziendale as ta WHERE a.CodAz = {$id10}"; 
+                          $query11 = "SELECT a.SedeTirocinio, a.PIVA, a.NomeRap, a.Indirizzo, a.Tel, a.EMail, a.SedeLegale FROM azienda AS a WHERE a.CodAz = {$id10}"; 
                           $result11 = mysqli_query($connection, $query11);
                           if (!$result11) {
                               die ('Invalid query: ' . mysql_error());
                           }
                           if ($row11 = mysqli_fetch_array($result11, MYSQLI_NUM)){
-                              $sedeLeg11 = $row11[0];
-                              $nometa11 = $row11[1];
+                              $piva11 = $row11[1];
+                              $rap11 = $row11[2];
+                              $ind11 = $row11[3];
+                              $tel11 = $row11[4];
+                              $email11 = $row11[5];
+                              $sedeLeg11 = $row11[6];
+                              $sedeTir11 = $row11[0];
+
+                            $query11 = "SELECT ta.nome, ta.cognome,ta.Tel, ta.EMail, ta.CodFisc, ta.DataNasc FROM tutor_aziendale as ta WHERE ta.FKAz = {$id10}"; 
+                            $result11 = mysqli_query($connection, $query11);
+                            if (!$result11) {
+                                die ('Invalid query: ' . mysql_error());
+                            }
+                            if ($row11 = mysqli_fetch_array($result11, MYSQLI_NUM)){
+                              $nometa11 = $row11[0] . " " . $row11[1];
+                              $tatel11 = $row11[2];
+                              $taemail11 = $row11[3];
+                              $tacf11 = $row11[4];
+                              $tadata11 = $row11[5];
+                            }
                       ?>
-                      <b>Sede Legale</b>: <?php echo $sedeLeg11 ?><br>
-                      <b>Tutor Aziendale</b>: <?php echo $nometa11 ?>
+                      <b>P. IVA</b>: <?php echo $piva11 ?><br>
+                      <b>Rappresentante Legale</b>: <?php echo $piva11 ?><br>
+                      <b>Tutor Aziendale</b>: <?php echo $nometa11 ?><br>
+                      <?php 
+                        if($ind11 != null){ 
+                      ?>
+                        <b>Indirizzo</b>: <?php echo $ind11 ?><br>
+                      <?php 
+                        } 
+                      ?>
+                      <b>Telefono</b>: <?php echo $tel11 ?><br>
+                      <b>E-Mail</b>: <?php echo $email11 ?><br>
+
+                      <?php 
+                        if ($sedeTir11 != null) { 
+                      ?>
+                          <b>Sede Tirocinio:</b> <?php echo $sedeTir11 ?><br>
+                          <b>Sede Legale:</b> <?php echo $sedeLeg11 ?><br>
+                      <?php 
+                        } else { 
+                      ?>
+                          <b>Sede Legale (e dei Tirocini): </b><?php echo $sedeLeg11 ?><br>
+                      <?php } ?>
+
                     </div>
-                    <?php } ?>
+                    <?php }
+                    ?>
                   </li>
+                  <?php 
+                    if ($row11 = mysqli_fetch_array($result11, MYSQLI_NUM)) {
+                      ?>
+                  <li>
+                    <div class="collapsible-header">
+                      <i class="material-icons">account_circle</i> Tutor Aziendale
+                    </div>
+                    <div class="collapsible-body">
+                      <b>Nome</b>: <?php echo $nometa11 ?><br>
+                      <b>Telefono</b>: <?php echo $tatel11 ?><br>
+                      <b>E-mail</b>: <?php echo $taemail11 ?><br>
+                      <b>Codice Fiscale</b>: <?php echo $tacf11 ?><br>
+                      <b>Data Nascita</b>: <?php echo $tadata11 ?><br>
+                    </div>
+                  </li>
+                    <?php   
+                      }
+                    ?>
                   <li>
                     <div class="collapsible-header">
                         Alunni
@@ -402,11 +503,12 @@
           ?>
           <li>
             <div class="collapsible-header" >
+              <i class="material-icons">account_circle</i> 
               <span style="width:50%;"><?php echo $cogTut2 . " " . $nomeTut2 ?></span>
               <span style="width:50%;"><?php echo $cfTut2 ?></span>
             </div>
             <div class="collapsible-body">
-            <ul>  
+            <ul style="list-style-type: circle !important;">  
               <?php
                   $queryGetClas2 = "SELECT classe.CodClas FROM classe WHERE classe.FKTutSc = {$idTut2}"; 
                   $resultClas2 = mysqli_query($connection, $queryGetClas2);
@@ -426,7 +528,18 @@
     </div>
 </div>
 
-    <div class="nomi">by Ludovico Venturi & Luca Moroni</div>
+     <ul id="slide-out" class="side-nav">
+    <li><div class="user-view">
+      <div style="background-color: #01870A" class="background">
+      </div>
+      <img class="circle" src="../assets/img/profile.jpg">
+      <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
+      <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
+    </div></li>
+    <li><a href="#!">ESCI</a></li>
+    <li><div class="divider"></div></li>
+  </ul>
+
     <script src="../assets/js/view_ajax.js"></script>
     </body>
 </html>

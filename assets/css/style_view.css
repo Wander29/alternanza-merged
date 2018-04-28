@@ -1,5 +1,22 @@
-.logo{
-    padding-left: 20px;
+.brand-logo {
+    padding-left: 30px !important;
+    font-family: "Century Gothic", Times, serif;
+}
+
+.brand-logo > i {
+    font-size: 35px !important;
+}
+
+.nav-extended{
+    background-color: #00cc00;
+    position: fixed;
+    opacity: 1 !important;
+    top:0;
+    z-index: 10;
+}
+
+.compensatore{
+    height: 120px;
 }
 
 .my-cont{
@@ -28,3 +45,17 @@
     font-weight: bold;
     background-color: rgba(0,255,0,0.5);
  }
+
+ .container {
+    margin-bottom: 50px;
+ }
+
+ .chip{
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
+
+.chip img:hover{
+    cursor: pointer;
+}

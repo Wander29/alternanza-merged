@@ -1,5 +1,30 @@
 .nav-extended{
 	background-color: #00cc00;
+	position: fixed;
+	opacity: 1 !important;
+	top:0;
+	z-index: 10;
+}
+
+.nav-wrapper {
+	background-color: #00cc00 !important;
+}
+
+.brand-logo > i {
+    font-size: 35px !important;
+}
+
+.gre {
+	background-color: #00cc00 !important; 
+}
+
+.brand-logo {
+	padding-left: 30px !important;
+	font-family: "Century Gothic", Times, serif;
+}
+
+.container {
+	margin-bottom: 50px;
 }
 
 .labelval{
@@ -37,7 +62,7 @@
 }
 
 .compensatore{
-	height: 75px;
+	height: 120px;
 }
 
 .chip{
@@ -58,12 +83,4 @@
 .flexx > button {
 	margin-left: 30%;
 	margin-top: 9px;
-}
-
-.container {
-	margin-bottom: 50px;
-}
-
-.brand-logo {
-	padding-left: 30px !important;
 }

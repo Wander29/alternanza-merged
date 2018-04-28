@@ -29,7 +29,7 @@
         $data['user'] = 'professore';
     } else {
         $data['sucquery'] = false;
-        $data['query'] = "ERRORE di autenticazione";
+        $data['errore'] = "ERRORE di autenticazione";
     }
 
     $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax

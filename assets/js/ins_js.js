@@ -22,5 +22,6 @@ $(document).ready(function(){
 	$("#sliderTrigger").click(function(){
 		$("#triggerat").trigger("click");
 	});
-	
+
+	$('.fixed-action-btn').floatingActionButton();
 });

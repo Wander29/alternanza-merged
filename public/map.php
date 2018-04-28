@@ -124,7 +124,7 @@
                   <tbody id="subalu">
                   
                           <?php
-                          $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.CodClas, azienda.CodAz FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY alunno.CodAlu ORDER BY classe.CodClas ASC;";
+                          $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.CodClas, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
                   $result = mysqli_query($connection, $queryGetData);
                   if (!$result) {
                     die('Invalid query: ' . mysql_error());
@@ -134,10 +134,13 @@
                           $surname = $row[1];
                           $clas = $row[2];
                           $azienda = $row[3];
-                      
+                          $azNome = $row[4];
                   ?>
                   <tr data-id="<?php echo $azienda;?>">
-                      <td><?php echo $name;?></td><td><?php echo $surname; ?></td><td><?php echo $clas;?></td>
+                      <td width="20%"><?php echo $name;?></td>
+                      <td width="20%"><?php echo $surname; ?></td>
+                      <td width="20%"><?php echo $clas;?></td>
+                      <td><?php echo $azNome;?></td>
                   </tr>          
 
                 <?php } ?>

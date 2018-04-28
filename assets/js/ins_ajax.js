@@ -22,7 +22,7 @@ $(document).ready(function() {
                 'datanasc'          : formatDate($('#dateAl').val()),
                 'emailains'         : $("#emailains").val(),
                 'psw'               : $("#pswa").val(),
-                'fkclass'           : $('#classe').val()
+                'fkclass'           : $('#classeAl').val()
             };
         }
         if(tipo == "tutsco"){
@@ -123,7 +123,7 @@ $(document).ready(function() {
                         if(risp.sucquery){
                             console.log(risp.query);
                             Materialize.toast(risp.query, 1000);
-                            svuota(tipo);
+                            svuota(form[0]);
                             /*setTimeout(function(){
                                 location.reload();
                             }, 4000);*/
@@ -147,7 +147,6 @@ $(document).ready(function() {
 
 function svuota(form) {
     Materialize.updateTextFields();
-    console.log(form);
     form.reset();
 }
 
