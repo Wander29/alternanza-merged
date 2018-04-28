@@ -11,27 +11,27 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Inserimento Alternanza</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Inserimento ">
-  <meta name="author" content="Ludovico Venturi & Luca Moroni">
+  <head>
+  	<title>Inserimento Alternanza</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Inserimento ">
+    <meta name="author" content="Ludovico Venturi & Luca Moroni">
 
-  <link rel="icon" href="../assets/img/favicon.png">
-  <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
-  <link rel="stylesheet" href="../lib/material_icons/mat_icons.css">
-  <link rel="stylesheet" href="../assets/css/style_ins.css">
-  
-  <script src="../lib/jquery.js"></script>
-  <script src="../lib/materialize/materialize.min.js"></script>
-  <script src="../assets/js/ins_js.js"></script>
-</head>
+    <link rel="icon" href="../assets/img/favicon.png">
+    <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
+    <link rel="stylesheet" href="../lib/material_icons/mat_icons.css">
+    <link rel="stylesheet" href="../assets/css/style_ins.css">
+    
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/materialize/materialize.min.js"></script>
+    <script src="../assets/js/ins_js.js"></script>
+  </head>
 	<body>
 
 	<nav class="nav-extended">
 		<div class="nav-wrapper">
-		  <a href="#" class="brand-logo">Logo</a>  
+		  <a href="#" class="brand-logo">INSERIMENTO</a>  
       <div class="chip">
         <img id="sliderTrigger" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
@@ -40,53 +40,53 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-		    <li class="tab"><a class="active" href="#test1">Test 1</a></li>
-		    <li class="tab"><a href="#test2">Test 2</a></li>
-		    <li class="tab"><a href="#test3">Test 3</a></li>
-		    <li class="tab"><a href="#test4">Test 4</a></li>
-		    <li class="tab"><a href="#test5">Test 5</a></li>
-		    <li class="tab"><a href="#test6">Test 6</a></li>
-        <li class="tab"><a href="#test7">Diario</a></li>
+		    <li class="tab"><a class="active" href="#test1">Alunno</a></li>
+		    <li class="tab"><a href="#test2">Tutor Scolastico</a></li>
+		    <li class="tab"><a href="#test3">Classe</a></li>
+		    <li class="tab"><a href="#test4">Azienda</a></li>
+		    <li class="tab"><a href="#test5">Tirocinio</a></li>
+		    <li class="tab"><a href="#test6">Tutor Aziendale</a></li>
+        <li class="tab"><a href="#test7">Diario Personale Stage</a></li>
 		  </ul>
 		</div>
 	</nav>
 	<div id="test1" class="col s12">
 		<div class="container">
-			<h2>Inserimento Alunni</h2>
+			<h2>Inserimento Alunno</h2>
 			<form class="inserimento" action="../server/insalu.php" method="post" enctype="multipart/form-data" autocomplete="off" id="alunno">
 				<div class="row">
                     <div class="input-field col s12">
-                      <input name="nome" id="nome" type="text" >
+                      <input name="nome" id="nome" type="text" required>
                       <label for="nome">Nome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="cognome" id="cognome" type="text" >
+                      <input name="cognome" id="cognome" type="text" required>
                       <label for="cognome">Cognome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="codfisc" id="codfisc" type="text" >
+                      <input name="codfisc" id="codfisc" type="text" required>
                       <label for="codfisc">Codice Fiscale</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="date" type="date" class="datepicker">
-                      <label for="date">Data di Nascita</label>
+                      <input id="dateAl" type="date" class="datepicker" required>
+                      <label for="dateAl">Data di Nascita</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="emailains" type="text" autocomplete="new-password" >
+                      <input id="emailains" type="email" autocomplete="off" required>
                       <label for="emailains">E-Mail</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="pswa" type="password" autocomplete="new-password" >
+                      <input id="pswa" type="password" autocomplete="off" required>
                       <label for="pswa">Password</label>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="row">
 	                <div class="input-field col s12">
 	                    <select name="classe" id="classe">
-	                      <option selected disabled value="">Inserisci</option>
+	                      <option selected disabled value="" required><i> Scegli la Classe</i></option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM classe WHERE 1;';
@@ -119,7 +119,7 @@
 	                    <label for="esp">Classe</label>
 	                </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+              <button action="submit" name="action">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -129,35 +129,35 @@
 			<form class="inserimento" action="../server/instutclass.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutsco">
 				<div class="row">
                     <div class="input-field col s12">
-                      <input name="nomet" id="nomet" type="text" >
+                      <input name="nomet" id="nomet" type="text" required>
                       <label for="nomet">Nome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="cognomet" id="cognomet" type="text" >
+                      <input name="cognomet" id="cognomet" type="text" required>
                       <label for="cognomet">Cognome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="codfisct" id="codfisct" type="text" >
+                      <input name="codfisct" id="codfisct" type="text" required>
                       <label for="codfisct">Codice Fiscale</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="emailpins" type="text" autocomplete="off" >
+                      <input id="emailpins" type="email" autocomplete="off" required>
                       <label for="emailpins">E-Mail</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="pswp" type="password" autocomplete="off" >
+                      <input id="pswp" type="password" autocomplete="off" required>
                       <label for="pswp">Password</label>
                     </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+                <button action="submit" name="action">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -167,14 +167,14 @@
 			<form class="inserimento" action="../server/insclas.php" method="post" enctype="multipart/form-data" autocomplete="off" id="classe">
 				<div class="row">
                     <div class="input-field col s12">
-                      <input name="nomec" id="nomec" type="text" >
+                      <input name="nomec" id="nomec" type="text" required>
                       <label for="nomec">Nome Classe</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkt" id="fkt">
-	                      <option selected disabled value="">Inserisci</option>
+	                      <option selected disabled value="" required>Scegli il Tutor Scolastico</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM tutor_scolastico WHERE 1;';
@@ -204,7 +204,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fks" id="fks">
-	                      <option selected disabled value="">Inserisci</option>
+	                      <option selected disabled value="" required>Scegli la Specializzazione</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM specializzazione WHERE 1;';
@@ -230,7 +230,7 @@
                       <label for="fks">Specializzazione</label>
                     </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+                <button action="submit" name="action">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -240,25 +240,25 @@
 			<form class="inserimento" action="../server/insazienda.php" method="post" enctype="multipart/form-data" autocomplete="off" id="azienda">
 				<div class="row">
                     <div class="input-field col s12">
-                      <input name="nomea" id="nomea" type="text" >
+                      <input name="nomea" id="nomea" type="text" required>
                       <label for="nomea">Nome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="piva" id="piva" type="text" >
+                      <input name="piva" id="piva" type="text" required>
                       <label for="piva">Partita Iva</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="nomer" id="nomer" type="text" >
+                      <input name="nomer" id="nomer" type="text" required>
                       <label for="nomer">Nome Rappresentante</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="indirizzo" id="indirizzo" type="text" >
+                      <input name="indirizzo" id="indirizzo" type="text" required>
                       <label for="indirizzo">Indirizzo</label>
                     </div>
                 </div>
@@ -267,39 +267,39 @@
                       <a class="waves-effect waves-light btn" href="https://www.latlong.net/convert-address-to-lat-long.html" target="_blank">Convert to LAT | LONG</a>
                     </div>
                     <div class="input-field col s3 offset-s1">
-                      <input name="lat" id="lat" type="text" >
+                      <input name="lat" id="lat" type="text" required>
                       <label for="lat">Latitudine</label>
                     </div>
                     <div class="input-field col s3 offset-s1">
-                      <input name="long" id="long" type="text" >
+                      <input name="long" id="long" type="text" required>
                       <label for="long">Longitudine</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="sedetir" id="sedetir" type="text" >
-                      <label for="sedetir">Sede Tirocinio</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input name="sedeleg" id="sedeleg" type="text" >
+                      <input name="sedeleg" id="sedeleg" type="text" required>
                       <label for="sedeleg">Sede Legale</label>
                     </div>
                 </div>
                 <div class="row">
+                  <div class="input-field col s12">
+                      <input name="sedetir" id="sedetir" type="text" >
+                      <label for="sedetir">Sede Tirocinio (se uguale a quella Legale lascia vuoto)</label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12">
-                      <input name="tel" id="tel" type="text" >
+                      <input name="tel" id="tel" type="text" required>
                       <label for="tel">Telefono</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="email" id="email" type="text" >
+                      <input name="email" id="email" type="email" required>
                       <label for="email">E-Mail</label>
                     </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+                <button action="submit" name="action">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -308,27 +308,16 @@
 			<h2>Inserimento Tirocinio</h2>
 			<form class="inserimento" action="../server/instirocinio.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tirocinio">
 				<div class="row">
-                    <div class="input-field col s12">
-                      <input name="sedelav" id="sedelav" type="text" >
-                      <label for="sedelav">Sede di Lavoro</label>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="inizio" type="date" class="datepicker">
+                      <input id="inizio" type="date" class="datepicker" required>
                       <label for="inzio">Data di Inizio</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="fine" type="date" class="datepicker">
+                      <input id="fine" type="date" class="datepicker" required>
                       <label for="fine">Data di Inizio</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input name="ore" id="ore" type="text" >
-                      <label for="ore">Ore Totali</label>
                     </div>
                 </div>
                 <div class="row">
@@ -340,7 +329,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkalu" id="fkalu">
-	                      <option selected disabled value="">Inserisci</option>
+	                      <option selected disabled value="" required>Scegli l'Aluno</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM alunno WHERE 1;';
@@ -370,7 +359,7 @@
                     <div class="row">
                     <div class="input-field col s12">
                       <select name="fkaz" id="fkaz">
-	                      <option selected disabled value="">Inserisci</option>
+	                      <option selected disabled value="" required>Scegli l'Azienda</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM azienda WHERE 1;';
@@ -395,16 +384,25 @@
                       <label for="fkaz">Azienda</label>
                     </div>
                 </div>
-                <div class="labelval">Valutazione Tirocinio:</div>
-                <div class="contval">
-                  <div class="values">1:</div>
-                  <div class="valued">:5</div>
-                  <p class="range-field">
-                    <input type="range" id="valut" min="1" max="5" />
-                  </p>
 
+                <div class="row">
+                    <div class="input-field col s12">
+                      <textarea name="valTest" id="valTest" class="materialize-textarea" ></textarea>
+                      <label for="valTest">Valutazione Testuale Tirocinio</label>
+                    </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+                <div class="row">
+                  <div class="labelval">Valutazione Tirocinio:</div>
+                  <div class="contval">
+                    <div class="values">1</div>
+                    <div class="valued">5</div>
+                    <p class="range-field">
+                      <input type="range" id="valut" min="1" max="5" required/>
+                    </p>
+                  </div>
+                </div>
+                <button action="submit" name="action">INSERISCI</button>
+              </div>
             </form>
 		</div>
 	</div>
@@ -414,38 +412,38 @@
 			<form class="inserimento" action="../server/instutaz.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutoraziendale">
 				<div class="row">
                     <div class="input-field col s12">
-                      <input name="nometa" id="nometa" type="text" >
+                      <input name="nometa" id="nometa" type="text" required>
                       <label for="nometa">Nome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="cognometa" id="cognometa" type="text" >
+                      <input name="cognometa" id="cognometa" type="text" required>
                       <label for="cognometa">Cognome</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="codfiscta" id="codfiscta" type="text" >
+                      <input name="codfiscta" id="codfiscta" type="text" required>
                       <label for="codfiscta">Codice Fiscale</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="telta" id="telta" type="text" >
+                      <input name="telta" id="telta" type="text" required>
                       <label for="telta">Telefono</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="emailta" id="emailta" type="text" >
+                      <input name="emailta" id="emailta" type="email" required>
                       <label for="emailta">E-Mail</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkazt" id="fkazt">
-                        <option selected disabled value="">Inserisci</option>
+                        <option selected disabled value="" required>Scegli l'Azienda</option>
                         <?php
 
                           $queryGetData = 'SELECT * FROM azienda WHERE 1;';
@@ -472,11 +470,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="datetut" type="date" class="datepicker">
+                      <input id="datetut" type="date" class="datepicker" required>
                       <label for="datetut">Data di Nascita</label>
                     </div>
                 </div>
-                <button action="submit" name="action">clack</button>
+                <button action="submit" name="action">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -562,17 +560,17 @@
     <div id="modal" class="modal modal-fixed-footer">
       <form class="inserimento" action="../server/insdia.php" method="post" enctype="multipart/form-data" autocomplete="off" id="diario">
         <div class="modal-content">
-      <h4>Modal Header</h4>
+      <h4>Diario Personale Stage</h4>
       
         <div class="row">
             <div class="row">
                 <div class="input-field col s12">
-                  <input id="datedia" type="date" class="datepicker">
+                  <input id="datedia" type="date" class="datepicker" required>
                   <label for="datedia">Data</label>
                 </div>
             </div>
             <div class="input-field col s12">
-              <select id="typeat" multiple>
+              <select id="typeat" multiple required>
                 <option value="" disabled selected>A / B / C / D</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
@@ -589,16 +587,14 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                  <input name="oredia" id="oredia" type="text" >
+                  <input name="oredia" id="oredia" type="text" required>
                   <label for="oredia">Ore</label>
                 </div>
-            </div>
-            
+            </div>  
     </div>
-    
   </div>
   <div class="modal-footer">
-    <button action="submit" name="action" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</button>
+    <button action="submit" name="action" class="modal-action modal-close waves-effect waves-green btn-flat ">INSERISCI</button>
   </div>
   </form>
 </div>

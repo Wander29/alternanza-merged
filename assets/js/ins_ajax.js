@@ -1,74 +1,69 @@
 $(document).ready(function() {
-    
     var appoidtir = "";
-
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
     });
 
     $('.inserimento').submit(function(event) {
+        event.preventDefault();
         var form = $(this), //prende gli attributi del form
             url = form.attr("action"), 
             type = form.attr("method"),
             data = {}; //data del form è un oggetto con più valori
         
-
         var tipo = $(this).attr("id");
         console.log(tipo);
 
         if(tipo == "alunno"){
-
-            var date = formatDate($('#date').val());
-
             var formData = { //valori del form inseriti
                 'nome'              : $('#nome').val(),
-                'cognome'              : $('#cognome').val(),
-                'codfisc': $('#codfisc').val(),
-                'datanasc': date,
-                'emailains' : $("#emailains").val(),
-                'psw' : $("#pswa").val(),
-                'fkclass': $('#classe').val()
+                'cognome'           : $('#cognome').val(),
+                'codfisc'           : $('#codfisc').val(),
+                'datanasc'          : formatDate($('#dateAl').val()),
+                'emailains'         : $("#emailains").val(),
+                'psw'               : $("#pswa").val(),
+                'fkclass'           : $('#classe').val()
             };
         }
         if(tipo == "tutsco"){
             var formData = { //valori del form inseriti
                 'nome'              : $('#nomet').val(),
-                'cognome'              : $('#cognomet').val(),
-                'codfisc': $('#codfisct').val(),
-                'emailpins' : $("#emailpins").val(),
-                'psw' : $("#pswp").val()
+                'cognome'           : $('#cognomet').val(),
+                'codfisc'           : $('#codfisct').val(),
+                'emailpins'         : $("#emailpins").val(),
+                'psw'               : $("#pswp").val()
             };
         }
         if(tipo == "classe"){
             var formData = { //valori del form inseriti
-                'classe'              : "'" + $('#nomec').val() + "'",
-                'tutor'              : $('#fkt').val(),
+                'classe'            : "'" + $('#nomec').val() + "'",
+                'tutor'             : $('#fkt').val(),
                 'spec'              : $('#fks').val()
             };
         }
         if(tipo == "azienda"){
             var formData = { //valori del form inseriti
-                'nomea'              : $('#nomea').val(),
+                'nomea'             : $('#nomea').val(),
                 'piva'              : $('#piva').val(),
-                'nomer'              : $('#nomer').val(),
-                'sedeleg'              : $('#sedeleg').val(),
-                'lat'              : $('#lat').val(),
+                'nomer'             : $('#nomer').val(),
+                'indirizzo'         : $('#indirizzo').val(),
+                'sedeleg'           : $('#sedeleg').val(),
+                'sedetir'           : $('#sedetir').val(),
+                'lat'               : $('#lat').val(),
                 'long'              : $('#long').val(),
-                'sedetir'              : $('#sedetir').val(),
-                'tel'              : $('#tel').val(),
-                'email'              : $('#email').val()
+                'tel'               : $('#tel').val(),
+                'email'             : $('#email').val()
             };
         }
         if(tipo == "tirocinio"){
             var formData = { //valori del form inseriti
-                'sedelav'              : $('#sedelav').val(),
-                'inizio'              : formatDate($('#inizio').val()),
+                'inizio'            : formatDate($('#inizio').val()),
                 'fine'              : formatDate($('#fine').val()),
-                'ore'              : $('#ore').val(),
-                'descr'              : $('#descr').val(),
-                'fkalu'              : $('#fkalu').val(),
+                'descr'             : $('#descr').val(),
+                'fkalu'             : $('#fkalu').val(),
                 'fkaz'              : $('#fkaz').val(),
-                'value'             :$("#valut").val()
+                'value'             : $("#valut").val(),
+                'valTest'           : $("#valTest").val()
             };
         }
         if(tipo == "tutoraziendale"){
@@ -114,7 +109,6 @@ $(document).ready(function() {
 			encode 		: true
 		})
             .done(function(risp) {
-                svuota();
                 // log data to the console so we can see
                 console.log(risp); 
                 if(risp.result !== undefined){
@@ -129,24 +123,18 @@ $(document).ready(function() {
                         if(risp.sucquery){
                             console.log(risp.query);
                             Materialize.toast(risp.query, 1000);
-                            Materialize.updateTextFields();
-                            setTimeout(function(){
+                            svuota(tipo);
+                            /*setTimeout(function(){
                                 location.reload();
-                            }, 4000);
+                            }, 4000);*/
                         }else{
                             console.log(risp.query);
-                            Materialize.toast(risp.query, 1000);
+                            Materialize.toast(risp.errore, 1000);
                         }
-                    }else{
-
                     }
                 }
-                
             })
-            // using the fail promise callback
 			.fail(function(risp) {
-                svuota();
-				// show any errors
 				console.log(risp);
 			});
 
@@ -157,13 +145,15 @@ $(document).ready(function() {
     return false;
 });
 
-function svuota(){
-    //migliorare
-    $("#nome").val("");
+function svuota(form) {
     Materialize.updateTextFields();
+    console.log(form);
+    form.reset();
 }
 
 function formatDate(inco){
+    if (inco == "")
+        return null;
     var date = inco.split(" ");
     var final = "";
  

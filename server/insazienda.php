@@ -21,6 +21,9 @@
     $long = $_POST['long'];
     $sedeleg = $_POST['sedeleg'];
     $sedetir = $_POST['sedetir'];
+        if ($sedetir == "") {
+            $sedetir = null;
+        }
     $tel = $_POST['tel'];
     $email = $_POST['email'];
 
@@ -35,6 +38,7 @@
     }else{
         $data['sucquery'] = false;
         $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);
+        $data['errore'] = "ERRORE, record non inserito";
     }
 
     $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax

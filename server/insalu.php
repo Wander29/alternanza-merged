@@ -30,7 +30,8 @@
         $data['query'] = "Record  Aggiunto correttamente"; 
     }else{
         $data['sucquery'] = false;
-        $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);
+        $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
+        $data['errore'] = "ERRORE, record non inserito";
     }
 
     $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax

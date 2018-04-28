@@ -63,3 +63,7 @@
 .container {
 	margin-bottom: 50px;
 }
+
+.brand-logo {
+	padding-left: 30px !important;
+}

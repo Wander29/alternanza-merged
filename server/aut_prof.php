@@ -16,14 +16,16 @@
     $psw = md5(test_input($_POST['psw']));
 
     /********** Query **********/
-    $query = "SELECT Nome, Cognome FROM tutor_scolastico WHERE EMail = '$mail' AND Password = '$psw';";
+    $query = "SELECT Nome, Cognome, EMail FROM tutor_scolastico WHERE EMail = '$mail' AND Password = '$psw';";
 
     $row = mysqli_fetch_array(mysqli_query($connection, $query));
     
     if($row[0] != null){
         $data["result"] = $row[0] . " " . $row[1];
+        $data["email"] = $row[2];
 
         $_SESSION["name"] = $data["result"];
+        $_SESSION["mail"] = $data["email"];
         $data['user'] = 'professore';
     } else {
         $data['sucquery'] = false;

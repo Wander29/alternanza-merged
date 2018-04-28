@@ -14,6 +14,8 @@
     /********** POST/GET **********/
     //in post prendo tutti i dati che vengono passati dal ajax
     $descr = $_POST['descr'];
+        if ($descr == "")
+            $descr = null;
     $ore = $_POST['ore'];       
     $date = $_POST['data'];
     $tipo = $_POST['tipo'];
@@ -25,28 +27,35 @@
     $query = "INSERT INTO diario (CodDia, Data, TipoAtt, Descr, Ore, FKTir) VALUES(null, $date, '$tipo','$descr', $ore, $idtir);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
-        $data['sucquery'] = true;
-        $data['query'] = "Record  Aggiunto correttamente"; 
-    }else{
+        //update delle ore totali, prima prendo l'id
+        $query = "SELECT MAX(tirocinio.CodTir) FROM tirocinio";
+        $result = mysqli_query($connection, $query);
+          if (!$result) {
+            $data['sucquery'] = false;
+            $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
+            die ('Invalid query: ' . mysql_error());
+          }
+          while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+              $id_tir_inserito = $row[0];
+          }
+        
+        $query = "UPDATE tirocinio SET tirocinio.TotOre = (SELECT SUM(Ore) FROM diario WHERE diario.FKTir = {$id_tir_inserito}) WHERE  tirocinio.CodTir = {$id_tir_inserito}";
+        if(mysqli_query($connection, $query)){
+            $data['sucquery'] = true;
+            $data['query'] = "Record  Aggiunto correttamente"; 
+            $data['success'] = true;
+        } else {
+            $data['sucquery'] = false;
+            $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
+            $data['errore'] = "ERRORE, record non inserito";
+        }
+    } else {
         $data['sucquery'] = false;
-        $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);
+        $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
+        $data['errore'] = "ERRORE, record non inserito";
     }
 
-    $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax
+    mysqli_close($connection); 
 
-    /********** Chiusura **********/
-    mysqli_close($connection); // Chiusura connessione
-
-
-    /********** Return Ajax **********/
-    echo json_encode($data); //funzione di ritorno tramite JSON
-
-
-    /********** Funzioni **********/
-    function test_input($data) {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
+    echo json_encode($data);
 ?>
