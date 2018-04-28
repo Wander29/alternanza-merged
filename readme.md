@@ -2,8 +2,6 @@ TO DO
 
 _material icons in ogni riga, numeri sullo slider
 _Tirocinio -> classi -> alunni -> aziende stage (con valutazione) -> diario giorni in Modal
-_Aziende (link mappa) -> tutor az | alunni in azienda
-Homepage: link inserimento / view / mappa
 Mappa: dropdown per ins o view | homepage
 
 [AZIENDA]
@@ -28,3 +26,8 @@ _
 
 LUCA
 query mappa da riguardare
+
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
