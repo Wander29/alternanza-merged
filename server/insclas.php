@@ -12,7 +12,7 @@
     }
     /********** POST/GET **********/
     //in post prendo tutti i dati che vengono passati dal ajax
-    $codclass = test_input($_POST['classe']);
+    $codclass = strtoupper(test_input($_POST['classe']));
     $fkt = $_POST['tutor'];       
     $fks = $_POST['spec'];
 

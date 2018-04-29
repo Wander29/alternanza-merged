@@ -102,6 +102,11 @@ $(document).ready(function() {
                 'psw'              : $('#pswp').val(),
             };
         }
+        if(tipo == "specializzazione"){
+            var formData = { //valori del form inseriti
+                'spec'              : $('#spec').val()
+            };
+        }
 
         $.ajax({
 			type 		: type, // define the type of HTTP verb we want to use (POST for our form)
@@ -124,9 +129,9 @@ $(document).ready(function() {
                         if(risp.sucquery){
                             Materialize.toast(risp.query, 1000);
                             svuota(form[0]);
-                            /*setTimeout(function(){
+                            setTimeout(function(){
                                 location.reload();
-                            }, 4000);*/
+                            }, 1100);
                         }else{
                             Materialize.toast(risp.errore, 1000);
                         }

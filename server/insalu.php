@@ -14,7 +14,7 @@
     //in post prendo tutti i dati che vengono passati dal ajax
     $nome = $_POST['nome'];
     $cognome = $_POST['cognome'];       
-    $codfisc = $_POST['codfisc'];
+    $codfisc = strtoupper($_POST['codfisc']);
     $datanasc = $_POST['datanasc'];  
     $emailains = $_POST['emailains'];
     $psw = MD5($_POST['psw']);

@@ -10,20 +10,11 @@
         $data["error"] = "errore nella connessione";
         die();
     }
-
     /********** POST/GET **********/
-    //in post prendo tutti i dati che vengono passati dal ajax
-    $fka = $_POST['fka'];
-    $nome = $_POST['nome'];
-    $cognome = $_POST['cognome'];       
-    $codfisc = strtoupper($_POST['codfisc']);
-    $tel = $_POST['tel'];
-    $mail = $_POST['mail'];
-    $date = $_POST['data'];
+    $spec = test_input($_POST['spec']);
 
     /********** Query **********/
-    //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO tutor_aziendale (CodTutAz, FKAz, Nome, Cognome, CodFisc, Tel, EMail, DataNasc) VALUES(null, '$fka', '$nome', '$cognome', '$codfisc', $tel, '$mail', $date)"; //query da sparare nel DB 
+    $query = "INSERT INTO specializzazione (Nome) VALUES('$spec')"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;
@@ -38,6 +29,7 @@
 
     /********** Chiusura **********/
     mysqli_close($connection); // Chiusura connessione
+
 
     /********** Return Ajax **********/
 	echo json_encode($data); //funzione di ritorno tramite JSON

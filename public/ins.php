@@ -40,9 +40,9 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-		    <li class="tab"><a class="active" href="#test1">Alunno</a></li>
-		    <li class="tab"><a href="#test2">Tutor Scolastico</a></li>
-		    <li class="tab"><a href="#test3">Classe</a></li>
+        <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li>
+        <li class="tab"><a href="#test3">Classe</a></li>
+		    <li class="tab"><a href="#test1">Alunno</a></li>
 		    <li class="tab"><a href="#test4">Azienda</a></li>
 		    <li class="tab"><a href="#test5">Tirocinio</a></li>
 		    <li class="tab"><a href="#test6">Tutor Aziendale</a></li>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input id="dateAl" type="date" class="datepicker" required>
+                      <input id="dateAl" type="text" class="datepicker" required>
                       <label for="dateAl">Data di Nascita</label>
                     </div>
                 </div>
@@ -164,13 +164,25 @@
 	</div>
 	<div id="test3" class="col s12">
 		<div class="container">
+
+      <h2>Inserimento Specializzazione</h2>
+      <form class="inserimento" action="../server/insspec.php" method="post" enctype="multipart/form-data" autocomplete="off" id="specializzazione">
+        <div class="row">
+          <div class="input-field col s12">
+            <input name="spec" id="spec" type="text" required>
+            <label for="spec">Specializzazione</label>
+          </div>
+        </div>
+        <button action="submit" name="action">INSERISCI</button>
+      </form>
+
 			<h2>Inserimento Classe</h2>
 			<form class="inserimento" action="../server/insclas.php" method="post" enctype="multipart/form-data" autocomplete="off" id="classe">
 				<div class="row">
-                    <div class="input-field col s12">
-                      <input name="nomec" id="nomec" type="text" required>
-                      <label for="nomec">Nome Classe</label>
-                    </div>
+                <div class="input-field col s12">
+                  <input name="nomec" id="nomec" type="text" required>
+                  <label for="nomec">Nome Classe</label>
+                </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
@@ -401,6 +413,7 @@
                 <button action="submit" name="action">INSERISCI</button>
               </div>
             </form>
+
 		</div>
 	</div>
 	<div id="test6" class="col s12">
