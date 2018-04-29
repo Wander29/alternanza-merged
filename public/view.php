@@ -400,6 +400,12 @@
                               $taemail11 = $row11[3];
                               $tacf11 = $row11[4];
                               $tadata11 = $row11[5];
+                            } else {
+                              $nometa11 = "";
+                              $tatel11 = "";
+                              $taemail11 = "";
+                              $tacf11 = "";
+                              $tadata11 = "";
                             }
                       ?>
                       <b>P. IVA</b>: <?php echo $piva11 ?><br>
@@ -424,7 +430,7 @@
                     ?>
                   </li>
                   <?php 
-                    if ($row11 = mysqli_fetch_array($result11, MYSQLI_NUM)) {
+                    if (!empty($nometa11) && $nometa11 != null) {
                       ?>
                   <li>
                     <div class="collapsible-header">
