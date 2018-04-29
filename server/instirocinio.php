@@ -17,19 +17,17 @@
     $fine = $_POST['fine'];
     $val = $_POST['value'];
     $valTest = $_POST['valTest'];
-        if ($valTest == "")
-            $valTest = null;
     $descr = $_POST['descr'];
-        if ($descr == "")
-            $descr = null;
     $fkalu = $_POST['fkalu'];
     $fkaz = $_POST['fkaz'];
 
+    $valTest = !empty($valTest) ? "'$valTest'" : "NULL";
+    $descr = !empty($descr) ? "'$descr'" : "NULL";
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO tirocinio (CodTir, Inizio, Fine, Descr, ValTest, Valutazione, FKAlu, FKAz
-    ) VALUES(null, $inizio, $fine, '$descr', $val, '$valTest', '$fkalu', '$fkaz');"; //query da sparare nel DB 
+    $query = "INSERT INTO tirocinio (CodTir, Inizio, Fine, Descr, ValVoto, ValTest, FKAlu, FKAz
+    ) VALUES(null, $inizio, $fine, ".$descr.", $val, ".$valTest.", '$fkalu', '$fkaz');"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

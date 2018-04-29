@@ -109,7 +109,10 @@
 			<div id="header" class="wrapper__header">
               <nav>
                 <div style="background-color: #00cc00" class="nav-wrapper">
-                  <a href="#" class="brand-logo">&nbsp;Mappa Alternanza</a>
+                  <div class="col s6">
+                    <div class="brand-logo"><i class="material-icons">map</i> Mappa Alternanza</div>
+                  </div>
+                  <a href="../index.html" class="col s3 offset-s6" id="home"><i class="material-icons">home</i></a>
                 </div>
               </nav>
 			</div>
@@ -123,8 +126,8 @@
                 <table class="striped bordered">
                   <tbody id="subalu">
                   
-                          <?php
-                          $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.CodClas, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
+                  <?php
+                  $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.CodClas, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
                   $result = mysqli_query($connection, $queryGetData);
                   if (!$result) {
                     die('Invalid query: ' . mysql_error());

@@ -5,6 +5,11 @@
 ## Pulsante HOME
 - [ ] Esci dalla sessione e torna alla home
 
+## INS
+- [x] su tiorcinio per inserire l'alunno si deve prima scegliere la classe altrimeni è un caos
+
+## togliere tutti i console.log
+
 # CHANGELOG
 - [x] ORE TOTALI TIROCINIO = update con la somma delle ore del tiro ogni volta che si inserisce un diario di un determinato tirocinio
 - [x] tolto campo SedeTirocinio dal tirocinio#### [AZIENDA]

@@ -259,8 +259,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <input name="indirizzo" id="indirizzo" type="text" required>
-                      <label for="indirizzo">Indirizzo</label>
+                      <input name="sedeleg" id="sedeleg" type="text" required>
+                      <label for="sedeleg">Sede Legale</label>
                     </div>
                 </div>
                 <div class="row">
@@ -274,12 +274,6 @@
                     <div class="input-field col s3 offset-s1">
                       <input name="long" id="long" type="text" required>
                       <label for="long">Longitudine</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input name="sedeleg" id="sedeleg" type="text" required>
-                      <label for="sedeleg">Sede Legale</label>
                     </div>
                 </div>
                 <div class="row">
@@ -318,46 +312,48 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <input id="fine" type="date" class="datepicker" required>
-                      <label for="fine">Data di Inizio</label>
+                      <label for="fine">Data di Fine</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                       <input name="descr" id="descr" type="text" >
-                      <label for="descr">Descrizione</label>
+                      <label for="descr">Descrizione (opzionale)</label>
                     </div>
                 </div>
                 <div class="row">
+                  <div class="col s4">
                     <div class="input-field col s12">
-                      <select name="fkalu" id="fkalu">
-	                      <option selected disabled value="" required>Scegli l'Aluno</option>
-	                      <?php
+                      <select name="classe_tir" id="classe_tir">
+                        <option selected disabled value="" required>Scegli la Classe</option>
+                        <?php
+                          $queryGetData = 'SELECT * FROM classe;';
+                          $result = mysqli_query($connection, $queryGetData);
+                          if (!$result) {
+                            die('Invalid query: ' . mysql_error());
+                          }
 
-	                        $queryGetData = 'SELECT * FROM alunno WHERE 1;';
-
-	                        $result = mysqli_query($connection, $queryGetData);
-	                        if (!$result) {
-	                          die('Invalid query: ' . mysql_error());
-	                        }
-	                        //echo json_decode($aResult);
-
-	                        $printcount = 0;
-
-	                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-	                           $id = $row[0];
-	                           $nome = $row[1];
-	                           $cognome = $row[2];
- 
-	                      ?>
-	                                <option value="<?php echo $id;?>"><?php echo $nome . " " . $cognome;?></option>
-	                      <?php 
-	                      } 
-	                      ?>
-	                    </select>
+                          while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                             $classe = $row[0];
+                        ?>
+                          <option value="<?php echo $classe;?>"><?php echo $classe ?></option>
+                        <?php 
+                          } 
+                        ?>
+                      </select>
+                      <label for="classe_tir">Classe</label>
+                    </div>
+                  </div>
+                  <div class="col s6 offset-s2">
+                    <div class="input-field col s12" id="ff">
+                      <select name="fkalu" id="fkalu" required>
+                        <option selected disabled value="">Scegli l'Alunno</option>
+                      </select>
                       <label for="fkalu">Alunno</label>
                     </div>
-                	</div>
-                    <div class="row">
+                  </div>   
+              	</div>
+                <div class="row">
                     <div class="input-field col s12">
                       <select name="fkaz" id="fkaz">
 	                      <option selected disabled value="" required>Scegli l'Azienda</option>
@@ -389,7 +385,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <textarea name="valTest" id="valTest" class="materialize-textarea" ></textarea>
-                      <label for="valTest">Valutazione Testuale Tirocinio</label>
+                      <label for="valTest">Valutazione Testuale Tirocinio  (opzionale)</label>
                     </div>
                 </div>
                 <div class="row">
@@ -583,7 +579,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <textarea id="descrdia" class="materialize-textarea"></textarea>
-                <label for="descrdia">Descrizione</label>
+                <label for="descrdia">Descrizione (opzionale)</label>
               </div>
             </div>
             <div class="row">

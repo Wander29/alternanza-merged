@@ -376,7 +376,7 @@
                     </div>
                     <div class="collapsible-body">
                       <?php
-                          $query11 = "SELECT a.SedeTirocinio, a.PIVA, a.NomeRap, a.Indirizzo, a.Tel, a.EMail, a.SedeLegale FROM azienda AS a WHERE a.CodAz = {$id10}"; 
+                          $query11 = "SELECT a.SedeTirocinio, a.PIVA, a.NomeRap, a.Tel, a.EMail, a.SedeLegale FROM azienda AS a WHERE a.CodAz = {$id10}"; 
                           $result11 = mysqli_query($connection, $query11);
                           if (!$result11) {
                               die ('Invalid query: ' . mysql_error());
@@ -384,10 +384,9 @@
                           if ($row11 = mysqli_fetch_array($result11, MYSQLI_NUM)){
                               $piva11 = $row11[1];
                               $rap11 = $row11[2];
-                              $ind11 = $row11[3];
-                              $tel11 = $row11[4];
-                              $email11 = $row11[5];
-                              $sedeLeg11 = $row11[6];
+                              $tel11 = $row11[3];
+                              $email11 = $row11[4];
+                              $sedeLeg11 = $row11[5];
                               $sedeTir11 = $row11[0];
 
                             $query11 = "SELECT ta.nome, ta.cognome,ta.Tel, ta.EMail, ta.CodFisc, ta.DataNasc FROM tutor_aziendale as ta WHERE ta.FKAz = {$id10}"; 
@@ -406,13 +405,6 @@
                       <b>P. IVA</b>: <?php echo $piva11 ?><br>
                       <b>Rappresentante Legale</b>: <?php echo $piva11 ?><br>
                       <b>Tutor Aziendale</b>: <?php echo $nometa11 ?><br>
-                      <?php 
-                        if($ind11 != null){ 
-                      ?>
-                        <b>Indirizzo</b>: <?php echo $ind11 ?><br>
-                      <?php 
-                        } 
-                      ?>
                       <b>Telefono</b>: <?php echo $tel11 ?><br>
                       <b>E-Mail</b>: <?php echo $email11 ?><br>
 

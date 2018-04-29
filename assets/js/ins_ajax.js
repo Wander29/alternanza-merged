@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var appoidtir = "";
+    var html_appo = "";
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
     });
@@ -12,7 +13,6 @@ $(document).ready(function() {
             data = {}; //data del form è un oggetto con più valori
         
         var tipo = $(this).attr("id");
-        console.log(tipo);
 
         if(tipo == "alunno"){
             var formData = { //valori del form inseriti
@@ -46,7 +46,6 @@ $(document).ready(function() {
                 'nomea'             : $('#nomea').val(),
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
-                'indirizzo'         : $('#indirizzo').val(),
                 'sedeleg'           : $('#sedeleg').val(),
                 'sedetir'           : $('#sedetir').val(),
                 'lat'               : $('#lat').val(),
@@ -56,14 +55,19 @@ $(document).ready(function() {
             };
         }
         if(tipo == "tirocinio"){
+            var descr = $("#descr").val();
+            var vt = $("#valTest").val();
+            /*if($.trim(descr).length>0) { } else { descr = null }
+            if($.trim(vt).length>0) { } else { vt = null }*/
+
             var formData = { //valori del form inseriti
                 'inizio'            : formatDate($('#inizio').val()),
                 'fine'              : formatDate($('#fine').val()),
-                'descr'             : $('#descr').val(),
+                'descr'             : descr,
                 'fkalu'             : $('#fkalu').val(),
                 'fkaz'              : $('#fkaz').val(),
                 'value'             : $("#valut").val(),
-                'valTest'           : $("#valTest").val()
+                'valTest'           : vt
             };
         }
         if(tipo == "tutoraziendale"){
@@ -99,8 +103,6 @@ $(document).ready(function() {
             };
         }
 
-        console.log(formData);
-
         $.ajax({
 			type 		: type, // define the type of HTTP verb we want to use (POST for our form)
 			url 		: url, // the url where we want to POST
@@ -109,8 +111,7 @@ $(document).ready(function() {
 			encode 		: true
 		})
             .done(function(risp) {
-                // log data to the console so we can see
-                console.log(risp); 
+                console.log(risp);
                 if(risp.result !== undefined){
                     if (risp.user == 'alunno') {
                         window.location.href = "public/view.php";
@@ -121,29 +122,72 @@ $(document).ready(function() {
                 }else{
                     if(risp.error == undefined){
                         if(risp.sucquery){
-                            console.log(risp.query);
                             Materialize.toast(risp.query, 1000);
                             svuota(form[0]);
                             /*setTimeout(function(){
                                 location.reload();
                             }, 4000);*/
                         }else{
-                            console.log(risp.query);
                             Materialize.toast(risp.errore, 1000);
                         }
                     }
                 }
             })
 			.fail(function(risp) {
-				console.log(risp);
+				//console.log(risp);
 			});
-
-		// stop the form from submitting the normal way and refreshing the page
-		event.preventDefault();
-    });
+        });
     
+        return false;
+    });
+
+     $("#classe_tir").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'classe' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getAlunni.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                $.each(risp['query'], function (i, item) {
+                    $('#fkalu').append($('<option>', { 
+                        value: item[2],
+                        text : item[0] + " " + item[1] 
+                    }));
+                });
+
+                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[2] +"'>" + item[0] + " "
+                    + item[1] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#fkalu").html(html_appo);
+                $('select').material_select();
+                
+            }else{
+                //console.log(risp['fail']);
+            }
+        })
+        .fail(function(risp) {
+            console.log("ERRORE lato SERVER");
+            //console.log(risp);
+        });
     return false;
-});
+    });
+
+
+
 
 function svuota(form) {
     Materialize.updateTextFields();

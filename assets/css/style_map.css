@@ -3,6 +3,25 @@ nav{
 	top:0px;
 
 }
+
+.brand-logo {
+    padding-left: 30px !important;
+    font-family: "Century Gothic", Times, serif;
+}
+
+#home {
+  right: 20%;
+  position: absolute;
+}
+
+#header i {
+    font-size: 35px !important;
+}
+
+.nav-wrapper{
+  display: flex;
+}
+
 .wrapper__map {
   position: fixed !important;
   top: 60px;

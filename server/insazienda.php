@@ -16,21 +16,18 @@
     $nomea = $_POST['nomea'];
     $piva = $_POST['piva'];       
     $nomer = $_POST['nomer'];
-    $indirizzo = $_POST['indirizzo'];
     $lat = $_POST['lat'];
     $long = $_POST['long'];
     $sedeleg = $_POST['sedeleg'];
     $sedetir = $_POST['sedetir'];
-        if ($sedetir == "") {
-            $sedetir = null;
-        }
     $tel = $_POST['tel'];
     $email = $_POST['email'];
 
+    $sedetir = !empty($sedetir) ? "'$sedetir'" : "NULL";
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO azienda (CodAz, Nome, PIVA, NomeRap, Indirizzo, SedeLegale, Lat, Lon, SedeTirocinio, Tel, Email) VALUES(null, '$nomea', '$piva', '$nomer', '$indirizzo', '$sedeleg', $lat, $long, '$sedetir', '$tel', '$email');"; //query da sparare nel DB 
+    $query = "INSERT INTO azienda (CodAz, Nome, PIVA, NomeRap, SedeLegale, Lat, Lon, SedeTirocinio, Tel, Email) VALUES(null, '$nomea', '$piva', '$nomer', '$sedeleg', $lat, $long, ".$sedetir.", '$tel', '$email');"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;
