@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 30, 2018 alle 15:17
+-- Creato il: Apr 30, 2018 alle 16:42
 -- Versione del server: 5.7.17
 -- Versione PHP: 5.6.30
 
@@ -44,9 +44,10 @@ CREATE TABLE `alunno` (
 --
 
 INSERT INTO `alunno` (`CodAlu`, `Nome`, `Cognome`, `CodFisc`, `DataNasc`, `EMail`, `Password`, `FKClasse`) VALUES
-(1, 'Luca', 'Moroni', 'MRNLC98BFDSB8', '1998-03-30', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 5),
-(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', 'ee11cbb19052e40b07aac0ca060c23ee', 5),
-(3, 'Matteo', 'Mathew', 'MTWMAT9INJFD9', '1999-02-01', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 5);
+(1, 'Luca', 'Moroni', 'MRNLC98BFDSB8', '1998-03-30', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 1),
+(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', 'ee11cbb19052e40b07aac0ca060c23ee', 1),
+(3, 'Matteo', 'Mathew', 'MTWMAT9INJFD9', '1999-02-01', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 3),
+(4, 'Marco', 'Riccardi', 'RCMARC780HJD', '1999-03-22', 'prova@f', '189bbbb00c5f1fb7fba9ad9285f193d1', 4);
 
 -- --------------------------------------------------------
 
@@ -89,6 +90,16 @@ CREATE TABLE `classe` (
   `FKSpec` int(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `classe`
+--
+
+INSERT INTO `classe` (`CodClas`, `NomeClasse`, `AnnoScolastico`, `FKTutSc`, `FKSpec`) VALUES
+(1, '5AIA', '2017/2018', 1, 1),
+(2, '5BIA', '2017/2018', 1, 1),
+(3, '5ACM', '2017/2018', 2, 2),
+(4, '5AET', '2017/2018', 2, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +124,10 @@ INSERT INTO `diario` (`CodDia`, `Data`, `TipoAtt`, `Descr`, `Ore`, `FKTir`) VALU
 (2, '2018-01-30', 'BC', '', 8, 2),
 (3, '2018-01-30', 'BC', '', 8, 1),
 (4, '2018-01-29', 'AB', '', 8, 3),
-(5, '2018-01-31', 'B', '', 7, 3);
+(5, '2018-01-31', 'B', '', 7, 3),
+(6, '2018-01-29', 'AB', 'Tutto ok', 8, 4),
+(7, '2018-02-05', 'B', '', 7, 2),
+(8, '2018-02-07', 'AB', 'NULL', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -159,9 +173,10 @@ CREATE TABLE `tirocinio` (
 --
 
 INSERT INTO `tirocinio` (`CodTir`, `Inizio`, `Fine`, `TotOre`, `Descr`, `ValTest`, `ValVoto`, `FKAlu`, `FKAz`) VALUES
-(1, '2018-01-29', '2018-02-09', 0, NULL, NULL, 4, 2, 1),
-(2, '2018-01-29', '2018-02-09', 0, NULL, NULL, 5, 1, 1),
-(3, '2018-01-29', '2018-02-09', 15, NULL, NULL, 2, 3, 2);
+(1, '2018-01-29', '2018-02-09', 8, NULL, NULL, 4, 2, 1),
+(2, '2018-01-29', '2018-02-09', 29, NULL, NULL, 5, 1, 1),
+(3, '2018-01-29', '2018-02-09', 15, NULL, NULL, 2, 3, 2),
+(4, '2018-01-29', '2018-02-09', 8, NULL, 'Bella esp', 4, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -278,7 +293,7 @@ ALTER TABLE `tutor_scolastico`
 -- AUTO_INCREMENT per la tabella `alunno`
 --
 ALTER TABLE `alunno`
-  MODIFY `CodAlu` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CodAlu` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `azienda`
 --
@@ -288,12 +303,12 @@ ALTER TABLE `azienda`
 -- AUTO_INCREMENT per la tabella `classe`
 --
 ALTER TABLE `classe`
-  MODIFY `CodClas` int(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `CodClas` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `diario`
 --
 ALTER TABLE `diario`
-  MODIFY `CodDia` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CodDia` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT per la tabella `specializzazione`
 --
@@ -303,7 +318,7 @@ ALTER TABLE `specializzazione`
 -- AUTO_INCREMENT per la tabella `tirocinio`
 --
 ALTER TABLE `tirocinio`
-  MODIFY `CodTir` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CodTir` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `tutor_aziendale`
 --
@@ -317,6 +332,12 @@ ALTER TABLE `tutor_scolastico`
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `alunno`
+--
+ALTER TABLE `alunno`
+  ADD CONSTRAINT `alunno_ibfk_1` FOREIGN KEY (`FKClasse`) REFERENCES `classe` (`CodClas`);
 
 --
 -- Limiti per la tabella `classe`
