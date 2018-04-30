@@ -24,5 +24,10 @@ $(document).ready(function(){
 	$('.modal').modal();
 
 	$("#sliderTrigger").sideNav();
+
+	$("#changeP").click(function(){
+		var to = '<?php echo $_SESSION["name"]; ?>';
+		$("#nome_ut").val(to);
+	});
 });
 
