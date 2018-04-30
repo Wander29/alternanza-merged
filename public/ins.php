@@ -639,13 +639,13 @@
 
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <form class="inserimento" action="server/aut_alu.php" method="post" enctype="multipart/form-data" autocomplete="off" id="cambia_password">
+      <form class="changep" action="../server/changep.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="row flexx">
           <h4>Modifica Password</h4>
           <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 ">
               <input name="nome_ut" id="nome_ut" type="text" >
               <label for="nome_ut">ut</label>
             </div>
@@ -662,7 +662,8 @@
     </div>
   </div>
 
-    <script src="../assets/js/ins_js.js"></script>
+        <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
+        <script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>

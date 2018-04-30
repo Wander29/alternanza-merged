@@ -537,6 +537,8 @@
       <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
       <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
     </div></li>
+    <li><a href="../server/logout.php">Cambia Password</a></li>
+    <li><div class="divider"></div></li>
     <li><a href="../server/logout.php">ESCI</a></li>
     <li><div class="divider"></div></li>
   </ul>
