@@ -36,7 +36,8 @@ $(document).ready(function() {
         }
         if(tipo == "classe"){
             var formData = { //valori del form inseriti
-                'classe'            : "'" + $('#nomec').val() + "'",
+                'classe'            : $('#nomec').val(),
+                'annoSc'            : $('#annoSc').val(),
                 'tutor'             : $('#fkt').val(),
                 'spec'              : $('#fks').val()
             };

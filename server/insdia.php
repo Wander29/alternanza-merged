@@ -14,8 +14,7 @@
     /********** POST/GET **********/
     //in post prendo tutti i dati che vengono passati dal ajax
     $descr = $_POST['descr'];
-        if ($descr == "")
-            $descr = null;
+    $descr = !empty($descr) ? "'$descr'" : "NULL";
     $ore = $_POST['ore'];       
     $date = $_POST['data'];
     $tipo = $_POST['tipo'];
@@ -24,22 +23,11 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO diario (CodDia, Data, TipoAtt, Descr, Ore, FKTir) VALUES(null, $date, '$tipo','$descr', $ore, $idtir);"; //query da sparare nel DB 
+    $query = "INSERT INTO diario (Data, TipoAtt, Descr, Ore, FKTir) VALUES($date, '$tipo','$descr', $ore, $idtir);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
-        //update delle ore totali, prima prendo l'id
-        $query = "SELECT MAX(tirocinio.CodTir) FROM tirocinio";
-        $result = mysqli_query($connection, $query);
-          if (!$result) {
-            $data['sucquery'] = false;
-            $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
-            die ('Invalid query: ' . mysql_error());
-          }
-          while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
-              $id_tir_inserito = $row[0];
-          }
-        
-        $query = "UPDATE tirocinio SET tirocinio.TotOre = (SELECT SUM(Ore) FROM diario WHERE diario.FKTir = {$id_tir_inserito}) WHERE  tirocinio.CodTir = {$id_tir_inserito}";
+        //update ore totali
+        $query = "UPDATE tirocinio SET tirocinio.TotOre = (SELECT SUM(Ore) FROM diario WHERE diario.FKTir = {$idtir}) WHERE  tirocinio.CodTir = {$idtir}";
         if(mysqli_query($connection, $query)){
             $data['sucquery'] = true;
             $data['query'] = "Record  Aggiunto correttamente"; 

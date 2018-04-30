@@ -12,14 +12,15 @@
     }
     /********** POST/GET **********/
     //in post prendo tutti i dati che vengono passati dal ajax
-    $codclass = strtoupper(test_input($_POST['classe']));
+    $nomeClas = strtoupper(test_input($_POST['classe']));
+    $annoSc = $_POST['annoSc']; 
     $fkt = $_POST['tutor'];       
     $fks = $_POST['spec'];
 
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO classe (CodClas, FKTutSc, FKSpec) VALUES($codclass, $fkt, $fks)"; //query da sparare nel DB 
+    $query = "INSERT INTO classe (NomeClasse, AnnoScolastico, FKTutSc, FKSpec) VALUES('$nomeClas', '$annoSc', $fkt, $fks)"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

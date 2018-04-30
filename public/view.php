@@ -1,5 +1,6 @@
 <?php 
   require("../server/db_info.php"); 
+  session_start();
   $connection = mysqli_connect ('localhost', $username, $password, $database);
   if (!$connection) {  die('Not connected : ' . mysqli_error()); }
 ?>
@@ -51,7 +52,7 @@
                 <br>
                     <ul class="collapsible popout" data-collapsible="accordion">
                         <?php
-                            $query1 = "SELECT * FROM specializzazione"; 
+                            $query1 = "SELECT * FROM specializzazione ORDER BY nome"; 
                             $result1 = mysqli_query($connection, $query1);
                             if (!$result1) {
                                 die ('Invalid query: ' . mysql_error());
@@ -66,7 +67,7 @@
                               <div class="collapsible-body"> <!-- Classi interne -->
                                     <ul class="collapsible" data-collapsible="accordion">
                                         <?php
-                                            $query2 = "SELECT classe.CodClas, tutor_scolastico.Nome, tutor_scolastico.Cognome FROM classe, tutor_scolastico WHERE classe.FKTutSc = tutor_scolastico.CodTutSc AND classe.FKSpec = {$idSpec1}"; 
+                                            $query2 = "SELECT classe.CodClas, tutor_scolastico.Nome, tutor_scolastico.Cognome, classe.NomeClasse FROM classe, tutor_scolastico WHERE classe.FKTutSc = tutor_scolastico.CodTutSc AND classe.FKSpec = {$idSpec1} ORDER BY classe.NomeClasse"; 
                                             $result2 = mysqli_query($connection, $query2);
                                             if (!$result2) {
                                                 die ('Invalid query: ' . mysql_error());
@@ -75,12 +76,13 @@
                                                 $idClas2 = $row2[0];
                                                 $nomeTut2 = $row2[1];
                                                 $cogTut2 = $row2[2];
+                                                $nomeClas2 = $row2[3];
                                         ?>
                                         <li>
                                             <div class="collapsible-header" <?php echo "id='" . $idClas2 . "'" ?> ><i class="material-icons">donut_large</i>
                                                 <table>
                                                     <tr>
-                                                        <td><?php echo $idClas2 ?></td>
+                                                        <td><b><?php echo $nomeClas2 ?></b></td>
                                                         <td class="tut-sc">Tutor Scolastico: <?php echo $nomeTut2 . " " . $cogTut2 ?></td>
                                                     </tr>
                                                 </table>
@@ -101,7 +103,7 @@
                                                             $dataNasc3 = $row3[4];
                                                     ?>
                                                             <tr <?php echo "id='" . $idAlu3 . "'" ?>>
-                                                                <td><?php echo $cog3 ?></td>
+                                                                <td><b><?php echo $cog3 ?></b></td>
                                                                 <td><?php echo $nome3 ?></td>
                                                                 <td><?php echo $codFisc3 ?></td>
                                                                 <td><?php echo $dataNasc3 ?></td>
@@ -127,7 +129,7 @@
         <ul class="collapsible popout" data-collapsible="accordion">
             <?php
 
-              $query4 = 'SELECT CodClas FROM classe';
+              $query4 = 'SELECT CodClas, NomeClasse FROM classe ORDER BY NomeClasse';
 
               $result4 = mysqli_query($connection, $query4);
               if (!$result4) {
@@ -136,18 +138,19 @@
 
               while($row4 = mysqli_fetch_array($result4,MYSQLI_NUM)){
                  $id4 = $row4[0];
+                 $clas4 = $row4[1];
             ?>
             <li>
                 <div class="collapsible-header">
                   <i class="material-icons">donut_large</i>
-                  <?php echo $id4; ?>
+                  <?php echo $clas4; ?>
                 </div>
                 <div class="collapsible-body">
                   <!-- NOME e COGNOME -->
                   <ul class="collapsible popout" data-collapsible="accordion">
                   <?php
 
-                    $query5 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$id4}';";
+                    $query5 = "SELECT alunno.CodAlu, alunno.Cognome, alunno.Nome FROM alunno WHERE alunno.FKClasse = '{$id4}' ORDER BY alunno.cognome;";
 
                     $result5 = mysqli_query($connection, $query5);
                     if (!$result5) {
@@ -508,15 +511,16 @@
             <div class="collapsible-body">
             <ul style="list-style-type: circle !important;">  
               <?php
-                  $queryGetClas2 = "SELECT classe.CodClas FROM classe WHERE classe.FKTutSc = {$idTut2}"; 
+                  $queryGetClas2 = "SELECT classe.CodClas, classe.NomeClasse FROM classe WHERE classe.FKTutSc = {$idTut2}"; 
                   $resultClas2 = mysqli_query($connection, $queryGetClas2);
                   if (!$resultClas2) {
                       die ('Invalid query: ' . mysql_error());
                   }
                   while($rowClas2 = mysqli_fetch_array($resultClas2, MYSQLI_NUM)){
                       $idClas2 = $rowClas2[0];
+                      $nomeClasse2 = $rowClas2[1];
                   ?>
-                  <li><?php echo $idClas2 ?></li>
+                  <li><?php echo $nomeClasse2 ?></li>
                 <?php } ?>
               </ul> 
             </div>

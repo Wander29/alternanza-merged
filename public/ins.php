@@ -25,7 +25,6 @@
     
     <script src="../lib/jquery.js"></script>
     <script src="../lib/materialize/materialize.min.js"></script>
-    <script src="../assets/js/ins_js.js"></script>
   </head>
 	<body>
 
@@ -97,22 +96,17 @@
 	                    <select name="classe" id="classeAl">
 	                      <option selected disabled value="" required><i> Scegli la Classe</i></option>
 	                      <?php
+                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
+                          $result = mysqli_query($connection, $queryGetData);
+                          if (!$result) {
+                            die('Invalid query: ' . mysql_error());
+                          }
 
-	                        $queryGetData = 'SELECT * FROM classe WHERE 1;';
-
-	                        $result = mysqli_query($connection, $queryGetData);
-	                        if (!$result) {
-	                          die('Invalid query: ' . mysql_error());
-	                        }
-	                        //echo json_decode($aResult);
-
-	                        $printcount = 0;
-
-	                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-	                           $nome = $row[0];
-
-	                      ?>
-	                                <option value="<?php echo $nome;?>"><?php echo $nome;?></option>
+                          while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                             $classe = $row[0];
+                             $idClas = $row[1];
+                        ?>
+	                                <option value="<?php echo $idClas;?>"><?php echo $classe;?></option>
 	                      <?php 
 	                      } 
 	                      ?>
@@ -187,19 +181,21 @@
         <div class="row">
           <div class="input-field col s12">
             <select name="annoSc" id="annoSc">
-              <option value="" disabled selected>Anno Scolastico</option>
+              <option value="" disabled>Anno Scolastico</option>
               <?php 
                 $varAnno = 2015;
-                $varAnnoSc;
-                while ($anno = 2024) {
-                  $varAnnoSc = $varAnno . "/" . $varAnno + 1;
+                $currentYear = "2017/2018";
+                $varAnnoSc = "";
+                
+                while ($varAnno < 2024) {
+                  $varAnnoSc = $varAnno . "/" . ++$varAnno;
               ?>
-                 <option value=<?php echo '$varAnnoSc' ?> ><?php echo $varAnnoSc ?></option> 
+                 <option value="<?php echo $varAnnoSc ?>" <?php if ($varAnnoSc == $currentYear) echo "selected" ?> ><?php echo $varAnnoSc ?></option> 
               <?php    
                 }
               ?>
             </select>
-            <label>Materialize Select</label>
+            <label for="annoSc">Anno Scolastico</label>
           </div>
         </div>
                 <div class="row">
@@ -357,7 +353,7 @@
                       <select name="classe_tir" id="classe_tir">
                         <option selected disabled value="" required>Scegli la Classe</option>
                         <?php
-                          $queryGetData = 'SELECT * FROM classe;';
+                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
                           $result = mysqli_query($connection, $queryGetData);
                           if (!$result) {
                             die('Invalid query: ' . mysql_error());
@@ -365,8 +361,9 @@
 
                           while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
                              $classe = $row[0];
+                             $idClas = $row[1];
                         ?>
-                          <option value="<?php echo $classe;?>"><?php echo $classe ?></option>
+                          <option value="<?php echo $idClas;?>"><?php echo $classe ?></option>
                         <?php 
                           } 
                         ?>
@@ -513,27 +510,25 @@
       <br>
       <ul class="collapsible popout" data-collapsible="accordion">
         <?php
-
-          $queryGetData = 'SELECT CodClas FROM classe WHERE 1;';
-
+          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
           $result = mysqli_query($connection, $queryGetData);
           if (!$result) {
             die('Invalid query: ' . mysql_error());
           }
 
           while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-             $id = $row[0];
-
+             $classe = $row[0];
+             $idClas = $row[1];
         ?>
             <li>
               <div class="collapsible-header">
-                <?php echo $id; ?>
+                <?php echo $classe; ?>
                 </div>
                 <div class="collapsible-body">
                   <ul class="collapsible popout" data-collapsible="accordion">
                   <?php
 
-                    $queryGetData2 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$id}';";
+                    $queryGetData2 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$idClas}';";
 
                     $result2 = mysqli_query($connection, $queryGetData2);
                     if (!$result) {
@@ -640,7 +635,7 @@
     <li><a href="#!">ESCI</a></li>
     <li><div class="divider"></div></li>
   </ul>
-  
+    <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
 	</body>
 </html>
