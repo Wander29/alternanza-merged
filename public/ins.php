@@ -96,7 +96,7 @@
 	                    <select name="classe" id="classeAl">
 	                      <option selected disabled value="" required><i> Scegli la Classe</i></option>
 	                      <?php
-                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
+                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe ORDER BY NomeClasse;';
                           $result = mysqli_query($connection, $queryGetData);
                           if (!$result) {
                             die('Invalid query: ' . mysql_error());
@@ -186,7 +186,7 @@
                 $varAnno = 2015;
                 $currentYear = "2017/2018";
                 $varAnnoSc = "";
-                
+
                 while ($varAnno < 2024) {
                   $varAnnoSc = $varAnno . "/" . ++$varAnno;
               ?>
@@ -204,7 +204,7 @@
 	                      <option selected disabled value="" required>Scegli il Tutor Scolastico</option>
 	                      <?php
 
-	                        $queryGetData = 'SELECT * FROM tutor_scolastico WHERE 1;';
+	                        $queryGetData = 'SELECT * FROM tutor_scolastico ORDER BY Cognome;';
 
 	                        $result = mysqli_query($connection, $queryGetData);
 	                        if (!$result) {
@@ -234,7 +234,7 @@
 	                      <option selected disabled value="" required>Scegli la Specializzazione</option>
 	                      <?php
 
-	                        $queryGetData = 'SELECT * FROM specializzazione WHERE 1;';
+	                        $queryGetData = 'SELECT * FROM specializzazione ORDER BY Nome;';
 
 	                        $result = mysqli_query($connection, $queryGetData);
 	                        if (!$result) {
@@ -353,7 +353,7 @@
                       <select name="classe_tir" id="classe_tir">
                         <option selected disabled value="" required>Scegli la Classe</option>
                         <?php
-                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
+                          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe ORDER BY NomeClasse';
                           $result = mysqli_query($connection, $queryGetData);
                           if (!$result) {
                             die('Invalid query: ' . mysql_error());
@@ -386,7 +386,7 @@
 	                      <option selected disabled value="" required>Scegli l'Azienda</option>
 	                      <?php
 
-	                        $queryGetData = 'SELECT * FROM azienda WHERE 1;';
+	                        $queryGetData = 'SELECT * FROM azienda ORDER BY Nome;';
 
 	                        $result = mysqli_query($connection, $queryGetData);
 	                        if (!$result) {
@@ -471,7 +471,7 @@
                         <option selected disabled value="" required>Scegli l'Azienda</option>
                         <?php
 
-                          $queryGetData = 'SELECT * FROM azienda WHERE 1;';
+                          $queryGetData = 'SELECT * FROM azienda ORDER BY nome;';
 
                           $result = mysqli_query($connection, $queryGetData);
                           if (!$result) {
@@ -510,7 +510,7 @@
       <br>
       <ul class="collapsible popout" data-collapsible="accordion">
         <?php
-          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe;';
+          $queryGetData = 'SELECT NomeClasse, CodClas FROM classe ORDER BY NomeClasse;';
           $result = mysqli_query($connection, $queryGetData);
           if (!$result) {
             die('Invalid query: ' . mysql_error());
@@ -528,7 +528,7 @@
                   <ul class="collapsible popout" data-collapsible="accordion">
                   <?php
 
-                    $queryGetData2 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$idClas}';";
+                    $queryGetData2 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$idClas}' ORDER BY alunno.cognome;";
 
                     $result2 = mysqli_query($connection, $queryGetData2);
                     if (!$result) {
@@ -543,7 +543,7 @@
                   ?>
                       <li>
                         <div class="collapsible-header" >
-                          <?php echo $nome . " " . $cognome; ?>
+                          <?php echo "<b>" . $cognome . "</b>&nbsp; " . $nome; ?>
                           </div>
                           <div class="collapsible-body">
                               <?php

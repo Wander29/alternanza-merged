@@ -6,7 +6,7 @@
     require("db_info.php");
     $connection = mysqli_connect('localhost', $username, $password, $database);
 
-    $query = "SELECT alunno.nome, alunno.cognome, alunno.CodAlu FROM alunno WHERE alunno.FKClasse = '$classe' ;";
+    $query = "SELECT alunno.cognome, alunno.nome, alunno.CodAlu FROM alunno WHERE alunno.FKClasse = '$classe' ;";
   
     $result = mysqli_query($connection, $query);
     if (!$result) {

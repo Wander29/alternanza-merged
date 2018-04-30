@@ -150,7 +150,7 @@
                   <ul class="collapsible popout" data-collapsible="accordion">
                   <?php
 
-                    $query5 = "SELECT alunno.CodAlu, alunno.Cognome, alunno.Nome FROM alunno WHERE alunno.FKClasse = '{$id4}' ORDER BY alunno.cognome;";
+                    $query5 = "SELECT alunno.CodAlu, alunno.Nome, alunno.Cognome FROM alunno WHERE alunno.FKClasse = '{$id4}' ORDER BY alunno.cognome;";
 
                     $result5 = mysqli_query($connection, $query5);
                     if (!$result5) {
@@ -164,7 +164,7 @@
                   ?>
                   <li>
                     <div class="collapsible-header" >
-                      <?php echo $nome5 . " " . $cognome5; ?>
+                      <?php echo "<b>" . $cognome5 . "</b> &nbsp;" . $nome5; ?>
 
                     </div>
                     <div class="collapsible-body">
@@ -505,7 +505,7 @@
           <li>
             <div class="collapsible-header" >
               <i class="material-icons">account_circle</i> 
-              <span style="width:50%;"><?php echo $cogTut2 . " " . $nomeTut2 ?></span>
+              <span style="width:50%;"><?php echo "<b>" . $cogTut2 . "</b> " . $nomeTut2 ?></span>
               <span style="width:50%;"><?php echo $cfTut2 ?></span>
             </div>
             <div class="collapsible-body">
