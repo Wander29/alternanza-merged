@@ -547,7 +547,7 @@
                           <div class="collapsible-body">
                               <?php
 
-                                $queryGetData3 = "SELECT tirocinio.Inizio, azienda.Nome, tirocinio.CodTir FROM tirocinio, azienda WHERE azienda.CodAz = tirocinio.FKAz AND tirocinio.FKAlu = {$ida};";
+                                $queryGetData3 = "SELECT tirocinio.Inizio, azienda.Nome, tirocinio.CodTir FROM tirocinio, azienda WHERE azienda.CodAz = tirocinio.FKAz AND tirocinio.FKAlu = {$ida} ORDER BY tirocinio.Inizio;";
 
                                 $result3 = mysqli_query($connection, $queryGetData3);
                                 if (!$result) {

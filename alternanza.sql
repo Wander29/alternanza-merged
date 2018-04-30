@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 30, 2018 alle 16:42
+-- Creato il: Apr 30, 2018 alle 22:02
 -- Versione del server: 5.7.17
 -- Versione PHP: 5.6.30
 
@@ -127,7 +127,8 @@ INSERT INTO `diario` (`CodDia`, `Data`, `TipoAtt`, `Descr`, `Ore`, `FKTir`) VALU
 (5, '2018-01-31', 'B', '', 7, 3),
 (6, '2018-01-29', 'AB', 'Tutto ok', 8, 4),
 (7, '2018-02-05', 'B', '', 7, 2),
-(8, '2018-02-07', 'AB', 'NULL', 6, 2);
+(8, '2018-02-07', 'AB', 'NULL', 6, 2),
+(9, '2017-06-12', 'A', 'NULL', 8, 5);
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,8 @@ INSERT INTO `tirocinio` (`CodTir`, `Inizio`, `Fine`, `TotOre`, `Descr`, `ValTest
 (1, '2018-01-29', '2018-02-09', 8, NULL, NULL, 4, 2, 1),
 (2, '2018-01-29', '2018-02-09', 29, NULL, NULL, 5, 1, 1),
 (3, '2018-01-29', '2018-02-09', 15, NULL, NULL, 2, 3, 2),
-(4, '2018-01-29', '2018-02-09', 8, NULL, 'Bella esp', 4, 4, 2);
+(4, '2018-01-29', '2018-02-09', 8, NULL, 'Bella esp', 4, 4, 2),
+(5, '2017-06-12', '2017-06-30', 8, NULL, NULL, 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -308,7 +310,7 @@ ALTER TABLE `classe`
 -- AUTO_INCREMENT per la tabella `diario`
 --
 ALTER TABLE `diario`
-  MODIFY `CodDia` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `CodDia` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT per la tabella `specializzazione`
 --
@@ -318,7 +320,7 @@ ALTER TABLE `specializzazione`
 -- AUTO_INCREMENT per la tabella `tirocinio`
 --
 ALTER TABLE `tirocinio`
-  MODIFY `CodTir` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `CodTir` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT per la tabella `tutor_aziendale`
 --
