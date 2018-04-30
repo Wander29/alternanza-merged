@@ -27,10 +27,13 @@
         $modifica = mysqli_query($connection, $query_modifica);
         if($modifica){
             $data['success'] = false;
+            $data['query'] = "Errore";
         }
         $data['success'] = true;
+        $data['query'] = "Password cambiata";
     } else {
         $data['success'] = false;
+        $data['query'] = "Errore";
     }
     
 

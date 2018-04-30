@@ -543,6 +543,31 @@
     <li><div class="divider"></div></li>
   </ul>
 
+    <div id="modal1" class="modal">
+    <div class="modal-content">
+      <form class="changep" action="../server/changep.php" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="row flexx">
+          <h4>Modifica Password</h4>
+          <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 ">
+              <input name="nome_ut" id="nome_ut" type="text" >
+              <label for="nome_ut">ut</label>
+            </div>
+            <div class="input-field col s12">
+              <input name="oldpsw" id="oldpsw" type="text" >
+              <label for="oldpsw">Vecchia Password</label>
+            </div>
+            <div class="input-field col s12">
+              <input name="newpsw" id="newpsw" type="password" >
+              <label for="newpsw">Nuova Password</label>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
     <script src="../assets/js/view_js.js"></script>
     <script src="../assets/js/view_ajax.js"></script>
     </body>

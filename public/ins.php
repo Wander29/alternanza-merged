@@ -662,8 +662,8 @@
     </div>
   </div>
 
-        <script src="../assets/js/ins_js.js"></script>
+    <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
-        <script src="../assets/js/changep_aj.js"></script>
+    <script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>

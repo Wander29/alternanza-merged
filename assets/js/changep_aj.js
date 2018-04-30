@@ -23,11 +23,9 @@ $(document).ready(function() {
 			encode 		: true
 		})
             .done(function(risp) {
-            console.log(risp);
+            Materialize.toast(risp.query, 1000);
                 if(risp.success == true){
-                    console.log("successo");
                 } else {
-                    console.log("errore query");
                 }
             })
 			.fail(function(risp) {
