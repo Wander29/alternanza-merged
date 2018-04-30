@@ -32,10 +32,9 @@
 		<div class="nav-wrapper">
 		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a>  
       <div class="chip">
-        <img id="sliderTrigger" src="../assets/img/profile.jpg" alt="Contact Person">
+        <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
       </div>
-      <a href="#" id="triggerat" data-activates="slide-out" class="button-collapse" style="display: none"></a>
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
@@ -632,7 +631,7 @@
       <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
       <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
     </div></li>
-    <li><a href="#!">ESCI</a></li>
+    <li><a href="../server/logout.php">ESCI</a></li>
     <li><div class="divider"></div></li>
   </ul>
     <script src="../assets/js/ins_js.js"></script>

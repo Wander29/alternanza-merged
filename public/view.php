@@ -29,10 +29,9 @@
               <div class="logo">
                 <a href="#" class="brand-logo"><i class="material-icons">visibility</i> VISUALIZZAZIONE</a></div>
               <div class="chip">
-                <img id="sliderTrigger" src="../assets/img/profile.jpg" alt="Contact Person">
+                <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
                   <?php echo $_SESSION["name"] ?>
               </div>
-              <a href="#" id="triggerat" data-activates="slide-out" class="button-collapse" style="display: none"></a>
             </div>
             </div>
             <div class="nav-content">
@@ -530,7 +529,7 @@
     </div>
 </div>
 
-     <ul id="slide-out" class="side-nav">
+  <ul id="slide-out" class="side-nav">
     <li><div class="user-view">
       <div style="background-color: #01870A" class="background">
       </div>
@@ -538,10 +537,11 @@
       <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
       <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
     </div></li>
-    <li><a href="#!">ESCI</a></li>
+    <li><a href="../server/logout.php">ESCI</a></li>
     <li><div class="divider"></div></li>
   </ul>
 
+    <script src="../assets/js/view_js.js"></script>
     <script src="../assets/js/view_ajax.js"></script>
     </body>
 </html>

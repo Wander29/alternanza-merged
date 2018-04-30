@@ -23,10 +23,6 @@ $(document).ready(function(){
 
 	$('.modal').modal();
 
-	$(".button-collapse").sideNav();
-
-	$("#sliderTrigger").click(function(){
-		$("#triggerat").trigger("click");
-	});
+	$("#sliderTrigger").sideNav();
 });
 
