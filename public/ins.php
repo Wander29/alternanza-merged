@@ -179,11 +179,29 @@
 			<h2>Inserimento Classe</h2>
 			<form class="inserimento" action="../server/insclas.php" method="post" enctype="multipart/form-data" autocomplete="off" id="classe">
 				<div class="row">
-                <div class="input-field col s12">
-                  <input name="nomec" id="nomec" type="text" required>
-                  <label for="nomec">Nome Classe</label>
-                </div>
-                </div>
+          <div class="input-field col s12">
+            <input name="nomec" id="nomec" type="text" required>
+            <label for="nomec">Nome Classe</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="annoSc" id="annoSc">
+              <option value="" disabled selected>Anno Scolastico</option>
+              <?php 
+                $varAnno = 2015;
+                $varAnnoSc;
+                while ($anno = 2024) {
+                  $varAnnoSc = $varAnno . "/" . $varAnno + 1;
+              ?>
+                 <option value=<?php echo '$varAnnoSc' ?> ><?php echo $varAnnoSc ?></option> 
+              <?php    
+                }
+              ?>
+            </select>
+            <label>Materialize Select</label>
+          </div>
+        </div>
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkt" id="fkt">
@@ -420,12 +438,12 @@
 		<div class="container">
 			<h2>Inserimento Tutor Aziendale</h2>
 			<form class="inserimento" action="../server/instutaz.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutoraziendale">
-				<div class="row">
-                    <div class="input-field col s12">
-                      <input name="nometa" id="nometa" type="text" required>
-                      <label for="nometa">Nome</label>
-                    </div>
+				      <div class="row">
+                <div class="input-field col s12">
+                  <input name="nometa" id="nometa" type="text" required>
+                  <label for="nometa">Nome</label>
                 </div>
+              </div>
                 <div class="row">
                     <div class="input-field col s12">
                       <input name="cognometa" id="cognometa" type="text" required>
@@ -490,7 +508,9 @@
 	</div>
   <div id="test7" class="col s12">
     <div class="container">
-      <h2>Diario personale</h2>
+      <h3>Diario personale</h3>
+      <h5 align="center">Classi | Alunni | Stage (data Inizio)</h5>
+      <br>
       <ul class="collapsible popout" data-collapsible="accordion">
         <?php
 

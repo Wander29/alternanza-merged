@@ -44,6 +44,7 @@
             $data['sucquery'] = true;
             $data['query'] = "Record  Aggiunto correttamente"; 
             $data['success'] = true;
+            $data['reload'] = false;
         } else {
             $data['sucquery'] = false;
             $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);

@@ -28,6 +28,7 @@
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;
         $data['query'] = "Record  Aggiunto correttamente"; 
+        $data['reload'] = false;
     }else{
         $data['sucquery'] = false;
         $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);

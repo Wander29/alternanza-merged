@@ -73,33 +73,33 @@ $(document).ready(function() {
         if(tipo == "tutoraziendale"){
             var formData = { //valori del form inseriti
                 'nome'              : $('#nometa').val(),
-                'cognome'              : $('#cognometa').val(),
+                'cognome'           : $('#cognometa').val(),
                 'data'              : formatDate($('#datetut').val()),
-                'codfisc'              : $('#codfiscta').val(),
-                'tel'              : $('#telta').val(),
+                'codfisc'           : $('#codfiscta').val(),
+                'tel'               : $('#telta').val(),
                 'mail'              : $('#emailta').val(),               
-                'fka'              : $('#fkazt').val()
+                'fka'               : $('#fkazt').val()
             };
         }
         if(tipo == "diario"){
             var formData = { //valori del form inseriti
-                'descr'              : $('#descrdia').val(),
-                'ore'              : $('#oredia').val(),
+                'descr'             : $('#descrdia').val(),
+                'ore'               : $('#oredia').val(),
                 'data'              : formatDate($('#datedia').val()),
                 'tipo'              : ftipo($('#typeat').val()),
-                'idtir'              : appoidtir
+                'idtir'             : appoidtir
             };
         }
         if(tipo == "autenticazione_alunno"){
             var formData = { //valori del form inseriti
                 'mail'              : $('#maila').val(),
-                'psw'              : $('#pswa').val(),
+                'psw'               : $('#pswa').val(),
             };
         }
         if(tipo == "autenticazione_professore"){
             var formData = { //valori del form inseriti
                 'mail'              : $('#mailp').val(),
-                'psw'              : $('#pswp').val(),
+                'psw'               : $('#pswp').val(),
             };
         }
         if(tipo == "specializzazione"){
@@ -128,10 +128,13 @@ $(document).ready(function() {
                     if(risp.error == undefined){
                         if(risp.sucquery){
                             Materialize.toast(risp.query, 1000);
-                            svuota(form[0]);
-                            setTimeout(function(){
-                                location.reload();
-                            }, 1100);
+                            if (risp.reload) {
+                                setTimeout(function(){
+                                    location.reload();
+                                }, 1100);
+                            } else {
+                                svuota(form[0]);
+                            }   
                         }else{
                             Materialize.toast(risp.errore, 1000);
                         }
