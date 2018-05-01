@@ -14,7 +14,6 @@ $(document).ready(function() {
             'newpsw'              : $('#newpsw').val()
         };
         
-        
         $.ajax({
 			type 		: type, // define the type of HTTP verb we want to use (POST for our form)
 			url 		: url, // the url where we want to POST
@@ -23,10 +22,8 @@ $(document).ready(function() {
 			encode 		: true
 		})
             .done(function(risp) {
-            Materialize.toast(risp.query, 1000);
-                if(risp.success == true){
-                } else {
-                }
+                Materialize.toast(risp.query, 1000);
+                console.log(risp);
             })
 			.fail(function(risp) {
                 console.log(risp);

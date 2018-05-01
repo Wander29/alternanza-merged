@@ -32,36 +32,36 @@
     var cou = 1;
 
     function initMap() {
-              map = new google.maps.Map(document.getElementById('map'), {
-              center: new google.maps.LatLng(42.5633500, 12.6432900),
-              zoom: 10,
-        disableDefaultUI: true,
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-          });
-          var infoWindow = new google.maps.InfoWindow;
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng(42.5633500, 12.6432900),
+            zoom: 10,
+            disableDefaultUI: true,
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var infoWindow = new google.maps.InfoWindow;
 
       // Change this depending on the name of your PHP or XML file
-      downloadUrl('../server/map_xml.php', function(data) {
+        downloadUrl('../server/map_xml.php', function(data) {
         var xml = data.responseXML;
         var markers = xml.documentElement.getElementsByTagName('marker');
         Array.prototype.forEach.call(markers, function(markerElem) {
-          var id = markerElem.getAttribute('id');
-          var name = markerElem.getAttribute('name');
-          var rap = markerElem.getAttribute('rap');
-          var sede = markerElem.getAttribute('sede');
-          var point = new google.maps.LatLng(
-              parseFloat(markerElem.getAttribute('lat')),
-              parseFloat(markerElem.getAttribute('lng'))
-          );
-          var tel = markerElem.getAttribute('tel');
-          var email = markerElem.getAttribute('email');
-          
-          var marker = new google.maps.Marker({
-              map: map,
-              position: point,
-              label: {text: name, color: "black"},
-          });
+        var id = markerElem.getAttribute('id');
+        var name = markerElem.getAttribute('name');
+        var rap = markerElem.getAttribute('rap');
+        var sede = markerElem.getAttribute('sede');
+        var point = new google.maps.LatLng(
+            parseFloat(markerElem.getAttribute('lat')),
+            parseFloat(markerElem.getAttribute('lng'))
+        );
+        var tel = markerElem.getAttribute('tel');
+        var email = markerElem.getAttribute('email');
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+            label: {text: name, color: "black"},
+        });
 
           asso[cou] = id;
             cou = cou+1 ;

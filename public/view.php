@@ -537,7 +537,7 @@
       <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
       <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
     </div></li>
-    <li><a href="../server/logout.php">Cambia Password</a></li>
+    <li><a class="modal-trigger" id="changeP" href="#modal1">Cambia Password</a></li>
     <li><div class="divider"></div></li>
     <li><a href="../server/logout.php">ESCI</a></li>
     <li><div class="divider"></div></li>
@@ -545,7 +545,7 @@
 
     <div id="modal1" class="modal">
     <div class="modal-content">
-      <form class="changep" action="../server/changep.php" method="post" enctype="multipart/form-data" autocomplete="off">
+      <form class="changep" action="../server/changepw.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="row flexx">
           <h4>Modifica Password</h4>
           <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
@@ -570,5 +570,6 @@
 
     <script src="../assets/js/view_js.js"></script>
     <script src="../assets/js/view_ajax.js"></script>
+    <script src="../assets/js/changep_aj.js"></script>
     </body>
 </html>
