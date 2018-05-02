@@ -54,13 +54,13 @@
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Here is the subject';
-                $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                $mail->Body    = 'Caro/a <b>'.$_SESSION["name"].'</b><br> La sua password è stata cambiata con successo.';
+                $mail->AltBody = 'Caro/a '.$_SESSION["name"].' La sua password è stata cambiata con successo.';
 
                 $mail->send();
 
             } catch (Exception $e) {
-                $data["e"] = $E -> getMessage();
+                $data["e"] = $e -> getMessage();
             }
         }
     } else {

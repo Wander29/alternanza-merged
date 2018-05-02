@@ -26,19 +26,6 @@
     $nomeut = test_input($_POST['nomeut']);
     $oldpsw = md5(test_input($_POST['oldpsw']));
     $newpsw = md5(test_input($_POST['newpsw']));
-
-    /********** Email **********/
-
-    $headers =  'MIME-Version: 1.0' . "\r\n"; 
-    $headers .= 'From: Your name <info@address.com>' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n"; 
-    
-    // the message
-    $msg = "Passoword cambiata con successo";
-
-    // use wordwrap() if lines are longer than 70 characters
-    $msg = wordwrap($msg,70); //worderap serve a tagliare una stringa dopo x caratteri e nel caso spezzarla in piu linee
-
     
 
     /********** Query **********/
@@ -56,6 +43,8 @@
             $data['success'] = true;
             $data['query'] = "Password cambiata";
 
+            /********** Email **********/
+            
             try {
                 //Server settings
                 $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -77,14 +66,14 @@
 
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Here is the subject';
-                $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                $mail->Subject = 'Cambio Password';
+                $mail->Body    = 'Caro/a <b>'.$_SESSION["name"].'</b><br> La sua password è stata cambiata con successo.';
+                $mail->AltBody = 'Caro/a '.$_SESSION["name"].' La sua password è stata cambiata con successo.';
 
                 $mail->send();
 
             } catch (Exception $e) {
-                $data["e"] = $E -> getMessage();
+                $data["e"] = $e -> getMessage();
             }
         }
         
