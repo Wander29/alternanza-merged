@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 30, 2018 alle 22:02
+-- Creato il: Mag 02, 2018 alle 21:35
 -- Versione del server: 5.7.17
--- Versione PHP: 5.6.30
+-- Versione PHP: 7.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,9 +45,10 @@ CREATE TABLE `alunno` (
 
 INSERT INTO `alunno` (`CodAlu`, `Nome`, `Cognome`, `CodFisc`, `DataNasc`, `EMail`, `Password`, `FKClasse`) VALUES
 (1, 'Luca', 'Moroni', 'MRNLC98BFDSB8', '1998-03-30', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 1),
-(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', 'ee11cbb19052e40b07aac0ca060c23ee', 1),
+(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', '24c9e15e52afc47c225b757e7bee1f9d', 1),
 (3, 'Matteo', 'Mathew', 'MTWMAT9INJFD9', '1999-02-01', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 3),
-(4, 'Marco', 'Riccardi', 'RCMARC780HJD', '1999-03-22', 'prova@f', '189bbbb00c5f1fb7fba9ad9285f193d1', 4);
+(4, 'Marco', 'Riccardi', 'RCMARC780HJD', '1999-03-22', 'prova@f', '189bbbb00c5f1fb7fba9ad9285f193d1', 4),
+(5, 'Michele', 'Apicella', 'APCMCH4378JN', '1999-02-01', 'ludovico.venturi@gmail.com', '8a94bdfc825df46f880854f41fee346b', 1);
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,7 @@ ALTER TABLE `tutor_scolastico`
 -- AUTO_INCREMENT per la tabella `alunno`
 --
 ALTER TABLE `alunno`
-  MODIFY `CodAlu` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `CodAlu` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT per la tabella `azienda`
 --
