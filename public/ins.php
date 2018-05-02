@@ -21,7 +21,6 @@
     <link rel="icon" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
-    <link rel="stylesheet" href="../lib/material_icons/mat_icons.css">
     <link rel="stylesheet" href="../assets/css/style_ins.css">
     
     <script src="../lib/jquery.js"></script>
