@@ -29,6 +29,7 @@
 
         $_SESSION["name"] = $data["result"];
         $_SESSION["mail"] = $row[2];
+        $_SESSION["table"] = 'alunno';
         $data['user'] = 'alunno';
     } else {
         $data['sucquery'] = false;

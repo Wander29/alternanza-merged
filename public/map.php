@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Inserimento ">
     <meta name="author" content="Ludovico Venturi & Luca Moroni">
-
+  
     <link rel="icon" href="../assets/img/favicon.png">
+    <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
     <link rel="stylesheet" href="../lib/material_icons/mat_icons.css">
     <link rel="stylesheet" href="../assets/css/style_map.css">
@@ -127,7 +128,7 @@
                   <tbody id="subalu">
                   
                   <?php
-                  $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.CodClas, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
+                  $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.NomeClasse, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
                   $result = mysqli_query($connection, $queryGetData);
                   if (!$result) {
                     die('Invalid query: ' . mysql_error());

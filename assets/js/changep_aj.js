@@ -9,7 +9,6 @@ $(document).ready(function() {
             data = {}; //data del form è un oggetto con più valori
        
         var formData = { //valori del form inseriti
-            'nomeut'              : $('#nome_ut').val(),
             'oldpsw'              : $('#oldpsw').val(),
             'newpsw'              : $('#newpsw').val()
         };
@@ -26,9 +25,9 @@ $(document).ready(function() {
                 console.log(risp);
             })
 			.fail(function(risp) {
+                Materialize.toast(risp.query, 1000);
                 console.log(risp);
 			});
         });
-    
         return false;
     });

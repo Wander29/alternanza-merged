@@ -63,3 +63,13 @@
 .dn {
     display: none;
 }
+
+.flexx{
+    display: flex;
+    flex-direction: row;
+}
+
+.flexx > button {
+    margin-left: 30%;
+    margin-top: 9px;
+}

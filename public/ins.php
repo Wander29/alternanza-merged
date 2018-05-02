@@ -19,6 +19,7 @@
     <meta name="author" content="Ludovico Venturi & Luca Moroni">
 
     <link rel="icon" href="../assets/img/favicon.png">
+    <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
     <link rel="stylesheet" href="../lib/material_icons/mat_icons.css">
     <link rel="stylesheet" href="../assets/css/style_ins.css">
@@ -639,18 +640,14 @@
 
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <form class="changep" action="../server/changep.php" method="post" enctype="multipart/form-data" autocomplete="off">
+      <form class="changep" action="../server/changepw.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="row flexx">
           <h4>Modifica Password</h4>
           <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
         </div>
         <div class="row">
-            <div class="input-field col s12 ">
-              <input name="nome_ut" id="nome_ut" type="text" >
-              <label for="nome_ut">ut</label>
-            </div>
             <div class="input-field col s12">
-              <input name="oldpsw" id="oldpsw" type="text" >
+              <input name="oldpsw" id="oldpsw" type="password" >
               <label for="oldpsw">Vecchia Password</label>
             </div>
             <div class="input-field col s12">

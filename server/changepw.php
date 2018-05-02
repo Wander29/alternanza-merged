@@ -1,31 +1,41 @@
 <?php
-
     require("db_info.php");
     session_start();
     $data = array(); 		// array to pass back data to ajax 
-    
+
+    ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require('PHPMailer-master/src/PHPMailer.php');
+    require('PHPMailer-master/src/Exception.php');
+    require('PHPMailer-master/src/SMTP.php');
+    $mail=new PHPMailer(true);
+    $mail->CharSet = 'UTF-8';
+
     /********** Apertura **********/
     $connection = mysqli_connect("localhost", $username, $password, $database);
 
     if(!$connection){
-        $data["error"] = "errore nella connessione";
+        $data["error"] = "Errore nella connessione";
         die();
     }
 
     /********** POST/GET **********/
-    $nomeut = test_input($_POST['nomeut']);
+    $nomeut = $_SESSION["mail"];
+    $table = $_SESSION["table"];
     $oldpsw = md5(test_input($_POST['oldpsw']));
     $newpsw = md5(test_input($_POST['newpsw']));
 
     /********** Query **********/
-    $query_verifica = "SELECT Nome FROM alunno WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
-    $query_modifica = "UPDATE alunno SET Password = '$newpsw' WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
+    $query_verifica = "SELECT Nome FROM $table WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
+    $query_modifica = "UPDATE $table SET Password = '$newpsw' WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
 
     $verifica = mysqli_fetch_array(mysqli_query($connection, $query_verifica));
     
     if($verifica != null){
         $modifica = mysqli_query($connection, $query_modifica);
-        if($modifica){
+        if(!$modifica){
             $data['success'] = false;
             $data['query'] = "Errore";
         }else {
@@ -34,7 +44,14 @@
 
             try {
                 //Server settings
-                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->isSMTP();    
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );                                   // Set mailer to use SMTP
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username   = '144.developer.master@gmail.com';
@@ -53,7 +70,7 @@
 
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Here is the subject';
+                $mail->Subject = 'Cambio Password';
                 $mail->Body    = 'Caro/a <b>'.$_SESSION["name"].'</b><br> La sua password è stata cambiata con successo.';
                 $mail->AltBody = 'Caro/a '.$_SESSION["name"].' La sua password è stata cambiata con successo.';
 
@@ -67,16 +84,12 @@
         $data['success'] = false;
         $data['query'] = "Errore";
     }
-    
-
 
     /********** Chiusura **********/
     mysqli_close($connection); // Chiusura connessione
 
-
     /********** Return Ajax **********/
 	echo json_encode($data); //funzione di ritorno tramite JSON
-
 
     /********** Funzioni **********/
     function test_input($data) {

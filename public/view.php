@@ -12,6 +12,7 @@
         <meta name="description" content="Form visualizzaione">
         <meta name="author" content="Ludovico Venturi & Luca Moroni">
 
+        <link rel="stylesheet" href="../assets/css/fonts.css">
         <link rel="icon" href="../assets/img/favicon.png">
         <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
         <link rel="stylesheet" href="../assets/css/style_view.css">
@@ -551,12 +552,8 @@
           <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
         </div>
         <div class="row">
-            <div class="input-field col s12 ">
-              <input name="nome_ut" id="nome_ut" type="text" >
-              <label for="nome_ut">ut</label>
-            </div>
             <div class="input-field col s12">
-              <input name="oldpsw" id="oldpsw" type="text" >
+              <input name="oldpsw" id="oldpsw" type="password" >
               <label for="oldpsw">Vecchia Password</label>
             </div>
             <div class="input-field col s12">

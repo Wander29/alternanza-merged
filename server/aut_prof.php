@@ -26,6 +26,7 @@
 
         $_SESSION["name"] = $data["result"];
         $_SESSION["mail"] = $data["email"];
+        $_SESSION["table"] = 'tutor_scolastico';
         $data['user'] = 'professore';
     } else {
         $data['sucquery'] = false;

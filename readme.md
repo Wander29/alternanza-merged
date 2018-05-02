@@ -1,13 +1,4 @@
 # TO DO
-## View
-- [ ] aggiustare Slider account VIEW:  Undefined variable: _SESSION in D:\Program Files ( x86)\EasyPHP-Devserver-17\eds-www\alternanza-merged\public\view.php on line 32
-
-## Pulsante HOME
-- [ ] Esci dalla sessione e torna alla home
-
-## INS
-- [x] su tiorcinio per inserire l'alunno si deve prima scegliere la classe altrimeni è un caos
-
 ## togliere tutti i console.log
 
 # CHANGELOG
@@ -31,4 +22,13 @@
 - [x] material icons in ogni riga
 
 ##DATABASE
-- [ ] modifica Classi, con anno scolastico
+- [x] modifica Classi, con anno scolastico
+
+## View
+- [x] aggiustare Slider account VIEW:  Undefined variable: _SESSION in D:\Program Files ( x86)\EasyPHP-Devserver-17\eds-www\alternanza-merged\public\view.php on line 32
+
+## Pulsante HOME
+- [x] Esci dalla sessione e torna alla home
+
+## INS
+- [x] su tiorcinio per inserire l'alunno si deve prima scegliere la classe altrimeni è un caos
