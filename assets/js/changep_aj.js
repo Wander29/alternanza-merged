@@ -2,6 +2,8 @@ $(document).ready(function() {
     
     $('.changep').submit(function(event) {
         
+        $(".progress_cont").toggleClass("dn");
+        
         event.preventDefault();
         var form = $(this), //prende gli attributi del form
             url = form.attr("action"), 
@@ -23,10 +25,12 @@ $(document).ready(function() {
             .done(function(risp) {
                 Materialize.toast(risp.query, 1000);
                 console.log(risp);
+                $(".progress_cont").toggleClass("dn");
             })
 			.fail(function(risp) {
                 Materialize.toast(risp.query, 1000);
                 console.log(risp);
+                $(".progress_cont").toggleClass("dn");
 			});
         });
         return false;

@@ -55,7 +55,7 @@
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username   = '144.developer.master@gmail.com';
-                $mail->Password   = 'karate1998';
+                $mail->Password   = 'developer144';
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 587;                                    // TCP port to connect to
 

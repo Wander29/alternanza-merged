@@ -563,6 +563,11 @@
       </form>
     </div>
   </div>
+    <div class="progress_cont dn">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
 
     <script src="../assets/js/view_js.js"></script>
     <script src="../assets/js/view_ajax.js"></script>

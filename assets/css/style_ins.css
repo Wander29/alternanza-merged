@@ -88,3 +88,11 @@
 .dn {
     display: none;
 }
+
+.progress_cont{
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+}
