@@ -308,6 +308,13 @@
             </td>
             <td>
               <span id="span-tipo-att-diario"></span>
+              <a class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="<ul>
+                <li><b>[A]</b> accoglienza in azienda e descrizione del ruolo del Tutor Aziendale dei  contenuti del Tirocinio/Stage</li><br>
+                <li><b>[B]</b> descrizione dell’attività e dell’organizzazione aziendale (descrizione del posto di lavoro, dei mezzi<br> di produzione assegnati, degli    
+         elementi di prevenzione adottati e dei dispositivi di protezione individuale)<br>e descrizione dei processi di competenza del ruolo</li><br>
+              <li><b>[C]</b> esercitazioni pratico-operative</li><br>
+              <li><b>[D]</b> verifica e valutazione dell’apprendimento</li>
+              </ul>">?</a>
             </td>
           </tr>
           <tr>

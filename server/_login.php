@@ -11,33 +11,29 @@
         die();
     }
 
+
     /********** POST/GET **********/
     //in post prendo tutti i dati che vengono passati dal ajax
-    $inizio = $_POST['inizio'];       
-    $fine = $_POST['fine'];
-    $val = $_POST['value'];
-    $oreTot = $_POST['oreTot'];
-    $valTest = $_POST['valTest'];
-    $descr = $_POST['descr'];
-    $fkalu = $_POST['fkalu'];
-    $fkaz = $_POST['fkaz'];
+    $mail = test_input($_POST['mail']);
+    $psw = md5(test_input($_POST['psw']));
 
-    $valTest = !empty($valTest) ? "'$valTest'" : "NULL";
-    $descr = !empty($descr) ? "'$descr'" : "NULL";
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO tirocinio (CodTir, Inizio, Fine, TotOre, Descr, ValVoto, ValTest, FKAlu, FKAz
-    ) VALUES(null, $inizio, $fine, $oreTot, ".$descr.", $val, ".$valTest.",'$fkalu', '$fkaz');"; //query da sparare nel DB 
+    $query = "SELECT Nome, Cognome, EMail FROM alunno WHERE EMail = '$mail' AND Password = '$psw';"; //query da sparare nel DB 
 
-    if(mysqli_query($connection, $query)){
-        $data['sucquery'] = true;
-        $data['query'] = "Record  Aggiunto correttamente"; 
-        $data['reload'] = true;
-    }else{
+    $row = mysqli_fetch_array(mysqli_query($connection, $query));
+    
+    if($row[0] != null){
+        $data["result"] = $row[0] . " " . $row[1];
+
+        $_SESSION["name"] = $data["result"];
+        $_SESSION["mail"] = $row[2];
+        $_SESSION["table"] = 'alunno';
+        $data['user'] = 'alunno';
+    } else {
         $data['sucquery'] = false;
-        $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
-        $data['errore'] = "ERRORE, record non inserito";
+        $data['errore'] = "ERRORE di autenticazione";
     }
 
     $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax
@@ -47,7 +43,7 @@
 
 
     /********** Return Ajax **********/
-    echo json_encode($data); //funzione di ritorno tramite JSON
+	echo json_encode($data); //funzione di ritorno tramite JSON
 
 
     /********** Funzioni **********/

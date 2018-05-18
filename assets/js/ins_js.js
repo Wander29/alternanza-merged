@@ -25,6 +25,8 @@ $(document).ready(function(){
 
 	$("#sliderTrigger").sideNav();
 
+	$('.tooltipped').tooltip({delay: 50, html: true});
+
 	$("#changeP").click(function(){
 		$("#nome_ut").val($(".email").html());
 	});

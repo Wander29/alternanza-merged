@@ -336,13 +336,11 @@
 			<form class="inserimento" action="../server/instirocinio.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tirocinio">
 				<div class="row">
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input id="inizio" type="date" class="datepicker" required>
                       <label for="inzio">Data di Inizio</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input id="fine" type="date" class="datepicker" required>
                       <label for="fine">Data di Fine</label>
                     </div>
@@ -387,7 +385,7 @@
                   </div>   
               	</div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <select name="fkaz" id="fkaz">
 	                      <option selected disabled value="" required>Scegli l'Azienda</option>
 	                      <?php
@@ -412,6 +410,10 @@
 	                      ?>
 	                    </select>
                       <label for="fkaz">Azienda</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input name="oreTot" id="oreTot" type="text" required>
+                      <label for="oreTot">Ore Totali</label>
                     </div>
                 </div>
 
@@ -600,15 +602,26 @@
                   <label for="datedia">Data</label>
                 </div>
             </div>
-            <div class="input-field col s12">
-              <select id="typeat" multiple required>
-                <option value="" disabled selected>A / B / C / D</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-              <label>Tipo di attività</label>
+            <div class="row">
+              <div class="col s2" style="padding-top: 20px">
+                <a class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="<ul>
+                <li><b>[A]</b> accoglienza in azienda e descrizione del ruolo del Tutor Aziendale dei  contenuti del Tirocinio/Stage</li><br>
+                <li><b>[B]</b> descrizione dell’attività e dell’organizzazione aziendale (descrizione del posto di lavoro, dei mezzi<br> di produzione assegnati, degli    
+         elementi di prevenzione adottati e dei dispositivi di protezione individuale)<br>e descrizione dei processi di competenza del ruolo</li><br>
+              <li><b>[C]</b> esercitazioni pratico-operative</li><br>
+              <li><b>[D]</b> verifica e valutazione dell’apprendimento</li>
+              </ul>">?</a>
+              </div>
+              <div class="input-field col s10">
+                <select id="typeat" multiple required>
+                  <option value="" disabled selected>A / B / C / D</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+                <label>Tipo di attività</label>
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s12">

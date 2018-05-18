@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>Login - Alternanza</title>
+
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Inserimento">
+        <meta name="author" content="Ludovico Venturi & Luca Moroni">
+
+        <link rel="icon" href="assets/img/favicon.png">
+        <link rel="stylesheet" href="assets/css/fonts.css">
+        <link rel="stylesheet" href="lib/materialize/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/style_ins.css">
+        <link rel="stylesheet" href="assets/css/style_login.css">
+        
+        <script src="lib/jquery.js"></script>
+        <script src="lib/materialize/materialize.min.js"></script>
+	</head>
+	<body>
+		<nav class="my_nav">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">Alternanza Scuola-Lavoro</a>
+			</div>
+		</nav>
+		<div class="compensatore"></div>
+		<div class="container row">
+
+			<div class="col s8">
+				<div class="wrap-login">
+					<form class="login" action="server/_login.php" method="post" enctype="multipart/form-data" autocomplete="off" id="login">
+						<div class="row">
+							<h4>Autenticazione Alunno</h4>
+							<button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
+						</div>
+						<div class="row">
+			                <div class="input-field col s12">
+			                  <input name="maila" id="maila" type="text" >
+			                  <label for="maila">E-Mail</label>
+			                </div>
+			                <div class="input-field col s12">
+			                  <input name="pswa" id="pswa" type="password" >
+			                  <label for="pswa">Password</label>
+			                </div>
+			            </div>
+		            </form>
+				</div>	
+			</div>
+			<div class="col s4">
+				
+			</div>
+
+        </div>
+
+	<script src="assets/js/ins_ajax.js"></script>
+	</body>
+</html>

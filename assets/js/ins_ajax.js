@@ -119,6 +119,7 @@ $(document).ready(function() {
                 'inizio'            : formatDate($('#inizio').val()),
                 'fine'              : formatDate($('#fine').val()),
                 'descr'             : descr,
+                'oreTot'            : $('#oreTot').val(),
                 'fkalu'             : $('#fkalu').val(),
                 'fkaz'              : $('#fkaz').val(),
                 'value'             : $("#valut").val(),
@@ -245,7 +246,6 @@ $(document).ready(function() {
                 });
                 $("#fkalu").html(html_appo);
                 $('select').material_select();
-                
             }else{
                 //console.log(risp['fail']);
             }
@@ -256,8 +256,6 @@ $(document).ready(function() {
         });
     return false;
     });
-
-
 
 
 function svuota(form) {
@@ -282,8 +280,6 @@ function formatDate(inco){
 
 function getDate(inco){
     var data = inco.replace(',', '');
-
-
     switch (data) {
         case "January":
             data = "01";
