@@ -44,7 +44,7 @@
 		    <li class="tab"><a href="#test4">Azienda</a></li>
 		    <li class="tab"><a href="#test5">Tirocinio</a></li>
 		    <li class="tab"><a href="#test6">Tutor Aziendale</a></li>
-        <li class="tab"><a href="#test7">Diario Personale Stage</a></li>
+        <li class="tab"><a href="#test7">Registro</a></li>
 		  </ul>
 		</div>
 	</nav>

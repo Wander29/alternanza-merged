@@ -1,6 +1,6 @@
 # TO DO
 
-- aggiungere utente guest sola lettura aziende
+- aggiungere utente guest sola lettura aziende ...
 - sviluppare parte operativa tutor scolastico
 - aggiungere tabella questionario tutor con: pk, fktir, fkaz, valutaz (1-5), commento e da aggiungere 
 a schermata tutor scolastico
