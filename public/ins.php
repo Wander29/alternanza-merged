@@ -43,8 +43,8 @@
 		    <li class="tab"><a href="#test1">Alunno</a></li>
 		    <li class="tab"><a href="#test4">Azienda</a></li>
 		    <li class="tab"><a href="#test5">Tirocinio</a></li>
-		    <li class="tab"><a href="#test6">Tutor Aziendale</a></li>
-        <li class="tab"><a href="#test7">Registro</a></li>
+		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li>
+        <li class="tab"><a href="#test7">Registro Personale</a></li>
 		  </ul>
 		</div>
 	</nav>
@@ -292,6 +292,13 @@
                     <div class="col s4" style='padding-top: 15px;'>
                       <a class="waves-effect waves-light btn" href="https://www.latlong.net/convert-address-to-lat-long.html" target="_blank">Convert to LAT | LONG</a>
                     </div>
+
+
+
+                    
+
+
+
                     <div class="input-field col s3 offset-s1">
                       <input name="lat" id="lat" type="text" required>
                       <label for="lat">Latitudine</label>
@@ -466,8 +473,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <select name="fkazt" id="fkazt">
-                        <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <select name="fkazt" id="fkazt" required>
+                        <option selected disabled value="">Scegli l'Azienda</option>
                         <?php
 
                           $queryGetData = 'SELECT * FROM azienda ORDER BY nome;';
@@ -484,7 +491,7 @@
                              $id = $row[0];
                              $nome = $row[1];
                         ?>
-                                  <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                            <option value="<?php echo $id;?>"><?php echo $nome;?></option>
                         <?php 
                         } 
                         ?>
@@ -504,7 +511,7 @@
 	</div>
   <div id="test7" class="col s12">
     <div class="container">
-      <h3>Diario personale</h3>
+      <h3>Registro personale</h3>
       <h5 align="center">Classi | Alunni | Stage (data Inizio)</h5>
       <br>
       <ul class="collapsible popout" data-collapsible="accordion">
@@ -584,7 +591,7 @@
     <div id="modal" class="modal modal-fixed-footer">
       <form class="inserimento" action="../server/insdia.php" method="post" enctype="multipart/form-data" autocomplete="off" id="diario">
         <div class="modal-content">
-      <h4>Diario Personale Stage</h4>
+      <h4>Registro Personale Stage</h4>
       
         <div class="row">
             <div class="row">
@@ -664,6 +671,6 @@
     </div>
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
-    <script src="../assets/js/changep_aj.js"></script>
+    <script src="../assets/js/changep_aj.http://localhost/alternanza-merged/public/ins.phpjs"></script>
 	</body>
 </html>

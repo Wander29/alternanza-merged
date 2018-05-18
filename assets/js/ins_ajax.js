@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var appoidtir = "";
     var html_appo = "";
+    var nomeAzienda = "";
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
     });
@@ -43,8 +44,9 @@ $(document).ready(function() {
             };
         }
         if(tipo == "azienda"){
+            nomeAzienda = $('#nomea').val();
             var formData = { //valori del form inseriti
-                'nomea'             : $('#nomea').val(),
+                'nomea'             : nomeAzienda,
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
                 'sedeleg'           : $('#sedeleg').val(),
@@ -124,17 +126,25 @@ $(document).ready(function() {
                     } else {
                         window.location.href = "public/ins.php";
                     }
-                    
                 }else{
                     if(risp.error == undefined){
                         if(risp.sucquery){
+                            if (risp.idAz !== undefined){
+                                $("#fkazt option:selected").removeAttr("selected");
+                                html_appo = "<option value=" + risp.idAz + " selected>" + nomeAzienda + "</option>";
+                                $("#fkazt").append(html_appo);
+                                $("#fkazt").material_select();
+                                $("#tutorAzTab").trigger("click");
+                                // AGGIUNGI SCROLL IN ALTO AUTOMATICO
+
+                            }
                             Materialize.toast(risp.query, 1000);
                             if (risp.reload) {
                                 setTimeout(function(){
                                     location.reload();
                                 }, 1100);
                             } else {
-                                svuota(form[0]);
+                                //svuota(form[0]);
                             }   
                         }else{
                             Materialize.toast(risp.errore, 1000);

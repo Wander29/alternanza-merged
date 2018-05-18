@@ -30,14 +30,24 @@
     $query = "INSERT INTO azienda (CodAz, Nome, PIVA, NomeRap, SedeLegale, Lat, Lon, SedeTirocinio, Tel, Email) VALUES(null, '$nomea', '$piva', '$nomer', '$sedeleg', $lat, $long, ".$sedetir.", '$tel', '$email');"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
-        $data['sucquery'] = true;
-        $data['query'] = "Record  Aggiunto correttamente"; 
-        $data['reload'] = true;
-    }else{
-        $data['sucquery'] = false;
-        $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);
-        $data['errore'] = "ERRORE, record non inserito";
-    }
+            $query = "SELECT CodAz FROM azienda WHERE PIVA = $piva;"; //query da sparare nel DB 
+            $result = mysqli_query($connection, $query);
+              if (!$result) {
+                die('Invalid query: ' . mysql_error());
+              }
+              if($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                 $idAz = $row[0];
+
+                $data['idAz'] = $idAz;
+                $data['sucquery'] = true;
+                $data['query'] = "Record  Aggiunto correttamente"; 
+                $data['reload'] = false;
+            }
+        }else{
+            $data['sucquery'] = false;
+            $data['query'] = "ERRORE: Non è statto possibile eseguire:  $query." . mysqli_error($connection);
+            $data['errore'] = "ERRORE, record non inserito";
+        }
 
     $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax
 

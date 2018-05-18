@@ -123,7 +123,7 @@
 <div id="2tirocini" class="col s12">
     <div class="container">
         <br>
-        <h5>Classi | Alunni | Tirocini | Diari</h5>
+        <h5>Classi | Alunni | Tirocini | Registri</h5>
         <br>
         <ul class="collapsible popout" data-collapsible="accordion">
             <?php
@@ -189,7 +189,7 @@
                               <i class="material-icons">work</i><?php echo $az6 . " | " . $inizio6; ?>
                             </div>
                             <div class="collapsible-body">
-                              <!-- Info Aziende - Diari -->
+                              <!-- Info Aziende - Registri -->
                               <ul class="collapsible" data-collapsible="accordion">
                                 <li>
                                   <div class="collapsible-header">
@@ -259,7 +259,7 @@
                                 </li>
                                 <li>
                                   <div class="collapsible-header">
-                                    <i class="material-icons">chrome_reader_mode</i> Diari Giornalieri
+                                    <i class="material-icons">chrome_reader_mode</i> Registri Giornalieri
                                   </div>
                                   <div class="collapsible-body">
                                     <?php
@@ -299,7 +299,7 @@
 <div id="modalDiario" class="modal modal-fixed-footer">
     <div class="modal-content">
 
-      <h4>Diario &nbsp;&nbsp;&nbsp;&nbsp;<span id="span-data-diario"></span></h4>
+      <h4>Registro Personale &nbsp;&nbsp;&nbsp;&nbsp;<span id="span-data-diario"></span></h4>
       <div class="container">
         <table class="highlight centered">
           <tr>
