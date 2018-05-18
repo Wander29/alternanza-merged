@@ -2,9 +2,59 @@ $(document).ready(function() {
     var appoidtir = "";
     var html_appo = "";
     var nomeAzienda = "";
+    var lat = 0;
+    var long = 0;
+    var indirizzo = "";
+    var sedetir = "";
+    var sedeleg = "";
+
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
     });
+
+    //FocusOut per la Geocodifica, purtroppo le richieste sono lente e l'Ajax è più veloce
+    $("#capLeg").focusout(function(){
+        geocode();
+    })
+    $("#capTir").focusout(function(){
+        geocode();
+    })
+    $("#sedetir").focusout(function(){
+        geocode();
+    })
+    $("#sedeleg").focusout(function(){
+        geocode();
+    })
+
+    function geocode(){
+        lat = long = 0;
+        sedetir = $('#sedetir').val();
+        sedeleg = $('#sedeleg').val();
+        if(sedetir !== ""){
+            indirizzo = sedetir + " Italy " + $('#capTir').val();
+        } else {
+            if(sedeleg !== ""){
+                indirizzo = sedeleg + " Italy " +  $('#capLeg').val();
+            }
+        }
+        //Geocoding coordinate
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
+            sensor: false,
+            address: indirizzo
+        }, function(data, textStatus ) {
+                var lat = (data.results[0].geometry.location.lat);
+                var long = (data.results[0].geometry.location.lng);
+                if(sedetir !== "" && sedeleg !== ""){
+                    $("#latTir").val(lat);
+                    $("#longTir").val(long);
+                } else {
+                    $("#latLeg").val(lat);
+                    $("#longLeg").val(long);
+                }
+            }
+        );
+    }
+
 
     $('.inserimento').submit(function(event) {
         event.preventDefault();
@@ -45,17 +95,19 @@ $(document).ready(function() {
         }
         if(tipo == "azienda"){
             nomeAzienda = $('#nomea').val();
+
             var formData = { //valori del form inseriti
                 'nomea'             : nomeAzienda,
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
-                'sedeleg'           : $('#sedeleg').val(),
-                'sedetir'           : $('#sedetir').val(),
-                'lat'               : $('#lat').val(),
-                'long'              : $('#long').val(),
+                'sedeleg'           : sedeleg,
+                'sedetir'           : sedetir,
+                'lat'               : lat,
+                'long'              : long,
                 'tel'               : $('#tel').val(),
                 'email'             : $('#email').val()
             };
+            console.log(formData);
         }
         if(tipo == "tirocinio"){
             var descr = $("#descr").val();

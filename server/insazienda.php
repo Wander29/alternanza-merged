@@ -30,8 +30,8 @@
     $query = "INSERT INTO azienda (CodAz, Nome, PIVA, NomeRap, SedeLegale, Lat, Lon, SedeTirocinio, Tel, Email) VALUES(null, '$nomea', '$piva', '$nomer', '$sedeleg', $lat, $long, ".$sedetir.", '$tel', '$email');"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
-            $query = "SELECT CodAz FROM azienda WHERE PIVA = $piva;"; //query da sparare nel DB 
-            $result = mysqli_query($connection, $query);
+            $query2 = "SELECT CodAz FROM azienda WHERE PIVA = $piva;"; //query da sparare nel DB 
+            $result = mysqli_query($connection, $query2);
               if (!$result) {
                 die('Invalid query: ' . mysql_error());
               }
@@ -42,6 +42,7 @@
                 $data['sucquery'] = true;
                 $data['query'] = "Record  Aggiunto correttamente"; 
                 $data['reload'] = false;
+                $data['cosaFaccio'] = $query;
             }
         }else{
             $data['sucquery'] = false;

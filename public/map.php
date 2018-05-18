@@ -171,14 +171,10 @@
 
                 $.each(list_items, function(ind, val){
                     var appoid = $(this).data("id");
-                    console.log(appoid);
                     list_items[ind].addEventListener('click', function() {
-                        
-                        console.log(gmarkers.length);
 
                         for(var i=0; i<gmarkers.length; i++){
                             google.maps.event.trigger(gmarkers[i], 'mouseleave');
-                            console.log(gmarkers[i]);
                         }
 
                         var mark = gmarkers[asso[$(this).data("id")]-1]; 
@@ -191,7 +187,7 @@
             }  
         </script>
         <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ29sfofxKQHtHRMDlE5KjQgTTrGvj_VY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&callback=initMap">
         </script>
 	</body>
 </html>

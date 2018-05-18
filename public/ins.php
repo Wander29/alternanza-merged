@@ -283,35 +283,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input name="sedeleg" id="sedeleg" type="text" required>
                       <label for="sedeleg">Sede Legale</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s4" style='padding-top: 15px;'>
-                      <a class="waves-effect waves-light btn" href="https://www.latlong.net/convert-address-to-lat-long.html" target="_blank">Convert to LAT | LONG</a>
+                    <div class="input-field col s3 ">
+                      <input name="capLeg" id="capLeg" type="text" required>
+                      <label for="capLeg">C.A.P. (sede Legale)</label>
                     </div>
-
-
-
-                    
-
-
-
-                    <div class="input-field col s3 offset-s1">
-                      <input name="lat" id="lat" type="text" required>
-                      <label for="lat">Latitudine</label>
+                    <div class="input-field col s1 offset-s1">
+                      <input name="latLeg" id="latLeg" type="text" disabled class="input-disabled">
                     </div>
-                    <div class="input-field col s3 offset-s1">
-                      <input name="long" id="long" type="text" required>
-                      <label for="long">Longitudine</label>
+                    <div class="input-field col s1">
+                      <input name="longLeg" id="longLeg" type="text" disabled class="input-disabled">
                     </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input name="sedetir" id="sedetir" type="text" >
-                      <label for="sedetir">Sede Tirocinio (se uguale a quella Legale lascia vuoto)</label>
+                      <label for="sedetir">Sede Tirocinio (se uguale alla Sede Legale lasciare vuoto)</label>
+                    </div>
+                    <div class="input-field col s3">
+                      <input name="capTir" id="capTir" type="text">
+                      <label for="capTir">C.A.P. (sede Tirocinio)</label>
+                    </div>
+                    <div class="input-field col s1 offset-s1">
+                      <input name="latTir" id="latTir" type="text" disabled class="input-disabled">
+                    </div>
+                    <div class="input-field col s1">
+                      <input name="longTir" id="longTir" type="text" disabled class="input-disabled">
                     </div>
                 </div>
                 <div class="row">
@@ -326,7 +326,7 @@
                       <label for="email">E-Mail</label>
                     </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button name="action" type='submit'>INSERISCI</div>
             </form>
 		</div>
 	</div>
@@ -671,6 +671,5 @@
     </div>
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
-    <script src="../assets/js/changep_aj.http://localhost/alternanza-merged/public/ins.phpjs"></script>
 	</body>
 </html>

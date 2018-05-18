@@ -96,3 +96,7 @@
     left: 50%;
     width: 150px;
 }
+
+.input-disabled{
+	font-size: 0.7rem !important;
+}

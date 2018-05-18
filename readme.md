@@ -2,6 +2,7 @@
 - sviluppare parte operativa tutor scolastico
 - aggiungere tabella questionario tutor con: pk, fktir, fkaz, valutaz (1-5), commento e da aggiungere 
 	a schermata tutor scolastico
+- scroll in alto quando triggera il tab 
 
 # LUDOVICO
 AUTENTICAZIONE
@@ -12,15 +13,19 @@ aggiungere utente guest sola lettura aziende (Comando iniziale prof)
 - 2) aggiunta alle variaibli di sessione dei "permessi" su ciò che si può fare
 - 3) le pagine saranno singole ma i pezzi di pagina saranno visibili solo se se ne hanno i diritti tramite controlli in PHP
 
+- Gestione INDIRIZZI TIROCINI e LEGALI, due separati e piu controlli all inseirmento del geocode
 - ore tirocinio non calcolate ma inserite manualmente dal tutor scolastico
-- Geocoding coordinate
+- Descrizione attività ABCD
 
 # FATTO
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
 - mettere link da ins azienda a tutor aziendale
+- cambio API google maps
+- cambio tipo LAT e LONG nel DB, a Decimal con 10 cifre max in tutto di cui 7 dopo la virgola
+- Geocoding coordinate
 
 # deprecate
-- lat e long non obbl nel db
+- lat e long non obbl nel db 
 
 
 # Non da fare noi
