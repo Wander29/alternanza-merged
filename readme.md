@@ -3,7 +3,7 @@
 - aggiungere tabella questionario tutor con: pk, fktir, fkaz, valutaz (1-5), commento e da aggiungere 
 	a schermata tutor scolastico
 
-#LUDOVICO
+# LUDOVICO
 AUTENTICAZIONE
 aggiungere utente guest sola lettura aziende (Comando iniziale prof)
 - OVVERO--> modificare completamente il sistema di autenticazione
@@ -15,13 +15,13 @@ aggiungere utente guest sola lettura aziende (Comando iniziale prof)
 - ore tirocinio non calcolate ma inserite manualmente dal tutor scolastico
 - Geocoding coordinate
 
-#FATTO
+# FATTO
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
 - mettere link da ins azienda a tutor aziendale
 
-#deprecate
+# deprecate
 - lat e long non obbl nel db
 
 
-#Non da fare noi
+# Non da fare noi
 - (inserire download modulistica)
