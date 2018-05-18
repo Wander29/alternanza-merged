@@ -107,7 +107,6 @@ $(document).ready(function() {
                 'tel'               : $('#tel').val(),
                 'email'             : $('#email').val()
             };
-            console.log(formData);
         }
         if(tipo == "tirocinio"){
             var descr = $("#descr").val();
@@ -162,6 +161,16 @@ $(document).ready(function() {
                 'spec'              : $('#spec').val()
             };
         }
+        if(tipo == "questionario_tutor"){
+            alert("da");
+            var formData = { //valori del form inseriti
+                'nome'                  : $('#nomequesttut').val(),
+                'cognome'               : $('#cognomequesttut').val(),
+                'azienda'               : $('#fkazquesttut').val(),
+                'commit'                : $('#commitquesttut').val(),
+                'val'                   : $('#valutquesttut').val()
+            };
+        }
 
         $.ajax({
 			type 		: type, // define the type of HTTP verb we want to use (POST for our form)
@@ -205,7 +214,7 @@ $(document).ready(function() {
                 }
             })
 			.fail(function(risp) {
-				//console.log(risp);
+				console.log(risp);
 			});
         });
     

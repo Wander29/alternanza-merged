@@ -38,13 +38,14 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li>
-        <li class="tab"><a href="#test3">Classe</a></li>
+            <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li>
+            <li class="tab"><a href="#test3">Classe</a></li>
 		    <li class="tab"><a href="#test1">Alunno</a></li>
 		    <li class="tab"><a href="#test4">Azienda</a></li>
 		    <li class="tab"><a href="#test5">Tirocinio</a></li>
 		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li>
-        <li class="tab"><a href="#test7">Registro Personale</a></li>
+            <li class="tab"><a href="#test7">Registro Personale</a></li>
+            <li class="tab"><a href="#test8">Questionario Tutor</a></li>
 		  </ul>
 		</div>
 	</nav>
@@ -441,7 +442,7 @@
 		<div class="container">
 			<h2>Inserimento Tutor Aziendale</h2>
 			<form class="inserimento" action="../server/instutaz.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutoraziendale">
-				      <div class="row">
+              <div class="row">
                 <div class="input-field col s12">
                   <input name="nometa" id="nometa" type="text" required>
                   <label for="nometa">Nome</label>
@@ -585,6 +586,70 @@
           } 
         ?>
       </ul>
+    </div>
+  </div>
+  <div id="test8" class="col s12">
+    <div class="container">
+      <h3>Questionario Tutor Scolastico | Azienda</h3>
+        <form class="inserimento" action="../server/insquest.php" method="post" enctype="multipart/form-data" autocomplete="off" id="questionario_tutor">
+            <div class="row">
+                <div class="input-field col s12">
+                  <input name="nomequesttut" id="nomequesttut" type="text" required>
+                  <label for="nomequesttut">Nome</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <input name="cognomequesttut" id="cognomequesttut" type="text" required>
+                  <label for="cognomequesttut">Cognome</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <select name="fkazquesttut" id="fkazquesttut">
+                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <?php
+
+                        $queryGetData = 'SELECT * FROM azienda ORDER BY Nome;';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0];
+                           $nome = $row[1];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="fkazquesttut">Azienda</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <textarea name="commitquesttut" id="commitquesttut" class="materialize-textarea" ></textarea>
+                  <label for="commitquesttut">Valutazione Testuale Azienda  (opzionale)</label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="labelval">Valutazione Azienda:</div>
+              <div class="contval">
+                <div class="values">1</div>
+                <div class="valued">5</div>
+                <p class="range-field">
+                  <input type="range" id="valutquesttut" min="1" max="5" required/>
+                </p>
+              </div>
+            </div>
+            <button action="submit" name="action">INSERISCI</button>
+        </form>      
     </div>
   </div>
 
