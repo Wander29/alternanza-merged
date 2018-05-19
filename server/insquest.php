@@ -21,7 +21,7 @@
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
     $query = "INSERT INTO quest_tutor (CodQuestTut, Valut, Commit, FKTut, FKTir
-    ) VALUES(null, $val, '$commit', $fktir, $idtut);"; //query da sparare nel DB 
+    ) VALUES(null, $val, \"$commit\", $fktir, $idtut);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

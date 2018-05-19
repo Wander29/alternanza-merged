@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     $('.changep').submit(function(event) {
-        
+
         $(".progress_cont").toggleClass("dn");
         
         event.preventDefault();

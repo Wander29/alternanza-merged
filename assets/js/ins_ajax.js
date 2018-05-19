@@ -162,10 +162,9 @@ $(document).ready(function() {
             };
         }
         if(tipo == "questionario_tutor"){
-            alert("da");
             var formData = { //valori del form inseriti
-                'idtut'                  : $('#idtutquesttut').val(),
-                'tirocinio'               : $('#fktirquesttut').val(),
+                'idtut'                 : $('#idtutquesttut').val(),
+            'tirocinio'                 : $('#fktirquesttut').val(),
                 'commit'                : $('#commitquesttut').val(),
                 'val'                   : $('#valutquesttut').val()
             };
@@ -335,7 +334,7 @@ $(document).ready(function() {
                     }));
                 });
 
-                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                html_appo = "<option disabled selected value=''>Scegli il Tirocinio</option>";
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[0] +"'>" + item[1] + " "
                     + item[2] + "</option>";

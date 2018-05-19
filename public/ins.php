@@ -656,7 +656,7 @@
                 </div>
                 <div class="input-field col s4">
                   <select name="fktirquesttut" id="fktirquesttut">
-                      <option selected disabled value="" required>Scegli il tirocinio</option>
+                      <option selected disabled value="" required>Scegli il Tirocinio</option>
                     </select>
                   <label for="fktirquesttut">Tirocino</label>
                 </div>
@@ -664,7 +664,7 @@
             <div class="row">
                 <div class="input-field col s12">
                   <textarea name="commitquesttut" id="commitquesttut" class="materialize-textarea" ></textarea>
-                  <label for="commitquesttut">Valutazione Testuale Azienda  (opzionale)</label>
+                  <label for="commitquesttut">Valutazione Testuale Azienda  (opzionale, per un corretto funzionamento non utilizzare i doppi apici)</label>
                 </div>
             </div>
             <div class="row">
@@ -697,10 +697,10 @@
             <div class="input-field col s12">
               <select id="typeat" multiple required>
                 <option value="" disabled selected>A / B / C / D</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
+                <option value="A">A (accoglienza in azienda e descrizione del ruolo del Tutor Aziendale dei  contenuti del Tirocinio/Stage)</option>
+                <option value="B">B (descrizione dell’ attività e dell’organizzazione aziendale e descrizione dei processi di competenza del ruolo)</option>
+                <option value="C">C (esercitazioni pratico-operative)</option>
+                <option value="D">D (verifica e valutazione dell’apprendimento)</option>
               </select>
               <label>Tipo di attività</label>
             </div>
@@ -765,5 +765,6 @@
     </div>
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
+		<script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>

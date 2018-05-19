@@ -9,6 +9,7 @@ $(document).ready(function(){
     
     $(".filter").click(function(){
         $(this).toggleClass("toglfilter");
+        $("#imgfilt").toggleClass("toglsubfilt");
     });
     
 });

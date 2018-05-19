@@ -1,8 +1,5 @@
 # LUCA
 - sviluppare parte operativa tutor scolastico
-- aggiungere tabella questionario tutor con: pk, fktir, fkaz, valutaz (1-5), commento e da aggiungere 
-	a schermata tutor scolastico
-- scroll in alto quando triggera il tab 
 
 # LUDOVICO
 AUTENTICAZIONE
@@ -15,7 +12,7 @@ aggiungere utente guest sola lettura aziende (Comando iniziale prof)
 
 - Gestione INDIRIZZI TIROCINI e LEGALI, due separati e piu controlli all inseirmento del geocode
 - ore tirocinio non calcolate ma inserite manualmente dal tutor scolastico
-- Descrizione attività ABCD
+
 
 # FATTO
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
@@ -23,6 +20,8 @@ aggiungere utente guest sola lettura aziende (Comando iniziale prof)
 - cambio API google maps
 - cambio tipo LAT e LONG nel DB, a Decimal con 10 cifre max in tutto di cui 7 dopo la virgola
 - Geocoding coordinate
+- scroll in alto quando triggera il tab 
+- Descrizione attività ABCD
 
 # deprecate
 - lat e long non obbl nel db 
