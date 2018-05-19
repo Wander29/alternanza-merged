@@ -122,7 +122,9 @@
           			<div id="alunni" class="alunni">
                   <div class="viewer tooltipped" data-position="top" data-delay="50" data-tooltip="Clicca per vedere tutti gli alunni"><img src="../assets/img/freccia.png" /></div>
                   <div class="conttable">
-                  <div style="height: 50px;"></div>
+                    <div style="height: 50px;">
+                             
+                    </div>
                 <table class="striped bordered">
                   <tbody id="subalu">
                   
@@ -153,8 +155,38 @@
             </div>
         </div>
 		</div>
+        <div class="filter">
+            <div class="row">
+                <div class="input-field col s12">
+                  <select name="fkazt" id="fkazt" required>
+                    <option selected disabled value="">Scegli l'Azienda</option>
+                    <?php
 
-        <script src="js/jquery-3.3.1.min.js"></script>
+                      $queryGetData = 'SELECT * FROM azienda ORDER BY nome;';
+
+                      $result = mysqli_query($connection, $queryGetData);
+                      if (!$result) {
+                        die('Invalid query: ' . mysql_error());
+                      }
+                      //echo json_decode($aResult);
+
+                      $printcount = 0;
+
+                      while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                         $id = $row[0];
+                         $nome = $row[1];
+                    ?>
+                        <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                    <?php 
+                    } 
+                    ?>
+                  </select>
+                </div>
+            </div>
+            <div class="sub_filter"></div>
+        </div>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/materialize/materialize.min.js"></script>
         <script async defer>
             
             var list_items = $("#subalu").find('tr');//restituisce un array
@@ -164,7 +196,7 @@
                 setTimeout(function(){ 
                     setEListener();                    
                 }, 3000);
-                
+                $('select').material_select();
             });
                         
             function setEListener(){

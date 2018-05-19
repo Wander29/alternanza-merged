@@ -594,23 +594,11 @@
         <form class="inserimento" action="../server/insquest.php" method="post" enctype="multipart/form-data" autocomplete="off" id="questionario_tutor">
             <div class="row">
                 <div class="input-field col s12">
-                  <input name="nomequesttut" id="nomequesttut" type="text" required>
-                  <label for="nomequesttut">Nome</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <input name="cognomequesttut" id="cognomequesttut" type="text" required>
-                  <label for="cognomequesttut">Cognome</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <select name="fkazquesttut" id="fkazquesttut">
-                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                  <select name="idtutquesttut" id="idtutquesttut">
+                      <option selected disabled value="" required>Scegli il tutor per il questionario</option>
                       <?php
 
-                        $queryGetData = 'SELECT * FROM azienda ORDER BY Nome;';
+                        $queryGetData = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
 
                         $result = mysqli_query($connection, $queryGetData);
                         if (!$result) {
@@ -621,7 +609,36 @@
                         $printcount = 0;
 
                         while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                           $id = $row[0];
+                           $id = $row[0]; 
+                           $nome = $row[1];
+                           $cognome = $row[2];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome . " " . $cognome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="idtutquesttut">Tutor Scolastico</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                  <select name="az" id="az">
+                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <?php
+
+                        $queryGetData = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0]; 
                            $nome = $row[1];
                       ?>
                                 <option value="<?php echo $id;?>"><?php echo $nome;?></option>
@@ -629,7 +646,19 @@
                       } 
                       ?>
                     </select>
-                  <label for="fkazquesttut">Azienda</label>
+                  <label for="az">Azienda</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="al" id="al">
+                      <option selected disabled value="" required>Scegli l'Alunno</option>
+                    </select>
+                  <label for="al">Alunno</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="fktirquesttut" id="fktirquesttut">
+                      <option selected disabled value="" required>Scegli il tirocinio</option>
+                    </select>
+                  <label for="fktirquesttut">Tirocino</label>
                 </div>
             </div>
             <div class="row">

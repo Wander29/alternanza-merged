@@ -106,7 +106,7 @@ $(document).ready(function() {
                 'long'              : long,
                 'tel'               : $('#tel').val(),
                 'email'             : $('#email').val()
-            };
+            };            
         }
         if(tipo == "tirocinio"){
             var descr = $("#descr").val();
@@ -164,9 +164,8 @@ $(document).ready(function() {
         if(tipo == "questionario_tutor"){
             alert("da");
             var formData = { //valori del form inseriti
-                'nome'                  : $('#nomequesttut').val(),
-                'cognome'               : $('#cognomequesttut').val(),
-                'azienda'               : $('#fkazquesttut').val(),
+                'idtut'                  : $('#idtutquesttut').val(),
+                'tirocinio'               : $('#fktirquesttut').val(),
                 'commit'                : $('#commitquesttut').val(),
                 'val'                   : $('#valutquesttut').val()
             };
@@ -266,6 +265,95 @@ $(document).ready(function() {
     return false;
     });
 
+    $("#az").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'azienda' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getAlquest.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                $.each(risp['query'], function (i, item) {
+                    $('#al').append($('<option>', { 
+                        value: item[0],
+                        text : item[2] + " " + item[1] 
+                    }));
+                });
+
+                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[0] +"'>" + item[2] + " "
+                    + item[1] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#al").html(html_appo);
+                $('select').material_select();
+                
+            }else{
+                //console.log(risp['fail']);
+            }
+        })
+        .fail(function(risp) {
+            console.log("ERRORE lato SERVER");
+            console.log(risp);
+        });
+    return false;
+    });
+
+    $("#al").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'alunno' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getTir.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                $.each(risp['query'], function (i, item) {
+                    $('#fktirquesttut').append($('<option>', { 
+                        value: item[0],
+                        text : item[1] + " " + item[2] 
+                    }));
+                });
+
+                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[0] +"'>" + item[1] + " "
+                    + item[2] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#fktirquesttut").html(html_appo);
+                $('select').material_select();
+                
+            }else{
+                //console.log(risp['fail']);
+            }
+        })
+        .fail(function(risp) {
+            console.log("ERRORE lato SERVER");
+            //console.log(risp);
+        });
+    return false;
+    });
 
 
 

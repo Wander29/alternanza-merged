@@ -7,4 +7,8 @@ $(document).ready(function(){
     
     $('.tooltipped').tooltip({delay: 50});
     
+    $(".filter").click(function(){
+        $(this).toggleClass("toglfilter");
+    });
+    
 });

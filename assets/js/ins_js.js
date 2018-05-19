@@ -28,5 +28,9 @@ $(document).ready(function(){
 	$("#changeP").click(function(){
 		$("#nome_ut").val($(".email").html());
 	});
+    
+    $(".tab").click(function(){
+       $("html,body").animate({scrollTop: 0}, 1000, function(){}); 
+    });
 });
 

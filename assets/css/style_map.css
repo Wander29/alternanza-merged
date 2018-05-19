@@ -106,3 +106,19 @@ nav{
 .dn {
     display: none;
 }
+
+.filter{
+    z-index: 999;
+    background-color: red;
+    position: fixed;
+    top: 50%;
+    padding-right: 5%;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    transition: all 0.4s ease-in;
+    transform: translateX(-80%);
+}
+
+.toglfilter{
+    transform: translateX(0%);
+}
