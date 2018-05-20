@@ -1,39 +1,4 @@
-.brand-logo {
-    padding-left: 30px !important;
-    font-family: "Century Gothic", Times, serif;
-}
-
-.brand-logo > i {
-    font-size: 35px !important;
-}
-
-.nav-extended{
-    background-color: #00cc00;
-    position: fixed;
-    opacity: 1 !important;
-    top:0;
-    z-index: 10;
-}
-
-.compensatore{
-    height: 120px;
-}
-
-.my-cont{
-    margin: 10px 20px;
-}
-
-.nomi{
-    display: inline-block;
-    font-size: 0.65rem;
-    bottom: 5px;
-    position: absolute;
-    display: none;
-}
-
-.h-100{
-    height: 100vh;
-}
+.compensatore{ height: 100px; }
 
 .tut-sc{ 
 	font-size: 0.9rem;
@@ -43,41 +8,6 @@
  .head-diario {
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: rgba(0,255,0,0.5);
+    background-color: #26a69a;
+    color: white;
  }
-
- .container {
-    margin-bottom: 50px;
- }
-
- .chip{
-    position: absolute;
-    right: 5px;
-    top: 10px;
-}
-
-.chip img:hover{
-    cursor: pointer;
-}
-
-.dn {
-    display: none;
-}
-
-.flexx{
-    display: flex;
-    flex-direction: row;
-}
-
-.flexx > button {
-    margin-left: 30%;
-    margin-top: 9px;
-}
-
-.progress_cont{
-    position: fixed;
-    z-index: 999;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-}

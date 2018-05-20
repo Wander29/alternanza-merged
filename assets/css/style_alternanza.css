@@ -1,0 +1,66 @@
+/************************
+		NAVBAR
+/***********************/
+.nav-extended{
+	background-color: #00cc00;
+	position: fixed;
+	opacity: 1 !important;
+	top:0;
+	z-index: 10;
+}
+
+.nav-wrapper {
+	background-color: #00cc00 !important;
+}
+
+.brand-logo {
+	padding-left: 30px !important;
+	font-family: "Century Gothic", Times, serif;
+}
+
+.brand-logo > i {
+    font-size: 35px !important;
+}
+
+.container { margin-bottom: 50px; }
+.compensatore{ height: 10%; }
+
+/*******************
+	Account management
+*******************/
+.chip{
+	position: absolute;
+	right: 3%;
+	top: 26%;
+}
+
+.chip img:hover, #btn-esci-ospite:hover{
+	cursor: pointer;
+}
+
+#btn-esci-ospite{
+	position: absolute;
+	right: 7%;
+	top: 22%;
+	border-radius: 20px;
+}
+
+.progress_cont{
+    position: fixed;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+}
+
+/*******************
+	Utils
+*******************/
+.my-cont{ margin: 10px 20px; }
+.h-100{ height: 100vh; }
+.dn { display: none; }
+.gre { background-color: #00cc00 !important; }
+.flexx{
+	display: flex;
+	flex-direction: row;
+}

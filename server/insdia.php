@@ -26,8 +26,12 @@
     $query = "INSERT INTO diario (Data, TipoAtt, Descr, Ore, FKTir) VALUES($date, '$tipo','$descr', $ore, $idtir);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
+        $data['sucquery'] = true;
+        $data['query'] = "Record  Aggiunto correttamente"; 
+        $data['success'] = true;
+        $data['reload'] = false;
         //update ore totali
-        $query = "UPDATE tirocinio SET tirocinio.TotOre = (SELECT SUM(Ore) FROM diario WHERE diario.FKTir = {$idtir}) WHERE  tirocinio.CodTir = {$idtir}";
+        /*$query = "UPDATE tirocinio SET tirocinio.TotOre = (SELECT SUM(Ore) FROM diario WHERE diario.FKTir = {$idtir}) WHERE  tirocinio.CodTir = {$idtir}";
         if(mysqli_query($connection, $query)){
             $data['sucquery'] = true;
             $data['query'] = "Record  Aggiunto correttamente"; 
@@ -37,7 +41,7 @@
             $data['sucquery'] = false;
             $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
             $data['errore'] = "ERRORE, record non inserito";
-        }
+        }*/
     } else {
         $data['sucquery'] = false;
         $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);

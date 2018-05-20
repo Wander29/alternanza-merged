@@ -1,12 +1,12 @@
 <?php 
     require("../server/db_info.php");
     session_start();
-    /********** Apertura **********/
     $connection = mysqli_connect("localhost", $username, $password, $database);
     if(!$connection){
-        $data["error"] = "errore nella connessione";
         die();
     }
+  if(!empty($_SESSION['permessi'])){
+    if (strpos($_SESSION['permessi'], "INS") !== false) { 
 ?>
 
 <!DOCTYPE html>
@@ -21,34 +21,50 @@
     <link rel="icon" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/style_alternanza.css">
     <link rel="stylesheet" href="../assets/css/style_ins.css">
     
     <script src="../lib/jquery.js"></script>
     <script src="../lib/materialize/materialize.min.js"></script>
   </head>
 	<body>
-
 	<nav class="nav-extended">
 		<div class="nav-wrapper">
-		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a>  
-      <div class="chip">
-        <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
+		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a> 
+      <a href="home.php" class="brand-logo center"><i class="material-icons">home</i>Alternanza Scuola-Lavoro</a>
+      <?php if ($_SESSION['tipoUt'] !== "ospite") { ?>
+        <div class="chip">
+          <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
+            </div>
+          <?php } else { ?>
+            <a href="../server/logout.php" class="btn" id="btn-esci-ospite">ESCI</a>
+          <?php } ?>
       </div>
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li>
-        <li class="tab"><a href="#test3">Classe</a></li>
-		    <li class="tab"><a href="#test1">Alunno</a></li>
-		    <li class="tab"><a href="#test4">Azienda</a></li>
-		    <li class="tab"><a href="#test5">Tirocinio</a></li>
-		    <li class="tab"><a href="#test6">Tutor Aziendale</a></li>
-        <li class="tab"><a href="#test7">Registro</a></li>
+        <?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
+          <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>
+          <li class="tab"><a href="#test3">Classe</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IAL") !== false) { ?>
+  		    <li class="tab"><a href="#test1">Alunno</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IAZ") !== false) { ?>
+  		    <li class="tab"><a href="#test4">Azienda</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ITIR") !== false) { ?>
+  		    <li class="tab"><a href="#test5">Tirocinio</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ITUTAZ") !== false) { ?>
+  		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IREG") !== false) { ?>
+          <li class="tab"><a href="#test7">Registro Personale</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IQST") !== false) { ?>
+          <li class="tab"><a href="#test8">Questionario Tutor</a></li><?php } ?>
 		  </ul>
 		</div>
 	</nav>
    <div class="compensatore"></div>
+ <?php if (strpos($_SESSION['permessi'], "IAL") !== false) { ?>
 	<div id="test1" class="col s12">
 		<div class="container">
 			<h2>Inserimento Alunno</h2>
@@ -117,6 +133,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
 	<div id="test2" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tutor Scolastico</h2>
@@ -155,6 +173,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>
 	<div id="test3" class="col s12">
 		<div class="container">
 
@@ -260,6 +280,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "IAZ") !== false) { ?>
 	<div id="test4" class="col s12">
 		<div class="container">
 			<h2>Inserimento Azienda</h2>
@@ -283,28 +305,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input name="sedeleg" id="sedeleg" type="text" required>
                       <label for="sedeleg">Sede Legale</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s4" style='padding-top: 15px;'>
-                      <a class="waves-effect waves-light btn" href="https://www.latlong.net/convert-address-to-lat-long.html" target="_blank">Convert to LAT | LONG</a>
+                    <div class="input-field col s3 ">
+                      <input name="capLeg" id="capLeg" type="text" required>
+                      <label for="capLeg">C.A.P. (sede Legale)</label>
                     </div>
-                    <div class="input-field col s3 offset-s1">
-                      <input name="lat" id="lat" type="text" required>
-                      <label for="lat">Latitudine</label>
+                    <div class="input-field col s1 offset-s1">
+                      <input name="latLeg" id="latLeg" type="text" disabled class="input-disabled">
                     </div>
-                    <div class="input-field col s3 offset-s1">
-                      <input name="long" id="long" type="text" required>
-                      <label for="long">Longitudine</label>
+                    <div class="input-field col s1">
+                      <input name="longLeg" id="longLeg" type="text" disabled class="input-disabled">
                     </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input name="sedetir" id="sedetir" type="text" >
-                      <label for="sedetir">Sede Tirocinio (se uguale a quella Legale lascia vuoto)</label>
+                      <label for="sedetir">Sede Tirocinio (se uguale alla Sede Legale lasciare vuoto)</label>
+                    </div>
+                    <div class="input-field col s3">
+                      <input name="capTir" id="capTir" type="text">
+                      <label for="capTir">C.A.P. (sede Tirocinio)</label>
+                    </div>
+                    <div class="input-field col s1 offset-s1">
+                      <input name="latTir" id="latTir" type="text" disabled class="input-disabled">
+                    </div>
+                    <div class="input-field col s1">
+                      <input name="longTir" id="longTir" type="text" disabled class="input-disabled">
                     </div>
                 </div>
                 <div class="row">
@@ -319,23 +348,23 @@
                       <label for="email">E-Mail</label>
                     </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button name="action" type='submit'>INSERISCI</div>
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITIR") !== false) { ?>
 	<div id="test5" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tirocinio</h2>
 			<form class="inserimento" action="../server/instirocinio.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tirocinio">
 				<div class="row">
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input id="inizio" type="date" class="datepicker" required>
                       <label for="inzio">Data di Inizio</label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <input id="fine" type="date" class="datepicker" required>
                       <label for="fine">Data di Fine</label>
                     </div>
@@ -380,7 +409,7 @@
                   </div>   
               	</div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                       <select name="fkaz" id="fkaz">
 	                      <option selected disabled value="" required>Scegli l'Azienda</option>
 	                      <?php
@@ -406,6 +435,10 @@
 	                    </select>
                       <label for="fkaz">Azienda</label>
                     </div>
+                    <div class="input-field col s6">
+                      <input name="oreTot" id="oreTot" type="text" required>
+                      <label for="oreTot">Ore Totali</label>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -430,11 +463,13 @@
 
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITUTAZ") !== false) { ?>
 	<div id="test6" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tutor Aziendale</h2>
 			<form class="inserimento" action="../server/instutaz.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutoraziendale">
-				      <div class="row">
+              <div class="row">
                 <div class="input-field col s12">
                   <input name="nometa" id="nometa" type="text" required>
                   <label for="nometa">Nome</label>
@@ -466,8 +501,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                      <select name="fkazt" id="fkazt">
-                        <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <input name="pswta" id="pswta" type="password" required>
+                      <label for="pswta">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                      <select name="fkazt" id="fkazt" required>
+                        <option selected disabled value="">Scegli l'Azienda</option>
                         <?php
 
                           $queryGetData = 'SELECT * FROM azienda ORDER BY nome;';
@@ -484,7 +525,7 @@
                              $id = $row[0];
                              $nome = $row[1];
                         ?>
-                                  <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                            <option value="<?php echo $id;?>"><?php echo $nome;?></option>
                         <?php 
                         } 
                         ?>
@@ -502,9 +543,11 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "IREG") !== false) { ?>
   <div id="test7" class="col s12">
     <div class="container">
-      <h3>Diario personale</h3>
+      <h3>Registro personale</h3>
       <h5 align="center">Classi | Alunni | Stage (data Inizio)</h5>
       <br>
       <ul class="collapsible popout" data-collapsible="accordion">
@@ -580,11 +623,106 @@
       </ul>
     </div>
   </div>
+<?php if (strpos($_SESSION['permessi'], "IQST") !== false) { ?>
+  <div id="test8" class="col s12">
+    <div class="container">
+      <h3>Questionario Tutor Scolastico | Azienda</h3>
+        <form class="inserimento" action="../server/insquest.php" method="post" enctype="multipart/form-data" autocomplete="off" id="questionario_tutor">
+            <div class="row">
+                <div class="input-field col s12">
+                  <select name="idtutquesttut" id="idtutquesttut">
+                      <option selected disabled value="" required>Scegli il tutor per il questionario</option>
+                      <?php
+
+                        $queryGetData = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0]; 
+                           $nome = $row[1];
+                           $cognome = $row[2];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome . " " . $cognome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="idtutquesttut">Tutor Scolastico</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                  <select name="az" id="az">
+                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <?php
+
+                        $queryGetData = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0]; 
+                           $nome = $row[1];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="az">Azienda</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="al" id="al">
+                      <option selected disabled value="" required>Scegli l'Alunno</option>
+                    </select>
+                  <label for="al">Alunno</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="fktirquesttut" id="fktirquesttut">
+                      <option selected disabled value="" required>Scegli il Tirocinio</option>
+                    </select>
+                  <label for="fktirquesttut">Tirocino</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <textarea name="commitquesttut" id="commitquesttut" class="materialize-textarea" ></textarea>
+                  <label for="commitquesttut">Valutazione Testuale Azienda  (opzionale, per un corretto funzionamento non utilizzare i doppi apici)</label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="labelval">Valutazione Azienda:</div>
+              <div class="contval">
+                <div class="values">1</div>
+                <div class="valued">5</div>
+                <p class="range-field">
+                  <input type="range" id="valutquesttut" min="1" max="5" required/>
+                </p>
+              </div>
+            </div>
+            <button action="submit" name="action">INSERISCI</button>
+        </form>      
+    </div>
+  </div>
+<?php } ?>
 
     <div id="modal" class="modal modal-fixed-footer">
       <form class="inserimento" action="../server/insdia.php" method="post" enctype="multipart/form-data" autocomplete="off" id="diario">
         <div class="modal-content">
-      <h4>Diario Personale Stage</h4>
+      <h4>Registro Personale Stage</h4>
       
         <div class="row">
             <div class="row">
@@ -593,15 +731,26 @@
                   <label for="datedia">Data</label>
                 </div>
             </div>
-            <div class="input-field col s12">
-              <select id="typeat" multiple required>
-                <option value="" disabled selected>A / B / C / D</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-              <label>Tipo di attività</label>
+            <div class="row">
+              <div class="col s2" style="padding-top: 20px">
+                <a class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="<ul>
+                <li><b>[A]</b> accoglienza in azienda e descrizione del ruolo del Tutor Aziendale dei  contenuti del Tirocinio/Stage</li><br>
+                <li><b>[B]</b> descrizione dell’attività e dell’organizzazione aziendale (descrizione del posto di lavoro, dei mezzi<br> di produzione assegnati, degli    
+         elementi di prevenzione adottati e dei dispositivi di protezione individuale)<br>e descrizione dei processi di competenza del ruolo</li><br>
+              <li><b>[C]</b> esercitazioni pratico-operative</li><br>
+              <li><b>[D]</b> verifica e valutazione dell’apprendimento</li>
+              </ul>">?</a>
+              </div>
+              <div class="input-field col s10">
+                <select id="typeat" multiple required>
+                  <option value="" disabled selected>A / B / C / D</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+                <label>Tipo di attività</label>
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
@@ -622,48 +771,14 @@
   </div>
   </form>
 </div>
+<?php } ?>
+<?php require("../server/sideNavBottom.php"); ?>
 
-  <ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-      <div style="background-color: red" class="background">
-      </div>
-      <img class="circle" src="../assets/img/profile.jpg">
-      <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
-      <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
-    </div></li>
-    <li><a class="modal-trigger" id="changeP" href="#modal1">Cambia Password</a></li>
-    <li><div class="divider"></div></li>
-    <li><a href="../server/logout.php">ESCI</a></li>
-    <li><div class="divider"></div></li>
-  </ul>
-
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <form class="changep" action="../server/changepw.php" method="post" enctype="multipart/form-data" autocomplete="off">
-        <div class="row flexx">
-          <h4>Modifica Password</h4>
-          <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <input name="oldpsw" id="oldpsw" type="password" >
-              <label for="oldpsw">Vecchia Password</label>
-            </div>
-            <div class="input-field col s12">
-              <input name="newpsw" id="newpsw" type="password" >
-              <label for="newpsw">Nuova Password</label>
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
-    <div class="progress_cont dn">
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
-    <script src="../assets/js/changep_aj.js"></script>
+		<script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>
+<?php   } else { require("nega.php"); }
+    } else { require("nega.php"); }
+?>

@@ -1,0 +1,31 @@
+.card-action{
+	margin-left: 10px;
+	color: #f0ab40;
+}
+
+.card{
+	opacity: .8;
+    -webkit-transition: border-radius .2s, opacity .6s; /* Safari */
+    transition: border-radius .2s, opacity .6s;
+    height: 190px;
+}
+.card-title{
+	transition: color .3s;
+}
+.card:hover .card-title{
+	color: #0c0!important;
+}
+
+.card-action > span{
+	visibility: hidden;
+	color: #0c0;
+}
+.card:hover > .card-action > span{
+	visibility: visible;
+}
+
+.card:hover{
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	opacity: 1;
+}

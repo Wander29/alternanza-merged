@@ -1,9 +1,61 @@
 $(document).ready(function() {
     var appoidtir = "";
     var html_appo = "";
+    var nomeAzienda = "";
+    var lat = long = 0;
+    var indirizzo = "";
+    var sedetir = "";
+    var sedeleg = "";
+
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
     });
+
+    //FocusOut per la Geocodifica, purtroppo le richieste sono lente e l'Ajax è più veloce
+    $("#sedeleg").focusout(function(){
+        geocodeLeg();
+    })
+    $("#capLeg").focusout(function(){
+        geocodeLeg();
+    })
+
+
+    $("#sedetir").focusout(function(){
+        geocodeTir();
+    })
+    $("#capTir").focusout(function(){
+        geocodeTir();
+    })
+
+    function geocodeLeg(){
+        sedeleg = $('#sedeleg').val();
+        indirizzo = sedeleg + " Italy " +  $('#capLeg').val();
+
+        //Geocoding coordinate
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
+            sensor: false,
+            address: indirizzo
+        }, function(data, textStatus) {
+                $("#latLeg").val(data.results[0].geometry.location.lat);
+                $("#longLeg").val(data.results[0].geometry.location.lng);
+            }
+        );
+    }
+
+    function geocodeTir(){
+        sedetir = $('#sedetir').val();
+        indirizzo = sedetir + " Italy " +  $('#capTir').val();
+
+        //Geocoding coordinate
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
+            sensor: false,
+            address: indirizzo
+        }, function(data, textStatus) {
+                $("#latTir").val(data.results[0].geometry.location.lat);
+                $("#longTir").val(data.results[0].geometry.location.lng);
+            }
+        );
+    }
 
     $('.inserimento').submit(function(event) {
         event.preventDefault();
@@ -43,17 +95,26 @@ $(document).ready(function() {
             };
         }
         if(tipo == "azienda"){
+            nomeAzienda = $('#nomea').val();
+            if ($('#sedetir').val() == ""){
+                lat = $('#latLeg').val();
+                long = $('#longLeg').val();
+            } else {
+                lat = $('#latTir').val();
+                long = $('#longTir').val();
+            }
+
             var formData = { //valori del form inseriti
-                'nomea'             : $('#nomea').val(),
+                'nomea'             : nomeAzienda,
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
-                'sedeleg'           : $('#sedeleg').val(),
-                'sedetir'           : $('#sedetir').val(),
-                'lat'               : $('#lat').val(),
-                'long'              : $('#long').val(),
+                'sedeleg'           : sedeleg,
+                'sedetir'           : sedetir,
+                'lat'               : lat,
+                'long'              : long,
                 'tel'               : $('#tel').val(),
                 'email'             : $('#email').val()
-            };
+            };            
         }
         if(tipo == "tirocinio"){
             var descr = $("#descr").val();
@@ -65,6 +126,7 @@ $(document).ready(function() {
                 'inizio'            : formatDate($('#inizio').val()),
                 'fine'              : formatDate($('#fine').val()),
                 'descr'             : descr,
+                'oreTot'            : $('#oreTot').val(),
                 'fkalu'             : $('#fkalu').val(),
                 'fkaz'              : $('#fkaz').val(),
                 'value'             : $("#valut").val(),
@@ -78,7 +140,8 @@ $(document).ready(function() {
                 'data'              : formatDate($('#datetut').val()),
                 'codfisc'           : $('#codfiscta').val(),
                 'tel'               : $('#telta').val(),
-                'mail'              : $('#emailta').val(),               
+                'mail'              : $('#emailta').val(), 
+                'psw'               : $('#pswta').val(),              
                 'fka'               : $('#fkazt').val()
             };
         }
@@ -108,6 +171,14 @@ $(document).ready(function() {
                 'spec'              : $('#spec').val()
             };
         }
+        if(tipo == "questionario_tutor"){
+            var formData = { //valori del form inseriti
+                'idtut'                 : $('#idtutquesttut').val(),
+                'tirocinio'             : $('#fktirquesttut').val(),
+                'commit'                : $('#commitquesttut').val(),
+                'val'                   : $('#valutquesttut').val()
+            };
+        }
 
         $.ajax({
 			type 		: type, // define the type of HTTP verb we want to use (POST for our form)
@@ -118,32 +189,29 @@ $(document).ready(function() {
 		})
             .done(function(risp) {
                 console.log(risp);
-                if(risp.result !== undefined){
-                    if (risp.user == 'alunno') {
-                        window.location.href = "public/view.php";
-                    } else {
-                        window.location.href = "public/ins.php";
-                    }
-                    
-                }else{
-                    if(risp.error == undefined){
-                        if(risp.sucquery){
-                            Materialize.toast(risp.query, 1000);
-                            if (risp.reload) {
-                                setTimeout(function(){
-                                    location.reload();
-                                }, 1100);
-                            } else {
-                                svuota(form[0]);
-                            }   
-                        }else{
-                            Materialize.toast(risp.errore, 1000);
+                if(risp.error == undefined){
+                    if(risp.sucquery){
+                        if (risp.idAz !== undefined){
+                            $("#fkazt option:selected").removeAttr("selected");
+                            html_appo = "<option value=" + risp.idAz + " selected>" + nomeAzienda + "</option>";
+                            $("#fkazt").append(html_appo);
+                            $("#fkazt").material_select();
+                            $("#tutorAzTab").trigger("click");
                         }
+                        Materialize.toast(risp.query, 1000);
+                        if (risp.reload) {
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1100);
+                        } else {
+                            svuota(form[0]);
+                        }   
+                    }else{
+                        Materialize.toast(risp.errore, 1000);
                     }
                 }
             })
 			.fail(function(risp) {
-				//console.log(risp);
 			});
         });
     
@@ -179,9 +247,94 @@ $(document).ready(function() {
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[2] +"'>" + item[0] + " "
                     + item[1] + "</option>";
-                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
                 });
                 $("#fkalu").html(html_appo);
+                $('select').material_select();
+            }else{
+            }
+        })
+        .fail(function(risp) {
+        });
+    return false;
+    });
+
+    $("#az").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'azienda' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getAlquest.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                $.each(risp['query'], function (i, item) {
+                    $('#al').append($('<option>', { 
+                        value: item[0],
+                        text : item[2] + " " + item[1] 
+                    }));
+                });
+
+                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[0] +"'>" + item[2] + " "
+                    + item[1] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#al").html(html_appo);
+                $('select').material_select();
+                
+            }else{
+                //console.log(risp['fail']);
+            }
+        })
+        .fail(function(risp) {
+            console.log("ERRORE lato SERVER");
+            console.log(risp);
+        });
+    return false;
+    });
+
+    $("#al").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'alunno' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getTir.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                $.each(risp['query'], function (i, item) {
+                    $('#fktirquesttut').append($('<option>', { 
+                        value: item[0],
+                        text : item[1] + " " + item[2] 
+                    }));
+                });
+
+                html_appo = "<option disabled selected value=''>Scegli il Tirocinio</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[0] +"'>" + item[1] + " | "
+                    + item[2] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#fktirquesttut").html(html_appo);
                 $('select').material_select();
                 
             }else{
@@ -194,9 +347,6 @@ $(document).ready(function() {
         });
     return false;
     });
-
-
-
 
 function svuota(form) {
     Materialize.updateTextFields();
@@ -220,8 +370,6 @@ function formatDate(inco){
 
 function getDate(inco){
     var data = inco.replace(',', '');
-
-
     switch (data) {
         case "January":
             data = "01";

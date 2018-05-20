@@ -20,20 +20,18 @@
         $data["error"] = "Errore nella connessione";
         die();
     }
-
     /********** POST/GET **********/
-    $nomeut = $_SESSION["mail"];
-    $table = $_SESSION["table"];
-    $oldpsw = md5(test_input($_POST['oldpsw']));
-    $newpsw = md5(test_input($_POST['newpsw']));
+    $email = $_SESSION["mail"];
+    $oldpsw = md5($_POST['oldpsw']);
+    $newpsw = md5($_POST['newpsw']);
 
     /********** Query **********/
-    $query_verifica = "SELECT Nome FROM $table WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
-    $query_modifica = "UPDATE $table SET Password = '$newpsw' WHERE EMail = '$nomeut' AND Password = '$oldpsw';";
+    $query_verifica = "SELECT CodUtente FROM users WHERE EMail = '$email' AND Password = '$oldpsw';";
+    $query_modifica = "UPDATE users SET Password = '$newpsw' WHERE EMail = '$email' AND Password = '$oldpsw';";
 
     $verifica = mysqli_fetch_array(mysqli_query($connection, $query_verifica));
     
-    if($verifica != null){
+    if(mysqli_query($connection, $query_verifica)){
         $modifica = mysqli_query($connection, $query_modifica);
         if(!$modifica){
             $data['success'] = false;
@@ -61,7 +59,7 @@
 
                 //Recipients
                 $mail->SetFrom('144.developer.master@gmail.com', "ASL WEB SITE");
-                $mail->AddAddress($nomeut, 'prova mail php');
+                $mail->AddAddress($email, 'prova mail php');
                 $mail->AddReplyTo('no-reply@mycomp.com','no-reply');
 
                 //Attachments

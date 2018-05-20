@@ -16,6 +16,7 @@
     $inizio = $_POST['inizio'];       
     $fine = $_POST['fine'];
     $val = $_POST['value'];
+    $oreTot = $_POST['oreTot'];
     $valTest = $_POST['valTest'];
     $descr = $_POST['descr'];
     $fkalu = $_POST['fkalu'];
@@ -26,8 +27,8 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO tirocinio (CodTir, Inizio, Fine, Descr, ValVoto, ValTest, FKAlu, FKAz
-    ) VALUES(null, $inizio, $fine, ".$descr.", $val, ".$valTest.", '$fkalu', '$fkaz');"; //query da sparare nel DB 
+    $query = "INSERT INTO tirocinio (CodTir, Inizio, Fine, TotOre, Descr, ValVoto, ValTest, FKAlu, FKAz
+    ) VALUES(null, $inizio, $fine, $oreTot, ".$descr.", $val, ".$valTest.",'$fkalu', '$fkaz');"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

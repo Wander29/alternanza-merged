@@ -1,0 +1,50 @@
+.nav-wrapper {
+    background-color: #8e397a !important;
+    opacity: .8;
+}
+
+.compensatore{
+    height: 4%;
+}
+
+#wrap-login{
+    padding: 30px;
+    border-radius: 30px;
+    z-index: 2;
+    background-color: white;
+    opacity: .75;
+}
+
+#wrap-ospite{
+    padding: 30px;
+    border-radius: 30px;
+    z-index: 2;
+    background-color: #FFB5E4;
+    opacity: .9;
+}
+
+#wrap-login-all::before{
+    content: "";
+    background-image: url('../img/wall_login_1.jpg');
+    background-size: auto;
+    background-repeat: repeat-y;
+    opacity: .7;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+}
+
+.btn-submit-aut{
+    border: 1px dotted black;
+    border-radius: 0;
+}
+
+.tooltip-text-view{
+    color: gray !important;
+    cursor: pointer;
+    padding: 10px;
+}
