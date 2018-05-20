@@ -452,9 +452,50 @@
                     <?php   
                       }
                     ?>
+                  <?php if (strpos($_SESSION['permessi'], "IQST") !== false) { 
+                      $votoTutSc = $votoAlu = $cnt_voti = 0;
+
+                      $query12b = "SELECT t.ValVoto FROM tirocinio AS t WHERE t.FKAz = {$id10};"; 
+                      $result12b  = mysqli_query($connection, $query12b);
+                      if (!$result12b) {
+                          die ('Invalid query: ' . mysql_error());
+                      }
+                      while ($row12b  = mysqli_fetch_array($result12b, MYSQLI_NUM)){
+                          $votoAlu  += $row12b[0];
+                          $cnt_voti += 1;
+                      }
+                      if ($cnt_voti !== 0){
+                        $votoAlu /= $cnt_voti;
+                      }
+                      $cnt_voti = 0;
+
+                      $query12c = "SELECT q.Voto FROM quest_tutor AS q, tirocinio AS t WHERE q.FKTir = t.CodTir AND t.FKAz = {$id10};"; 
+                      $result12c  = mysqli_query($connection, $query12c);
+                      if (!$result12c) {
+                          die ('Invalid query: ' . mysql_error());
+                      }
+                      while ($row12c  = mysqli_fetch_array($result12c, MYSQLI_NUM)){
+                          $votoTutSc  += $row12c[0];
+                          $cnt_voti += 1;
+                      }
+                      if ($cnt_voti !== 0){
+                        $votoTutSc /= $cnt_voti;
+                      }
+                      if ($votoAlu !== 0 || $votoTutSc !== 0){
+                    ?>
+                    <li>
+                      <div class="collapsible-header">
+                        <i class="material-icons">class</i> Valutazione Azienda
+                      </div>
+                      <div class="collapsible-body">
+                        <b>Valutazione Media Tutor Scolastici</b>: <?php echo round($votoTutSc, 2) ?> /5<br>
+                        <b>Valutazione Media Alunni</b>: <?php echo round($votoAlu, 2)?> /5<br>
+                      </div>
+                    </li>
+                  <?php }} ?>
                   <li>
                     <div class="collapsible-header">
-                        Alunni
+                        Alunni stagisti
                     </div>
                     <div class="collapsible-body">
                       <table>

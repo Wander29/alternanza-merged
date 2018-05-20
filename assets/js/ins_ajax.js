@@ -330,7 +330,7 @@ $(document).ready(function() {
 
                 html_appo = "<option disabled selected value=''>Scegli il Tirocinio</option>";
                 risp['query'].forEach(function(item, index) {
-                    html_appo += "<option value='" + item[0] +"'>" + item[1] + " "
+                    html_appo += "<option value='" + item[0] +"'>" + item[1] + " | "
                     + item[2] + "</option>";
                     //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
                 });

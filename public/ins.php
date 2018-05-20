@@ -38,7 +38,6 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-<<<<<<< HEAD
         <?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
           <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li> <?php } ?>
         <?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>

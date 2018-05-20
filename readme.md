@@ -23,6 +23,7 @@
 - Gestione INDIRIZZI TIROCINI e LEGALI, due separati e piu controlli all'inseirmento del geocode
 - scroll in alto quando triggera il tab 
 - Descrizione attività ABCD
+- viusalizzazione voto medio Azienda secondo il questionario tutor, solo per DIRIGENTE e tutsc
 
 # deprecate
 - lat e long non obbl nel db 
