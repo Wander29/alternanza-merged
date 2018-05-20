@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.1.4
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 02, 2018 alle 21:35
--- Versione del server: 5.7.17
--- Versione PHP: 7.1.3
+-- Generation Time: Mag 19, 2018 alle 13:08
+-- Versione del server: 5.6.15-log
+-- PHP Version: 5.5.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `alternanza`
@@ -28,16 +26,18 @@ SET time_zone = "+00:00";
 -- Struttura della tabella `alunno`
 --
 
-CREATE TABLE `alunno` (
-  `CodAlu` int(4) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `alunno` (
+  `CodAlu` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `Nome` varchar(30) NOT NULL,
   `Cognome` varchar(30) NOT NULL,
   `CodFisc` varchar(20) NOT NULL,
   `DataNasc` date NOT NULL,
   `EMail` varchar(100) NOT NULL,
   `Password` varchar(200) NOT NULL,
-  `FKClasse` int(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `FKClasse` int(3) unsigned NOT NULL,
+  PRIMARY KEY (`CodAlu`),
+  KEY `FKClasse` (`FKClasse`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dump dei dati per la tabella `alunno`
@@ -45,10 +45,9 @@ CREATE TABLE `alunno` (
 
 INSERT INTO `alunno` (`CodAlu`, `Nome`, `Cognome`, `CodFisc`, `DataNasc`, `EMail`, `Password`, `FKClasse`) VALUES
 (1, 'Luca', 'Moroni', 'MRNLC98BFDSB8', '1998-03-30', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 1),
-(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', '24c9e15e52afc47c225b757e7bee1f9d', 1),
+(2, 'Ludovico', 'Venturi', 'VNTLVC99A29F8HUJB', '1999-01-29', 'ludo@user', 'ee11cbb19052e40b07aac0ca060c23ee', 1),
 (3, 'Matteo', 'Mathew', 'MTWMAT9INJFD9', '1999-02-01', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5', 3),
-(4, 'Marco', 'Riccardi', 'RCMARC780HJD', '1999-03-22', 'prova@f', '189bbbb00c5f1fb7fba9ad9285f193d1', 4),
-(5, 'Michele', 'Apicella', 'APCMCH4378JN', '1999-02-01', 'ludovico.venturi@gmail.com', '8a94bdfc825df46f880854f41fee346b', 1);
+(4, 'Marco', 'Riccardi', 'RCMARC780HJD', '1999-03-22', 'prova@f', '189bbbb00c5f1fb7fba9ad9285f193d1', 4);
 
 -- --------------------------------------------------------
 
@@ -56,8 +55,8 @@ INSERT INTO `alunno` (`CodAlu`, `Nome`, `Cognome`, `CodFisc`, `DataNasc`, `EMail
 -- Struttura della tabella `azienda`
 --
 
-CREATE TABLE `azienda` (
-  `CodAz` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `azienda` (
+  `CodAz` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `PIVA` varchar(12) NOT NULL,
   `NomeRap` varchar(50) NOT NULL,
@@ -66,8 +65,9 @@ CREATE TABLE `azienda` (
   `SedeLegale` varchar(100) NOT NULL,
   `SedeTirocinio` varchar(100) DEFAULT NULL,
   `Tel` varchar(14) NOT NULL,
-  `EMail` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `EMail` varchar(50) NOT NULL,
+  PRIMARY KEY (`CodAz`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dump dei dati per la tabella `azienda`
@@ -75,7 +75,9 @@ CREATE TABLE `azienda` (
 
 INSERT INTO `azienda` (`CodAz`, `Nome`, `PIVA`, `NomeRap`, `Lat`, `Lon`, `SedeLegale`, `SedeTirocinio`, `Tel`, `EMail`) VALUES
 (1, 'NetAddiction', '483048329043', 'Andrea Pucci', 42.565685, 12.592703, 'Via angelini 12 05100', NULL, '07443984023948', 'netaddiction@l'),
-(2, 'Alcantara', '00835580150', 'Patrizio Patrick', 42.485116, 12.465958, 'Strada di Vagno,13, Nera Montoro TR', NULL, '0744 7571', 'info@alcantara.it');
+(2, 'Alcantara', '00835580150', 'Patrizio Patrick', 42.485116, 12.465958, 'Strada di Vagno,13, Nera Montoro TR', NULL, '0744 7571', 'info@alcantara.it'),
+(3, 'azienda', '9999', 'luigi', 0, 0, 'via irma bandiera 22', NULL, '3647626', 'fkaskj@kjdkas'),
+(4, 'mark', '9997', 'jkkja', 0, 0, 'via irma bandiera 33', NULL, '86786', 'ah@oaisdhha');
 
 -- --------------------------------------------------------
 
@@ -83,13 +85,16 @@ INSERT INTO `azienda` (`CodAz`, `Nome`, `PIVA`, `NomeRap`, `Lat`, `Lon`, `SedeLe
 -- Struttura della tabella `classe`
 --
 
-CREATE TABLE `classe` (
-  `CodClas` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `classe` (
+  `CodClas` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `NomeClasse` varchar(5) NOT NULL,
   `AnnoScolastico` varchar(9) NOT NULL,
-  `FKTutSc` int(3) UNSIGNED NOT NULL,
-  `FKSpec` int(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `FKTutSc` int(3) unsigned NOT NULL,
+  `FKSpec` int(3) unsigned NOT NULL,
+  PRIMARY KEY (`CodClas`),
+  KEY `FKTutSc` (`FKTutSc`),
+  KEY `FKSpec` (`FKSpec`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dump dei dati per la tabella `classe`
@@ -107,14 +112,16 @@ INSERT INTO `classe` (`CodClas`, `NomeClasse`, `AnnoScolastico`, `FKTutSc`, `FKS
 -- Struttura della tabella `diario`
 --
 
-CREATE TABLE `diario` (
-  `CodDia` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `diario` (
+  `CodDia` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `Data` date NOT NULL,
   `TipoAtt` varchar(4) NOT NULL,
   `Descr` varchar(255) DEFAULT NULL,
   `Ore` int(2) NOT NULL,
-  `FKTir` int(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `FKTir` int(3) unsigned NOT NULL,
+  PRIMARY KEY (`CodDia`),
+  KEY `FKTir` (`FKTir`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dump dei dati per la tabella `diario`
@@ -134,13 +141,38 @@ INSERT INTO `diario` (`CodDia`, `Data`, `TipoAtt`, `Descr`, `Ore`, `FKTir`) VALU
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `quest_tutor`
+--
+
+CREATE TABLE IF NOT EXISTS `quest_tutor` (
+  `CodQuestTut` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `Valut` int(1) unsigned NOT NULL,
+  `Commit` varchar(500) NOT NULL,
+  `FKTut` int(3) unsigned NOT NULL,
+  `FKTir` int(3) unsigned NOT NULL,
+  PRIMARY KEY (`CodQuestTut`),
+  KEY `FKTut` (`FKTut`,`FKTir`),
+  KEY `FKTir` (`FKTir`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dump dei dati per la tabella `quest_tutor`
+--
+
+INSERT INTO `quest_tutor` (`CodQuestTut`, `Valut`, `Commit`, `FKTut`, `FKTir`) VALUES
+(1, 1, 'buono', 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `specializzazione`
 --
 
-CREATE TABLE `specializzazione` (
-  `CodSpec` int(3) UNSIGNED NOT NULL,
-  `Nome` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `specializzazione` (
+  `CodSpec` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(20) NOT NULL,
+  PRIMARY KEY (`CodSpec`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dump dei dati per la tabella `specializzazione`
@@ -158,17 +190,20 @@ INSERT INTO `specializzazione` (`CodSpec`, `Nome`) VALUES
 -- Struttura della tabella `tirocinio`
 --
 
-CREATE TABLE `tirocinio` (
-  `CodTir` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `tirocinio` (
+  `CodTir` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `Inizio` date NOT NULL,
   `Fine` date NOT NULL,
   `TotOre` int(3) NOT NULL DEFAULT '0',
   `Descr` varchar(255) DEFAULT NULL,
   `ValTest` text,
-  `ValVoto` int(1) UNSIGNED NOT NULL,
-  `FKAlu` int(4) UNSIGNED NOT NULL,
-  `FKAz` int(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ValVoto` int(1) unsigned NOT NULL,
+  `FKAlu` int(4) unsigned NOT NULL,
+  `FKAz` int(3) unsigned NOT NULL,
+  PRIMARY KEY (`CodTir`),
+  KEY `FKAlu` (`FKAlu`),
+  KEY `FKAz` (`FKAz`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dump dei dati per la tabella `tirocinio`
@@ -187,16 +222,18 @@ INSERT INTO `tirocinio` (`CodTir`, `Inizio`, `Fine`, `TotOre`, `Descr`, `ValTest
 -- Struttura della tabella `tutor_aziendale`
 --
 
-CREATE TABLE `tutor_aziendale` (
-  `CodTutAz` int(3) UNSIGNED NOT NULL,
-  `FKAz` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `tutor_aziendale` (
+  `CodTutAz` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `FKAz` int(3) unsigned NOT NULL,
   `Nome` varchar(30) NOT NULL,
   `Cognome` varchar(30) NOT NULL,
   `CodFisc` varchar(20) NOT NULL,
   `Tel` varchar(14) NOT NULL,
   `EMail` varchar(50) NOT NULL,
-  `DataNasc` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `DataNasc` date NOT NULL,
+  PRIMARY KEY (`CodTutAz`),
+  KEY `FKAz` (`FKAz`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dump dei dati per la tabella `tutor_aziendale`
@@ -212,14 +249,15 @@ INSERT INTO `tutor_aziendale` (`CodTutAz`, `FKAz`, `Nome`, `Cognome`, `CodFisc`,
 -- Struttura della tabella `tutor_scolastico`
 --
 
-CREATE TABLE `tutor_scolastico` (
-  `CodTutSc` int(3) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `tutor_scolastico` (
+  `CodTutSc` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `Nome` varchar(30) NOT NULL,
   `Cognome` varchar(30) NOT NULL,
   `CodFisc` varchar(20) NOT NULL,
   `EMail` varchar(100) NOT NULL,
-  `Password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  `Password` varchar(200) NOT NULL,
+  PRIMARY KEY (`CodTutSc`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=4 ;
 
 --
 -- Dump dei dati per la tabella `tutor_scolastico`
@@ -227,111 +265,9 @@ CREATE TABLE `tutor_scolastico` (
 
 INSERT INTO `tutor_scolastico` (`CodTutSc`, `Nome`, `Cognome`, `CodFisc`, `EMail`, `Password`) VALUES
 (1, 'Sara', 'Frittella', 'SRTFRT943hj43', 'sara@admin', '21232f297a57a5a743894a0e4a801fc3'),
-(2, 'Maria', 'Alternanza', 'ALTMRTFSJDKFN', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5');
+(2, 'Maria', 'Alternanza', 'ALTMRTFSJDKFN', 'gatto@micio.com', '3bb02d10f95096180e7604770f4a98e5'),
+(3, 'luca', 'moroni', 'PASJDOA', 'terraformer.144@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
 
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `alunno`
---
-ALTER TABLE `alunno`
-  ADD PRIMARY KEY (`CodAlu`),
-  ADD KEY `FKClasse` (`FKClasse`);
-
---
--- Indici per le tabelle `azienda`
---
-ALTER TABLE `azienda`
-  ADD PRIMARY KEY (`CodAz`);
-
---
--- Indici per le tabelle `classe`
---
-ALTER TABLE `classe`
-  ADD PRIMARY KEY (`CodClas`),
-  ADD KEY `FKTutSc` (`FKTutSc`),
-  ADD KEY `FKSpec` (`FKSpec`);
-
---
--- Indici per le tabelle `diario`
---
-ALTER TABLE `diario`
-  ADD PRIMARY KEY (`CodDia`),
-  ADD KEY `FKTir` (`FKTir`);
-
---
--- Indici per le tabelle `specializzazione`
---
-ALTER TABLE `specializzazione`
-  ADD PRIMARY KEY (`CodSpec`);
-
---
--- Indici per le tabelle `tirocinio`
---
-ALTER TABLE `tirocinio`
-  ADD PRIMARY KEY (`CodTir`),
-  ADD KEY `FKAlu` (`FKAlu`),
-  ADD KEY `FKAz` (`FKAz`);
-
---
--- Indici per le tabelle `tutor_aziendale`
---
-ALTER TABLE `tutor_aziendale`
-  ADD PRIMARY KEY (`CodTutAz`),
-  ADD KEY `FKAz` (`FKAz`);
-
---
--- Indici per le tabelle `tutor_scolastico`
---
-ALTER TABLE `tutor_scolastico`
-  ADD PRIMARY KEY (`CodTutSc`);
-
---
--- AUTO_INCREMENT per le tabelle scaricate
---
-
---
--- AUTO_INCREMENT per la tabella `alunno`
---
-ALTER TABLE `alunno`
-  MODIFY `CodAlu` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT per la tabella `azienda`
---
-ALTER TABLE `azienda`
-  MODIFY `CodAz` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT per la tabella `classe`
---
-ALTER TABLE `classe`
-  MODIFY `CodClas` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT per la tabella `diario`
---
-ALTER TABLE `diario`
-  MODIFY `CodDia` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT per la tabella `specializzazione`
---
-ALTER TABLE `specializzazione`
-  MODIFY `CodSpec` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT per la tabella `tirocinio`
---
-ALTER TABLE `tirocinio`
-  MODIFY `CodTir` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT per la tabella `tutor_aziendale`
---
-ALTER TABLE `tutor_aziendale`
-  MODIFY `CodTutAz` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT per la tabella `tutor_scolastico`
---
-ALTER TABLE `tutor_scolastico`
-  MODIFY `CodTutSc` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Limiti per le tabelle scaricate
 --
@@ -355,6 +291,13 @@ ALTER TABLE `diario`
   ADD CONSTRAINT `diario_ibfk_1` FOREIGN KEY (`FKTir`) REFERENCES `tirocinio` (`CodTir`);
 
 --
+-- Limiti per la tabella `quest_tutor`
+--
+ALTER TABLE `quest_tutor`
+  ADD CONSTRAINT `quest_tutor_ibfk_2` FOREIGN KEY (`FKTir`) REFERENCES `tirocinio` (`CodTir`),
+  ADD CONSTRAINT `quest_tutor_ibfk_1` FOREIGN KEY (`FKTut`) REFERENCES `tutor_scolastico` (`CodTutSc`);
+
+--
 -- Limiti per la tabella `tirocinio`
 --
 ALTER TABLE `tirocinio`
@@ -366,7 +309,6 @@ ALTER TABLE `tirocinio`
 --
 ALTER TABLE `tutor_aziendale`
   ADD CONSTRAINT `tutor_aziendale_ibfk_1` FOREIGN KEY (`FKAz`) REFERENCES `azienda` (`CodAz`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

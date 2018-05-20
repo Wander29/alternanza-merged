@@ -1,5 +1,0 @@
- A  = accoglienza in azienda e descrizione del ruolo del Tutor Aziendale dei  contenuti del Tirocinio/Stage;
- B =  descrizione dell’ attività e dell’organizzazione aziendale (descrizione del posto di lavoro, dei mezzi di produzione assegnati, degli    
-         elementi di prevenzione adottati e dei dispositivi di protezione individuale)e descrizione dei processi di competenza del ruolo;
- C =  esercitazioni pratico-operative;                    
- D =   verifica e valutazione dell’apprendimento.

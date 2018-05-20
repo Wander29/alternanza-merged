@@ -124,54 +124,65 @@
           			<div id="alunni" class="alunni">
                   <div class="viewer tooltipped" data-position="top" data-delay="50" data-tooltip="Clicca per vedere tutti gli alunni"><img src="../assets/img/freccia.png" /></div>
                   <div class="conttable">
-                  <div style="height: 50px;"></div>
+                    <div style="height: 50px;">
+                             
+                    </div>
                 <table class="striped bordered">
                   <tbody id="subalu">
-                  
-                  <?php
-                  $queryGetData= "SELECT alunno.Nome, alunno.Cognome, classe.NomeClasse, azienda.CodAz, azienda.nome FROM azienda, tirocinio, alunno, classe WHERE azienda.CodAz = tirocinio.FkAz AND alunno.CodAlu = tirocinio.FkAlu AND alunno.FkClasse = classe.CodClas GROUP BY azienda.CodAz, alunno.Nome, alunno.Cognome ORDER BY alunno.cognome ASC";
-                  $result = mysqli_query($connection, $queryGetData);
-                  if (!$result) {
-                    die('Invalid query: ' . mysql_error());
-                  }
-                      while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                          $name = $row[0];
-                          $surname = $row[1];
-                          $clas = $row[2];
-                          $azienda = $row[3];
-                          $azNome = $row[4];
-                  ?>
-                  <tr data-id="<?php echo $azienda;?>">
-                      <td width="20%"><?php echo $name;?></td>
-                      <td width="20%"><?php echo $surname; ?></td>
-                      <td width="20%"><?php echo $clas;?></td>
-                      <td><?php echo $azNome;?></td>
-                  </tr>          
-
-                <?php } ?>
+                      <tr><td>Nessuna classe selezionata attivare filtro</td></tr>
                   </tbody>
                 </table>
                 </div>
             </div>
         </div>
 		</div>
+        <div class="filter tooltipped" data-position="right" data-delay="50" data-tooltip="Clicca per filtrare gli alunni per classe">
+            <div class="row">
+                <div class="input-field col s12">
+                  <select name="class" id="class" required>
+                    <option selected disabled value="">Scegli la classe</option>
+                    <?php
 
-        <script src="js/jquery-3.3.1.min.js"></script>
+                      $queryGetData = 'SELECT * FROM classe ORDER BY NomeClasse;';
+
+                      $result = mysqli_query($connection, $queryGetData);
+                      if (!$result) {
+                        die('Invalid query: ' . mysql_error());
+                      }
+                      //echo json_decode($aResult);
+
+                      $printcount = 0;
+
+                      while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                         $id = $row[0];
+                         $nome = $row[1];
+                    ?>
+                        <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                    <?php 
+                    } 
+                    ?>
+                  </select>
+                </div>
+            </div>
+            <div class="sub_filter"><img id="imgfilt" src="../assets/img/freccia.png"/></div>
+        </div>
+        <script src="../lib/jquery.js"></script>
+        <script src="../lib/materialize/materialize.min.js"></script>
         <script async defer>
             
-            var list_items = $("#subalu").find('tr');//restituisce un array
                    
         
             $( document ).ready(function() {
                 setTimeout(function(){ 
                     setEListener();                    
                 }, 3000);
-                
+                $('select').material_select();
             });
                         
             function setEListener(){
-
+                var list_items = $("#subalu").find('tr');//restituisce un array
                 $.each(list_items, function(ind, val){
+                    console.log("diamante");
                     var appoid = $(this).data("id");
                     list_items[ind].addEventListener('click', function() {
 
@@ -190,6 +201,42 @@
         </script>
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&callback=initMap">
+        </script>
+        <script>
+            $("#class").change(function() { 
+                var questo = $(this);  
+                var data = { 
+                    'classe' : questo.val() 
+                    };
+                var type = "post";
+                var url = "../server/filtromap.php";
+
+                $.ajax({
+                    type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+                    url         : url, // l'indirizzo della pagina cui inviare i dati
+                    data        : data, // oggetto contenente tutti i dati, oppure stringa
+                    dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+                    encode      : true
+                })
+                .done(function(risp) {
+                    if(risp['query']){                          
+                        html_appo = "";
+                        risp['query'].forEach(function(item, index) {
+                            html_appo += "<tr data-id='" + item[0] + "'> <td width='20%'>" + item[1] + "</td><td width='20%'>" + item[2] + "</td><td width='20%'>" + item[3] + "</td></tr>  ";
+                        });
+                        $("#subalu").html(html_appo);
+                        setEListener();
+                    }else{
+                        //console.log(risp['fail']);
+                    }
+                })
+                .fail(function(risp) {
+                    console.log("ERRORE lato SERVER");
+                    //console.log(risp);
+                });
+            return false;
+            });
+
         </script>
 	</body>
 </html>

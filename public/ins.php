@@ -38,6 +38,7 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
+<<<<<<< HEAD
         <?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
           <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li> <?php } ?>
         <?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>
@@ -52,6 +53,8 @@
   		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li> <?php } ?>
         <?php if (strpos($_SESSION['permessi'], "IREG") !== false) { ?>
           <li class="tab"><a href="#test7">Registro Personale</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IQST") !== false) { ?>
+          <li class="tab"><a href="#test8">Questionario Tutor</a></li><?php } ?>
 		  </ul>
 		</div>
 	</nav>
@@ -461,7 +464,7 @@
 		<div class="container">
 			<h2>Inserimento Tutor Aziendale</h2>
 			<form class="inserimento" action="../server/instutaz.php" method="post" enctype="multipart/form-data" autocomplete="off" id="tutoraziendale">
-				      <div class="row">
+              <div class="row">
                 <div class="input-field col s12">
                   <input name="nometa" id="nometa" type="text" required>
                   <label for="nometa">Nome</label>
@@ -615,6 +618,101 @@
       </ul>
     </div>
   </div>
+<?php if (strpos($_SESSION['permessi'], "IQST") !== false) { ?>
+  <div id="test8" class="col s12">
+    <div class="container">
+      <h3>Questionario Tutor Scolastico | Azienda</h3>
+        <form class="inserimento" action="../server/insquest.php" method="post" enctype="multipart/form-data" autocomplete="off" id="questionario_tutor">
+            <div class="row">
+                <div class="input-field col s12">
+                  <select name="idtutquesttut" id="idtutquesttut">
+                      <option selected disabled value="" required>Scegli il tutor per il questionario</option>
+                      <?php
+
+                        $queryGetData = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0]; 
+                           $nome = $row[1];
+                           $cognome = $row[2];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome . " " . $cognome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="idtutquesttut">Tutor Scolastico</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                  <select name="az" id="az">
+                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <?php
+
+                        $queryGetData = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
+
+                        $result = mysqli_query($connection, $queryGetData);
+                        if (!$result) {
+                          die('Invalid query: ' . mysql_error());
+                        }
+                        //echo json_decode($aResult);
+
+                        $printcount = 0;
+
+                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
+                           $id = $row[0]; 
+                           $nome = $row[1];
+                      ?>
+                                <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                      <?php 
+                      } 
+                      ?>
+                    </select>
+                  <label for="az">Azienda</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="al" id="al">
+                      <option selected disabled value="" required>Scegli l'Alunno</option>
+                    </select>
+                  <label for="al">Alunno</label>
+                </div>
+                <div class="input-field col s4">
+                  <select name="fktirquesttut" id="fktirquesttut">
+                      <option selected disabled value="" required>Scegli il Tirocinio</option>
+                    </select>
+                  <label for="fktirquesttut">Tirocino</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <textarea name="commitquesttut" id="commitquesttut" class="materialize-textarea" ></textarea>
+                  <label for="commitquesttut">Valutazione Testuale Azienda  (opzionale, per un corretto funzionamento non utilizzare i doppi apici)</label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="labelval">Valutazione Azienda:</div>
+              <div class="contval">
+                <div class="values">1</div>
+                <div class="valued">5</div>
+                <p class="range-field">
+                  <input type="range" id="valutquesttut" min="1" max="5" required/>
+                </p>
+              </div>
+            </div>
+            <button action="submit" name="action">INSERISCI</button>
+        </form>      
+    </div>
+  </div>
+<?php } ?>
 
     <div id="modal" class="modal modal-fixed-footer">
       <form class="inserimento" action="../server/insdia.php" method="post" enctype="multipart/form-data" autocomplete="off" id="diario">
@@ -673,6 +771,7 @@
 
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
+		<script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>
 <?php } ?>

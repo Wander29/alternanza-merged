@@ -21,6 +21,8 @@
 - cambio psw OK
 - gestioe stessi pezzi PHP magari con require
 - Gestione INDIRIZZI TIROCINI e LEGALI, due separati e piu controlli all'inseirmento del geocode
+- scroll in alto quando triggera il tab 
+- Descrizione attività ABCD
 
 # deprecate
 - lat e long non obbl nel db 
