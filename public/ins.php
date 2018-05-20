@@ -5,6 +5,7 @@
     if(!$connection){
         die();
     }
+  if(!empty($_SESSION['permessi'])){
     if (strpos($_SESSION['permessi'], "INS") !== false) { 
 ?>
 
@@ -26,7 +27,6 @@
     <script src="../lib/materialize/materialize.min.js"></script>
   </head>
 	<body>
-
 	<nav class="nav-extended">
 		<div class="nav-wrapper">
 		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a> 
@@ -773,4 +773,10 @@
 		<script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>
-<?php } ?>
+<?php } else{
+        require("nega.php");
+    }
+  }
+else{  
+    require("nega.php"); 
+}?>
