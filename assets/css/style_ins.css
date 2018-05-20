@@ -1,31 +1,4 @@
-.nav-extended{
-	background-color: #00cc00;
-	position: fixed;
-	opacity: 1 !important;
-	top:0;
-	z-index: 10;
-}
-
-.nav-wrapper {
-	background-color: #00cc00 !important;
-}
-
-.brand-logo > i {
-    font-size: 35px !important;
-}
-
-.gre {
-	background-color: #00cc00 !important; 
-}
-
-.brand-logo {
-	padding-left: 30px !important;
-	font-family: "Century Gothic", Times, serif;
-}
-
-.container {
-	margin-bottom: 50px;
-}
+.input-disabled{ font-size: 0.7rem !important; }
 
 .labelval{
   text-align: center;
@@ -53,61 +26,4 @@
 	top: 27px;
 	width: 0px;
 	height: 0px;	
-}
-
-.my_nav{
-	position: fixed !important;
-	top: 0px;
-	z-index: 30;
-}
-
-.compensatore{
-	height: 120px;
-}
-
-.chip{
-	position: absolute;
-	right: 3%;
-	top: 26%;
-}
-
-.chip img:hover{
-	cursor: pointer;
-}
-
-#btn-esci-ospite{
-	position: absolute;
-	right: 7%;
-	top: 22%;
-	border-radius: 20px;
-}
-
-#btn-esci-ospite:hover{
-	cursor: pointer;
-}
-
-.flexx{
-	display: flex;
-	flex-direction: row;
-}
-
-.flexx > button {
-	margin-left: 30%;
-	margin-top: 9px;
-}
-
-.dn {
-    display: none;
-}
-
-.progress_cont{
-    position: fixed;
-    z-index: 999;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-}
-
-.input-disabled{
-	font-size: 0.7rem !important;
 }

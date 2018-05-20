@@ -19,6 +19,7 @@
     <link rel="icon" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/style_alternanza.css">
     <link rel="stylesheet" href="../assets/css/style_map.css">
     
     <script src="../lib/jquery.js"></script>
@@ -136,7 +137,7 @@
             </div>
         </div>
 		</div>
-        <div class="filter tooltipped" data-position="right" data-delay="50" data-tooltip="Clicca per filtrare gli alunni per classe">
+        <div class="filter tooltipped" data-position="top" data-delay="50" data-tooltip="Clicca per filtrare gli alunni per classe">
             <div class="row">
                 <div class="input-field col s12">
                   <select name="class" id="class" required>
@@ -182,7 +183,6 @@
             function setEListener(){
                 var list_items = $("#subalu").find('tr');//restituisce un array
                 $.each(list_items, function(ind, val){
-                    console.log("diamante");
                     var appoid = $(this).data("id");
                     list_items[ind].addEventListener('click', function() {
 

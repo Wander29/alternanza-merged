@@ -15,8 +15,9 @@
         <link rel="stylesheet" href="../assets/css/fonts.css">
         <link rel="icon" href="../assets/img/favicon.png">
         <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
+        <link rel="stylesheet" href="../assets/css/style_alternanza.css">
         <link rel="stylesheet" href="../assets/css/style_view.css">
-
+        
         <script src="../lib/jquery.js"></script>
         <script src="../lib/materialize/materialize.min.js"></script>
         <script src="../assets/js/view_js.js"></script>
@@ -34,8 +35,9 @@
                   <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
                     <?php echo $_SESSION["name"] ?>
                 </div>
+              <?php } else { ?>
+                <a href="../server/logout.php" class="btn" id="btn-esci-ospite">ESCI</a>
               <?php } ?>
-            </div>
             </div>
             <div class="nav-content">
               <ul class="tabs tabs-transparent">

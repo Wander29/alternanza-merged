@@ -1,101 +1,10 @@
-.brand-logo {
-    padding-left: 30px !important;
-    font-family: "Century Gothic", Times, serif;
-}
-
-.brand-logo > i {
-    font-size: 35px !important;
-}
-
 .nav-wrapper {
     background-color: #8e397a !important;
-    opacity: .7;
-}
-
-.nav-extended{
-    position: fixed;
-    top:0;
-    z-index: 10;
+    opacity: .8;
 }
 
 .compensatore{
-    height: 90px;
-}
-
-.my-cont{
-    margin: 10px 20px;
-}
-
-.nomi{
-    display: inline-block;
-    font-size: 0.65rem;
-    bottom: 5px;
-    position: absolute;
-    display: none;
-}
-
-.h-100{
-    height: 100vh;
-}
-
-.tut-sc{ 
-	font-size: 0.9rem;
-	font-style: italic;
- }
-
- .head-diario {
-    font-size: 1.1rem;
-    font-weight: bold;
-    background-color: #26a69a;
-    color: white;
- }
-
- .container {
-    margin-bottom: 50px;
- }
-
-.chip{
-    position: absolute;
-    right: 3%;
-    top: 26%;
-}
-
-.chip img:hover{
-    cursor: pointer;
-}
-
-#btn-esci-ospite{
-    position: absolute;
-    right: 7%;
-    top: 22%;
-    border-radius: 20px;
-}
-
-#btn-esci-ospite:hover{
-    cursor: pointer;
-}
-
-
-.dn {
-    display: none;
-}
-
-.flexx{
-    display: flex;
-    flex-direction: row;
-}
-
-.flexx > button {
-    margin-left: 30%;
-    margin-top: 9px;
-}
-
-.progress_cont{
-    position: fixed;
-    z-index: 999;
-    top: 50%;
-    left: 50%;
-    width: 150px;
+    height: 4%;
 }
 
 #wrap-login{

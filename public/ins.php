@@ -20,6 +20,7 @@
     <link rel="icon" href="../assets/img/favicon.png">
     <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/style_alternanza.css">
     <link rel="stylesheet" href="../assets/css/style_ins.css">
     
     <script src="../lib/jquery.js"></script>
@@ -31,9 +32,14 @@
 		<div class="nav-wrapper">
 		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a> 
       <a href="home.php" class="brand-logo center"><i class="material-icons">home</i>Alternanza Scuola-Lavoro</a>
-      <div class="chip">
-        <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
+      <?php if ($_SESSION['tipoUt'] !== "ospite") { ?>
+        <div class="chip">
+          <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
+            </div>
+          <?php } else { ?>
+            <a href="../server/logout.php" class="btn" id="btn-esci-ospite">ESCI</a>
+          <?php } ?>
       </div>
 		</div>
 		<div class="nav-content">

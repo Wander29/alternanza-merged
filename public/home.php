@@ -14,7 +14,8 @@
         <link rel="icon" href="../assets/img/favicon.png">
         <link rel="stylesheet" href="../assets/css/fonts.css">
         <link rel="stylesheet" href="../lib/materialize/materialize.min.css">
-        <link rel="stylesheet" href="../assets/css/style_ins.css">
+        <link rel="stylesheet" href="../assets/css/style_alternanza.css">
+        <link rel="stylesheet" href="../assets/css/style_home.css">
         
         <script src="../lib/jquery.js"></script>
         <script src="../lib/materialize/materialize.min.js"></script>
@@ -38,16 +39,19 @@
 			<div class="col s6">
 			<?php if (strpos($_SESSION['permessi'], "VIEW") !== false) { ?>
 				<div class="row">
-					<div class="col s8 offset-s2">
+					<a href="view.php">
+						<div class="col s8 offset-s2">
 						<div class="card blue-grey darken-1">
-					    <div class="card-content white-text">
-					      <span class="card-title">VISUALIZZAZIONE</span>
-					    </div>
-					    <div class="card-action">
-					      <a href="view.php">Vai</a>
-					    </div>
+						    <div class="card-content white-text">
+						      	<span class="card-title">VISUALIZZAZIONE</span>
+						      	<p>Visualizza il contenuto del database</p>
+						    </div>
+						    <div class="card-action">
+					     		<span>VAI</span>
+						    </div>
 					  </div>
 					</div>
+					</a>
 					<div class="col s1"></div>
 				</div>
 			<?php } ?>
@@ -56,14 +60,17 @@
 			<?php if (strpos($_SESSION['permessi'], "INS") !== false) { ?>
 				<div class="row">
 					<div class="col s8 offset-s1">
-						<div class="card blue-grey darken-1">
-					    <div class="card-content white-text">
-					      <span class="card-title">INSERIMENTO</span>
-					    </div>
-					    <div class="card-action">
-					      <a href="ins.php">Vai</a>
-					    </div>
-					  </div>
+						<a href="ins.php">
+							<div class="card blue-grey darken-1">
+							    <div class="card-content white-text">
+							      <span class="card-title">INSERIMENTO</span>
+							      <p>Inserisci informazioni riguardanti l'Alternanza Scuola-lavoro</p>
+							    </div>
+							    <div class="card-action">
+							      <span>VAI</span>
+							    </div>
+						  	</div>
+						</a>
 					</div>
 					<div class="col s1"></div>
 				</div>
@@ -73,15 +80,17 @@
 				<div class="col s6">
 					<div class="row">
 						<div class="col s8 offset-s2">
-							<div class="card blue-grey darken-1">
-						    <div class="card-content white-text">
-						      <span class="card-title">MAPPA</span>
-						      <p>Visualizza Mappa Aziende</p>
-						    </div>
-						    <div class="card-action">
-						      <a href="map.php">Vai</a>
-						    </div>
-						  </div>
+							<a href="map.php">
+								<div class="card blue-grey darken-1">
+								    <div class="card-content white-text">
+								      <span class="card-title">MAPPA</span>
+								      <p>Visualizza Mappa Aziende</p>
+								    </div>
+								    <div class="card-action">
+								      <span>VAI</span>
+								    </div>
+						  		</div>
+							</a>
 						</div>
 						<div class="col s3"></div>
 					</div>
@@ -100,6 +109,7 @@
 		</div>
 
 	<?php require("../server/sideNavBottom.php"); ?>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.modal').modal();
