@@ -2,8 +2,7 @@ $(document).ready(function() {
     var appoidtir = "";
     var html_appo = "";
     var nomeAzienda = "";
-    var lat = 0;
-    var long = 0;
+    var lat = long = 0;
     var indirizzo = "";
     var sedetir = "";
     var sedeleg = "";
@@ -13,48 +12,50 @@ $(document).ready(function() {
     });
 
     //FocusOut per la Geocodifica, purtroppo le richieste sono lente e l'Ajax è più veloce
-    $("#capLeg").focusout(function(){
-        geocode();
-    })
-    $("#capTir").focusout(function(){
-        geocode();
-    })
-    $("#sedetir").focusout(function(){
-        geocode();
-    })
     $("#sedeleg").focusout(function(){
-        geocode();
+        geocodeLeg();
+    })
+    $("#capLeg").focusout(function(){
+        geocodeLeg();
     })
 
-    function geocode(){
-        lat = long = 0;
-        sedetir = $('#sedetir').val();
+
+    $("#sedetir").focusout(function(){
+        geocodeTir();
+    })
+    $("#capTir").focusout(function(){
+        geocodeTir();
+    })
+
+    function geocodeLeg(){
         sedeleg = $('#sedeleg').val();
-        if(sedetir !== ""){
-            indirizzo = sedetir + " Italy " + $('#capTir').val();
-        } else {
-            if(sedeleg !== ""){
-                indirizzo = sedeleg + " Italy " +  $('#capLeg').val();
-            }
-        }
+        indirizzo = sedeleg + " Italy " +  $('#capLeg').val();
+
         //Geocoding coordinate
         $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
             sensor: false,
             address: indirizzo
-        }, function(data, textStatus ) {
-                var lat = (data.results[0].geometry.location.lat);
-                var long = (data.results[0].geometry.location.lng);
-                if(sedetir !== "" && sedeleg !== ""){
-                    $("#latTir").val(lat);
-                    $("#longTir").val(long);
-                } else {
-                    $("#latLeg").val(lat);
-                    $("#longLeg").val(long);
-                }
+        }, function(data, textStatus) {
+                $("#latLeg").val(data.results[0].geometry.location.lat);
+                $("#longLeg").val(data.results[0].geometry.location.lng);
             }
         );
     }
 
+    function geocodeTir(){
+        sedetir = $('#sedetir').val();
+        indirizzo = sedetir + " Italy " +  $('#capTir').val();
+
+        //Geocoding coordinate
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
+            sensor: false,
+            address: indirizzo
+        }, function(data, textStatus) {
+                $("#latTir").val(data.results[0].geometry.location.lat);
+                $("#longTir").val(data.results[0].geometry.location.lng);
+            }
+        );
+    }
 
     $('.inserimento').submit(function(event) {
         event.preventDefault();
@@ -95,6 +96,13 @@ $(document).ready(function() {
         }
         if(tipo == "azienda"){
             nomeAzienda = $('#nomea').val();
+            if ($('#sedetir').val() == ""){
+                lat = $('#latLeg').val();
+                long = $('#longLeg').val();
+            } else {
+                lat = $('#latTir').val();
+                long = $('#longTir').val();
+            }
 
             var formData = { //valori del form inseriti
                 'nomea'             : nomeAzienda,
@@ -133,7 +141,8 @@ $(document).ready(function() {
                 'data'              : formatDate($('#datetut').val()),
                 'codfisc'           : $('#codfiscta').val(),
                 'tel'               : $('#telta').val(),
-                'mail'              : $('#emailta').val(),               
+                'mail'              : $('#emailta').val(), 
+                'psw'               : $('#pswta').val(),              
                 'fka'               : $('#fkazt').val()
             };
         }
@@ -173,40 +182,30 @@ $(document).ready(function() {
 		})
             .done(function(risp) {
                 console.log(risp);
-                if(risp.result !== undefined){
-                    if (risp.user == 'alunno') {
-                        window.location.href = "public/view.php";
-                    } else {
-                        window.location.href = "public/ins.php";
-                    }
-                }else{
-                    if(risp.error == undefined){
-                        if(risp.sucquery){
-                            if (risp.idAz !== undefined){
-                                $("#fkazt option:selected").removeAttr("selected");
-                                html_appo = "<option value=" + risp.idAz + " selected>" + nomeAzienda + "</option>";
-                                $("#fkazt").append(html_appo);
-                                $("#fkazt").material_select();
-                                $("#tutorAzTab").trigger("click");
-                                // AGGIUNGI SCROLL IN ALTO AUTOMATICO
-
-                            }
-                            Materialize.toast(risp.query, 1000);
-                            if (risp.reload) {
-                                setTimeout(function(){
-                                    location.reload();
-                                }, 1100);
-                            } else {
-                                //svuota(form[0]);
-                            }   
-                        }else{
-                            Materialize.toast(risp.errore, 1000);
+                if(risp.error == undefined){
+                    if(risp.sucquery){
+                        if (risp.idAz !== undefined){
+                            $("#fkazt option:selected").removeAttr("selected");
+                            html_appo = "<option value=" + risp.idAz + " selected>" + nomeAzienda + "</option>";
+                            $("#fkazt").append(html_appo);
+                            $("#fkazt").material_select();
+                            $("#tutorAzTab").trigger("click");
                         }
+                        Materialize.toast(risp.query, 1000);
+                        if (risp.reload) {
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1100);
+                        } else {
+                            svuota(form[0]);
+                        }   
+                    }else{
+                        Materialize.toast(risp.errore, 1000);
                     }
                 }
             })
 			.fail(function(risp) {
-				//console.log(risp);
+                console.log(risp);
 			});
         });
     
@@ -242,17 +241,13 @@ $(document).ready(function() {
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[2] +"'>" + item[0] + " "
                     + item[1] + "</option>";
-                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
                 });
                 $("#fkalu").html(html_appo);
                 $('select').material_select();
             }else{
-                //console.log(risp['fail']);
             }
         })
         .fail(function(risp) {
-            console.log("ERRORE lato SERVER");
-            //console.log(risp);
         });
     return false;
     });

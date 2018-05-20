@@ -3,8 +3,8 @@
   session_start();
   $connection = mysqli_connect ('localhost', $username, $password, $database);
   if (!$connection) {  die('Not connected : ' . mysqli_error()); }
+  if (strpos($_SESSION['permessi'], "VIEW") !== false) { 
 ?>
-
 <html>
     <head>
         <meta charset="utf-8">
@@ -28,24 +28,32 @@
             <div class="nav-wrapper">
               <div class="logo">
                 <a href="#" class="brand-logo"><i class="material-icons">visibility</i> VISUALIZZAZIONE</a></div>
-              <div class="chip">
-                <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
-                  <?php echo $_SESSION["name"] ?>
-              </div>
+                <a href="home.php" class="brand-logo center"><i class="material-icons">home</i>Alternanza Scuola-Lavoro</a>
+              <?php if ($_SESSION['tipoUt'] !== "ospite") { ?>
+                <div class="chip">
+                  <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
+                    <?php echo $_SESSION["name"] ?>
+                </div>
+              <?php } ?>
             </div>
             </div>
             <div class="nav-content">
               <ul class="tabs tabs-transparent">
-                <li class="tab"><a class="active" href="#1classi">Classi</a></li>
-                <li class="tab"><a href="#2tirocini">Tirocini</a></li>
-                <li class="tab"><a href="#3aziende">Aziende</a></li>
-                <li class="tab"><a href="#4tutsc">Tutor Scolastici</a></li>
+                <?php if (strpos($_SESSION['permessi'], "VCL") !== false) { ?>
+                  <li class="tab"><a class="active" href="#1classi">Classi</a></li> <?php } ?>
+                <?php if (strpos($_SESSION['permessi'], "VTIR") !== false) { ?>
+                  <li class="tab"><a href="#2tirocini">Tirocini</a></li>  <?php } ?>
+                <?php if (strpos($_SESSION['permessi'], "VAZ") !== false) { ?>
+                  <li class="tab"><a href="#3aziende">Aziende</a></li>  <?php } ?>
+                <?php if (strpos($_SESSION['permessi'], "VTUTSC") !== false) { ?>
+                  <li class="tab"><a href="#4tutsc">Tutor Scolastici</a></li>  <?php } ?>
               </ul>
             </div>
           </nav>
           <div class="compensatore"></div>
-        <div class="container">
+          <?php if (strpos($_SESSION['permessi'], "VCL") !== false) { ?>
             <div id="1classi" class="col s12"> <!-- CLASSI -->
+              <div class="container">
                 <br>
                 <h5>Specializzazioni | Classi | Alunni</h5>
                 <br>
@@ -119,7 +127,8 @@
             </ul>
         </div>
     </div>
-
+  <?php } ?>
+<?php if (strpos($_SESSION['permessi'], "VTIR") !== false) { ?>
 <div id="2tirocini" class="col s12">
     <div class="container">
         <br>
@@ -337,26 +346,13 @@
           </tr>
         </table>
       </div>
-
-      <div class="row">
-        
-        
-      </div>
-      <div class="row">
-        
-      </div>
-      <div class="row">
-        
-      </div>
-      <div class="row">
-        
-      </div>
     </div>
   <div class="modal-footer">
     <button class="modal-action modal-close waves-effect waves-green btn-flat ">Chiudi</button>
   </div>
 </div>
-
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "VAZ") !== false) { ?>
 <div id="3aziende" class="col s12">
     <div class="container">
         <br>
@@ -489,7 +485,8 @@
         </ul>
     </div>
 </div>
-
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "VTUTSC") !== false) { ?>
 <div id="4tutsc" class="col s12">
     <div class="container">
         <br>
@@ -535,49 +532,11 @@
         </ul>
     </div>
 </div>
-
-  <ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-      <div style="background-color: #01870A" class="background">
-      </div>
-      <img class="circle" src="../assets/img/profile.jpg">
-      <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
-      <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
-    </div></li>
-    <li><a class="modal-trigger" id="changeP" href="#modal1">Cambia Password</a></li>
-    <li><div class="divider"></div></li>
-    <li><a href="../server/logout.php">ESCI</a></li>
-    <li><div class="divider"></div></li>
-  </ul>
-
-    <div id="modal1" class="modal">
-    <div class="modal-content">
-      <form class="changep" action="../server/changepw.php" method="post" enctype="multipart/form-data" autocomplete="off">
-        <div class="row flexx">
-          <h4>Modifica Password</h4>
-          <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <input name="oldpsw" id="oldpsw" type="password" >
-              <label for="oldpsw">Vecchia Password</label>
-            </div>
-            <div class="input-field col s12">
-              <input name="newpsw" id="newpsw" type="password" >
-              <label for="newpsw">Nuova Password</label>
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
-    <div class="progress_cont dn">
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
-
+<?php } ?>
+<?php require("../server/sideNavBottom.php"); ?>
     <script src="../assets/js/view_js.js"></script>
     <script src="../assets/js/view_ajax.js"></script>
-    <script src="../assets/js/changep_aj.js"></script>
+    <?php if ($_SESSION['tipoUt'] !== "ospite") { ?> <script src="../assets/js/changep_aj.js"></script> <?php } ?>
     </body>
 </html>
+<?php } ?>

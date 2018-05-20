@@ -1,12 +1,11 @@
 <?php 
     require("../server/db_info.php");
     session_start();
-    /********** Apertura **********/
     $connection = mysqli_connect("localhost", $username, $password, $database);
     if(!$connection){
-        $data["error"] = "errore nella connessione";
         die();
     }
+    if (strpos($_SESSION['permessi'], "INS") !== false) { 
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +29,8 @@
 
 	<nav class="nav-extended">
 		<div class="nav-wrapper">
-		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a>  
+		  <a href="#" class="brand-logo"><i class="material-icons">mode_edit</i>INSERIMENTO</a> 
+      <a href="home.php" class="brand-logo center"><i class="material-icons">home</i>Alternanza Scuola-Lavoro</a>
       <div class="chip">
         <img id="sliderTrigger" data-activates="slide-out" src="../assets/img/profile.jpg" alt="Contact Person">
           <?php echo $_SESSION["name"] ?>
@@ -38,17 +38,25 @@
 		</div>
 		<div class="nav-content">
 		  <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li>
-        <li class="tab"><a href="#test3">Classe</a></li>
-		    <li class="tab"><a href="#test1">Alunno</a></li>
-		    <li class="tab"><a href="#test4">Azienda</a></li>
-		    <li class="tab"><a href="#test5">Tirocinio</a></li>
-		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li>
-        <li class="tab"><a href="#test7">Registro Personale</a></li>
+        <?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
+          <li class="tab"><a class="active" href="#test2">Tutor Scolastico</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>
+          <li class="tab"><a href="#test3">Classe</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IAL") !== false) { ?>
+  		    <li class="tab"><a href="#test1">Alunno</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IAZ") !== false) { ?>
+  		    <li class="tab"><a href="#test4">Azienda</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ITIR") !== false) { ?>
+  		    <li class="tab"><a href="#test5">Tirocinio</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "ITUTAZ") !== false) { ?>
+  		    <li class="tab"><a id="tutorAzTab" href="#test6">Tutor Aziendale</a></li> <?php } ?>
+        <?php if (strpos($_SESSION['permessi'], "IREG") !== false) { ?>
+          <li class="tab"><a href="#test7">Registro Personale</a></li> <?php } ?>
 		  </ul>
 		</div>
 	</nav>
    <div class="compensatore"></div>
+ <?php if (strpos($_SESSION['permessi'], "IAL") !== false) { ?>
 	<div id="test1" class="col s12">
 		<div class="container">
 			<h2>Inserimento Alunno</h2>
@@ -117,6 +125,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITUTSC") !== false) { ?>
 	<div id="test2" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tutor Scolastico</h2>
@@ -155,6 +165,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ICL") !== false) { ?>
 	<div id="test3" class="col s12">
 		<div class="container">
 
@@ -260,6 +272,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "IAZ") !== false) { ?>
 	<div id="test4" class="col s12">
 		<div class="container">
 			<h2>Inserimento Azienda</h2>
@@ -330,6 +344,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITIR") !== false) { ?>
 	<div id="test5" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tirocinio</h2>
@@ -439,6 +455,8 @@
 
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "ITUTAZ") !== false) { ?>
 	<div id="test6" class="col s12">
 		<div class="container">
 			<h2>Inserimento Tutor Aziendale</h2>
@@ -471,6 +489,12 @@
                     <div class="input-field col s12">
                       <input name="emailta" id="emailta" type="email" required>
                       <label for="emailta">E-Mail</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                      <input name="pswta" id="pswta" type="password" required>
+                      <label for="pswta">Password</label>
                     </div>
                 </div>
                 <div class="row">
@@ -511,6 +535,8 @@
             </form>
 		</div>
 	</div>
+<?php } ?>
+<?php if (strpos($_SESSION['permessi'], "IREG") !== false) { ?>
   <div id="test7" class="col s12">
     <div class="container">
       <h3>Registro personale</h3>
@@ -642,47 +668,11 @@
   </div>
   </form>
 </div>
+<?php } ?>
+<?php require("../server/sideNavBottom.php"); ?>
 
-  <ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-      <div style="background-color: red" class="background">
-      </div>
-      <img class="circle" src="../assets/img/profile.jpg">
-      <span class="white-text name"><?php echo $_SESSION["name"]; ?></span>
-      <span class="white-text email"><?php echo $_SESSION["mail"]; ?></span>
-    </div></li>
-    <li><a class="modal-trigger" id="changeP" href="#modal1">Cambia Password</a></li>
-    <li><div class="divider"></div></li>
-    <li><a href="../server/logout.php">ESCI</a></li>
-    <li><div class="divider"></div></li>
-  </ul>
-
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <form class="changep" action="../server/changepw.php" method="post" enctype="multipart/form-data" autocomplete="off">
-        <div class="row flexx">
-          <h4>Modifica Password</h4>
-          <button class="modal-action modal-close waves-effect waves-green btn btn-flat" action="submit" name="action">INVIA</button>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <input name="oldpsw" id="oldpsw" type="password" >
-              <label for="oldpsw">Vecchia Password</label>
-            </div>
-            <div class="input-field col s12">
-              <input name="newpsw" id="newpsw" type="password" >
-              <label for="newpsw">Nuova Password</label>
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
-    <div class="progress_cont dn">
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
     <script src="../assets/js/ins_js.js"></script>
 		<script src="../assets/js/ins_ajax.js"></script>
 	</body>
 </html>
+<?php } ?>

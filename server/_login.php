@@ -1,56 +1,51 @@
 <?php
-
     require("db_info.php");
     session_start();
-    $data = array();        // array to pass back data to ajax 
-    /********** Apertura **********/
     $connection = mysqli_connect("localhost", $username, $password, $database);
-
     if(!$connection){
-        $data["error"] = "errore nella connessione";
         die();
     }
+    $mail = $psw = "";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $mail = $_POST["email"];
+        $psw = md5($_POST["psw"]);
+    }
 
-
-    /********** POST/GET **********/
-    //in post prendo tutti i dati che vengono passati dal ajax
-    $mail = test_input($_POST['mail']);
-    $psw = md5(test_input($_POST['psw']));
-
-
-    /********** Query **********/
-    //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "SELECT Nome, Cognome, EMail FROM alunno WHERE EMail = '$mail' AND Password = '$psw';"; //query da sparare nel DB 
-
+    $query = "SELECT Email, Tipo, FKCod_relativo_Utente, Permessi FROM users, tipo_utente WHERE EMail = '$mail' AND Password = '$psw' AND CodTipoUt = FKTipoUtente"; 
     $row = mysqli_fetch_array(mysqli_query($connection, $query));
     
     if($row[0] != null){
-        $data["result"] = $row[0] . " " . $row[1];
+        $_SESSION["mail"] = $row[0];
+        $table = $row[1];
+        switch ($table) {
+            case 'dirigente':
+                $codice_nome = "CodDirig";
+                break;
+            case 'tutor_scolastico':
+                $codice_nome = "CodTutSc";
+                break;
+            case 'alunno':
+                $codice_nome = "CodAlu";
+                break;
+            case 'tutor_aziendale':
+                $codice_nome = "CodTutAz";
+                break;
+            default:
+                break;
+        }
+        $cod_ut_relativo = $row[2];
+        $_SESSION['permessi'] = $row[3];
+        $_SESSION['tipoUt'] = $table;
 
-        $_SESSION["name"] = $data["result"];
-        $_SESSION["mail"] = $row[2];
-        $_SESSION["table"] = 'alunno';
-        $data['user'] = 'alunno';
-    } else {
-        $data['sucquery'] = false;
-        $data['errore'] = "ERRORE di autenticazione";
+        $query2 = "SELECT Nome, Cognome FROM $table WHERE $cod_ut_relativo = $codice_nome";
+        $row2 = mysqli_fetch_array(mysqli_query($connection, $query2));
+
+        if($row2[0] != null){
+            $_SESSION['name'] = $row2[0] . " " . $row2[1];
+        }
+    } 
+    if (strpos($_SESSION['permessi'], "HOME") !== false) { 
+        header('Location: ../public/home.php');
     }
-
-    $data['success'] = true; //necessario per il cporretto funzionamento dell'ajax
-
-    /********** Chiusura **********/
-    mysqli_close($connection); // Chiusura connessione
-
-
-    /********** Return Ajax **********/
-	echo json_encode($data); //funzione di ritorno tramite JSON
-
-
-    /********** Funzioni **********/
-    function test_input($data) {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
+    mysqli_close($connection); 
 ?>

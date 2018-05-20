@@ -23,12 +23,28 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO alunno (CodAlu, Nome, Cognome, CodFisc, DataNasc, EMail, Password, FKClasse) VALUES(null, '$nome','$cognome','$codfisc',$datanasc, '$emailains', '$psw', '$FKClass')"; //query da sparare nel DB 
+    $query = "INSERT INTO alunno (CodAlu, Nome, Cognome, CodFisc, DataNasc, EMail, FKClasse) VALUES(null, '$nome','$cognome','$codfisc',$datanasc, '$emailains', '$FKClass')"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
-        $data['sucquery'] = true;
-        $data['query'] = "Record  Aggiunto correttamente"; 
-        $data['reload'] = true;
+        $query2 = "SELECT CodAlu FROM alunno WHERE CodFisc = '$codfisc'";
+        $row2 = mysqli_fetch_array(mysqli_query($connection, $query2));
+        if($row2[0] != null){
+            $codRelUt = $row2[0];
+
+            $query3 = "SELECT CodTipoUt FROM tipo_utente WHERE Tipo = 'alunno'";
+            $row3 = mysqli_fetch_array(mysqli_query($connection, $query3));
+            if($row3[0] != null){
+                $codTipoUt = $row3[0];
+
+                $query4 = "INSERT INTO users (Email, Password, FKTipoUtente, FKCod_relativo_Utente) VALUES('$emailains', '$psw', $codTipoUt, $codRelUt)";
+
+                if(mysqli_query($connection, $query4)){
+                    $data['sucquery'] = true;
+                    $data['query'] = "Record  Aggiunto correttamente"; 
+                    $data['reload'] = false;
+                }
+            }
+        }
     }else{
         $data['sucquery'] = false;
         $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);

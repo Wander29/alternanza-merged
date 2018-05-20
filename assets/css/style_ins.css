@@ -67,11 +67,22 @@
 
 .chip{
 	position: absolute;
-	right: 5px;
-	top: 10px;
+	right: 3%;
+	top: 26%;
 }
 
 .chip img:hover{
+	cursor: pointer;
+}
+
+#btn-esci-ospite{
+	position: absolute;
+	right: 7%;
+	top: 22%;
+	border-radius: 20px;
+}
+
+#btn-esci-ospite:hover{
 	cursor: pointer;
 }
 

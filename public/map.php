@@ -1,7 +1,9 @@
 <?php 
   require("../server/db_info.php"); 
+  session_start();
   $connection=mysqli_connect ('localhost', $username, $password, $database);
   if (!$connection) {  die('Not connected : ' . mysql_error());}
+  if (strpos($_SESSION['permessi'], "MAP") !== false) { 
 ?>
 
 <!doctype html>
@@ -11,7 +13,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Inserimento ">
+    <meta name="description" content="Inserimento">
     <meta name="author" content="Ludovico Venturi & Luca Moroni">
   
     <link rel="icon" href="../assets/img/favicon.png">
@@ -110,9 +112,9 @@
               <nav>
                 <div style="background-color: #00cc00" class="nav-wrapper">
                   <div class="col s6">
-                    <div class="brand-logo"><i class="material-icons">map</i> Mappa Alternanza</div>
+                    <div class="brand-logo"><i class="material-icons">map</i> MAPPA AZIENDE</div>
                   </div>
-                  <a href="../index.html" class="col s3 offset-s6" id="home"><i class="material-icons">home</i></a>
+                  <a href="home.php" class="brand-logo center"><i class="material-icons">home</i>Alternanza Scuola-Lavoro</a>
                 </div>
               </nav>
 			</div>
@@ -191,4 +193,5 @@
         </script>
 	</body>
 </html>
+<?php } ?>
 
