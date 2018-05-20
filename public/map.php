@@ -3,7 +3,8 @@
   session_start();
   $connection=mysqli_connect ('localhost', $username, $password, $database);
   if (!$connection) {  die('Not connected : ' . mysql_error());}
-  if (strpos($_SESSION['permessi'], "MAP") !== false) { 
+  if(!empty($_SESSION['permessi'])){
+      if (strpos($_SESSION['permessi'], "MAP") !== false) { 
 ?>
 
 <!doctype html>
@@ -240,5 +241,7 @@
         </script>
 	</body>
 </html>
-<?php } ?>
+<?php   } else { require("nega.php"); }
+    } else { require("nega.php"); }
+?>
 

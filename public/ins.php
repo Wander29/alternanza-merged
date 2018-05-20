@@ -779,10 +779,6 @@
 		<script src="../assets/js/changep_aj.js"></script>
 	</body>
 </html>
-<?php } else{
-        require("nega.php");
-    }
-  }
-else{  
-    require("nega.php"); 
-}?>
+<?php   } else { require("nega.php"); }
+    } else { require("nega.php"); }
+?>

@@ -3,7 +3,8 @@
   session_start();
   $connection = mysqli_connect ('localhost', $username, $password, $database);
   if (!$connection) {  die('Not connected : ' . mysqli_error()); }
-  if (strpos($_SESSION['permessi'], "VIEW") !== false) { 
+  if(!empty($_SESSION['permessi'])){
+      if (strpos($_SESSION['permessi'], "HOME") !== false) { 
 ?>
 <html>
     <head>
@@ -22,7 +23,7 @@
         <script src="../lib/materialize/materialize.min.js"></script>
         <script src="../assets/js/view_js.js"></script>
 
-        <title>Alternanza VIEW</title>
+        <title>Visualizzazione Alternanza</title>
     </head>
     <body>
         <nav class="nav-extended">
@@ -582,4 +583,6 @@
     <?php if ($_SESSION['tipoUt'] !== "ospite") { ?> <script src="../assets/js/changep_aj.js"></script> <?php } ?>
     </body>
 </html>
-<?php } ?>
+<?php   } else { require("nega.php"); }
+    } else { require("nega.php"); }
+?>

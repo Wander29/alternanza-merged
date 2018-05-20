@@ -10,11 +10,29 @@ body{
     font-size: 35px !important;
 }
 
-.btn{
+.btn-nega{
     background-color: red !important; 
-    margin: 10px;
+    padding: 20px;
+    height: auto;
+    opacity: .7;
 }
 
-.btn > i {
+.btn-nega > i {
     font-size: 35px !important;
+}
+
+.btn-nega:hover{
+	opacity: 1;
+}
+
+nav{
+	background-color: red;
+}
+
+.my-red{
+	color: red;
+}
+
+h3{
+	text-transform: uppercase;
 }

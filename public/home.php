@@ -1,6 +1,7 @@
 <?php 
 	session_start(); 
-	if (strpos($_SESSION['permessi'], "HOME") !== false) {
+	if(!empty($_SESSION['permessi'])){
+    	if (strpos($_SESSION['permessi'], "HOME") !== false) { 
 ?>
 <html>
 	<head>
@@ -124,4 +125,6 @@
 	<?php if ($_SESSION['tipoUt'] !== "ospite") { ?> <script src="../assets/js/changep_aj.js"></script> <?php } ?>
 	</body>
 </html>
-<?php } ?>
+<?php   } else { require("nega.php"); }
+    } else { require("nega.php"); }
+?>
