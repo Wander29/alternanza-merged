@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	$('.datepicker').pickadate({
 		default: "01-01-1999",
 		selectMonths: true, // Creates a dropdown to control month

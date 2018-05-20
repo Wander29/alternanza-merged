@@ -1,7 +1,6 @@
 # LUCA
 
 # LUDOVICO
-- Ottimizzazione stessi js e css tra ins view e home
 
 # CHANGELOG
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
@@ -24,6 +23,7 @@
 - scroll in alto quando triggera il tab 
 - Descrizione attività ABCD
 - viusalizzazione voto medio Azienda secondo il questionario tutor, solo per DIRIGENTE e tutsc
+- Ottimizzazione stessi js e css tra ins view e home
 
 # deprecate
 - lat e long non obbl nel db 
