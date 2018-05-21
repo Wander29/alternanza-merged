@@ -36,16 +36,6 @@
 								<h5>AUTENTICAZIONE</h5>
 							</div>
 							<div class="row">
-								<div class="input-field col s6">
-									<select id="user_type" name="user_type" required>
-					                  	<option value="" disabled selected>Tipologia Utente</option>
-					                  	<option value="dirig">Dirigente</option>
-					                  	<option value="tutsc">Tutor Scolastico</option>
-					                  	<option value="tutaz">Tutor Aziendale</option>
-					                  	<option value="alu">Alunno</option>
-					                </select>
-					                <label for="user_type">Utente</label>
-				              	</div>
 				              	<div class="input-field col s12">
 				                  <input name="email" id="email" type="text" required>
 				                  <label for="email">E-Mail</label>
@@ -55,14 +45,13 @@
 				                  <label for="psw">Password</label>
 				                </div>
 							</div>
-
 							 <div align="right">
-				            	<button class="waves-effect waves-green btn btn-flat btn-submit-aut" action="submit" name="action">INVIA</button>
+				            	<button class="waves-effect waves-green btn btn-flat btn-submit-aut" action="submit" name="action">LOG IN</button>
 				            </div>
 						</div>
 					</div>
 				</form>
-				<form method="post" action="server/_loginOspite.php" enctype="multipart/form-data" autocomplete="off" id="login">
+				<form method="post" action="server/_loginOspite.php" enctype="multipart/form-data" autocomplete="off" id="loginOsp">
 					<div class="col s5">
 						<div id="wrap-ospite">
 							<div class="row" align="center">
@@ -80,6 +69,11 @@
 				</form>
 	        </div>
 		</div>
+	 	<div class="progress_cont dn">
+	        <div class="progress">
+	            <div class="indeterminate"></div>
+	        </div>
+	    </div>
   
 	<script>
 		$(document).ready(function(){
@@ -87,5 +81,6 @@
 			$('select').material_select();
 		});
 	</script>
+	<script src="assets/js/login_ajax.js"></script>
 	</body>
 </html>

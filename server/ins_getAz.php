@@ -6,7 +6,7 @@
     require("db_info.php");
     $connection = mysqli_connect('localhost', $username, $password, $database);
 
-    $query = "SELECT azienda.CodAz, azienda.Nome FROM azienda, tutor_scolastico, alunno, classe, tirocinio WHERE tutor_scolastico.CodTutSc = Classe.FKTutSc AND Classe.CodClas = Alunno.FKClasse AND alunno.CodAlu = tirocinio.FKAlu AND tirocinio.FKAz = azienda.CodAz AND tutor_scolastico.CodTutSc = '$tut' GROUP BY azienda.CodAz;";
+    $query = "SELECT az.CodAz, az.Nome FROM azienda AS az, alunno AS al, classe AS c, tirocinio AS t WHERE c.FKTutSc = $tut AND c.CodClas = al.FKClasse AND al.CodAlu = t.FKAlu AND t.FKAz = az.CodAz GROUP BY az.CodAz;";
   
     $result = mysqli_query($connection, $query);
     if (!$result) {

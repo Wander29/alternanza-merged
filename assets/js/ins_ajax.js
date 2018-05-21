@@ -3,7 +3,8 @@ $(document).ready(function() {
     var html_appo = "";
     var nomeAzienda = "";
     var lat = long = 0;
-    var indirizzo = "";
+    var indirizzoLeg = "";
+    var indirizzoTir = "";
     var sedetir = "";
     var sedeleg = "";
     var tipo_att = "";
@@ -19,6 +20,12 @@ $(document).ready(function() {
     $("#sedeleg").focusout(function(){
         geocodeLeg();
     })
+    $("#citLeg").focusout(function(){
+        geocodeLeg();
+    })
+    $("#prLeg").focusout(function(){
+        geocodeLeg();
+    })
     $("#capLeg").focusout(function(){
         geocodeLeg();
     })
@@ -27,36 +34,44 @@ $(document).ready(function() {
     $("#sedetir").focusout(function(){
         geocodeTir();
     })
+    $("#citTir").focusout(function(){
+        geocodeTir();
+    })
+    $("#prTir").focusout(function(){
+        geocodeTir();
+    })
     $("#capTir").focusout(function(){
         geocodeTir();
     })
 
     function geocodeLeg(){
         sedeleg = $('#sedeleg').val();
-        indirizzo = sedeleg + " Italy " +  $('#capLeg').val();
-
+        indirizzoLeg = sedeleg + " Italy " +  $('#capLeg').val() + " " + $('#prLeg').val() + " " + $('#citLeg').val();
         //Geocoding coordinate
         $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
             sensor: false,
-            address: indirizzo
+            address: indirizzoLeg
         }, function(data, textStatus) {
                 $("#latLeg").val(data.results[0].geometry.location.lat);
                 $("#longLeg").val(data.results[0].geometry.location.lng);
+                indirizzoLeg = data.results[0].formatted_address;
             }
         );
     }
 
     function geocodeTir(){
         sedetir = $('#sedetir').val();
-        indirizzo = sedetir + " Italy " +  $('#capTir').val();
+        indirizzoTir = sedetir + " Italy " +  $('#capTir').val() + " " + $('#prTir').val() + " " + $('#citTir').val();
 
         //Geocoding coordinate
         $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB-gSOx6HEUZS6AZheeSZ1JPwNVOLQXsWI&',{
             sensor: false,
-            address: indirizzo
+            address: indirizzoTir
         }, function(data, textStatus) {
                 $("#latTir").val(data.results[0].geometry.location.lat);
                 $("#longTir").val(data.results[0].geometry.location.lng);
+                indirizzoTir = data.results[0].formatted_address;
+                console.log(indirizzoTir);
             }
         );
     }
@@ -103,6 +118,7 @@ $(document).ready(function() {
             if ($('#sedetir').val() == ""){
                 lat = $('#latLeg').val();
                 long = $('#longLeg').val();
+                indirizzoTir = "";
             } else {
                 lat = $('#latTir').val();
                 long = $('#longTir').val();
@@ -112,8 +128,8 @@ $(document).ready(function() {
                 'nomea'             : nomeAzienda,
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
-                'sedeleg'           : sedeleg,
-                'sedetir'           : sedetir,
+                'sedeleg'           : indirizzoLeg,
+                'sedetir'           : indirizzoTir,
                 'lat'               : lat,
                 'long'              : long,
                 'tel'               : $('#tel').val(),
@@ -180,7 +196,6 @@ $(document).ready(function() {
         }
         if(tipo == "questionario_tutor"){
             formData = { //valori del form inseriti
-                'idtut'                 : $('#idtutquesttut').val(),
                 'tirocinio'             : $('#fktirquesttut').val(),
                 'commit'                : $('#commitquesttut').val(),
                 'val'                   : $('#valutquesttut').val()
@@ -404,6 +419,12 @@ function svuota(form) {
         svuota_select('#az');
         $("#idtutquesttut option[value='']").prop('selected', true);
         $('#idtutquesttut').material_select();
+    }
+    if (form.attr('id') == "diario") {
+        $('#typeat').val("");
+        $("#typeat option:selected").prop('selected', false);
+        $("#typeat option[value='']").prop('selected', true);
+        $('#typeat').material_select();
     }
 }
 

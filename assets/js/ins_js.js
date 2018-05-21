@@ -35,5 +35,19 @@ $(document).ready(function(){
     $(".tab").click(function(){
        $("html,body").animate({scrollTop: 0}, 1000, function(){}); 
     });
+
+    $('.modal-diario').click(function(){
+    	$('#diario').trigger('reset');
+    	Materialize.updateTextFields();
+    	$('#typeat').val("");
+        $("#typeat option:selected").prop('selected', false);
+        $("#typeat option[value='']").prop('selected', true);
+        $('#typeat').material_select();
+
+        $data = $('#datedia').pickadate();
+		picker = $data.pickadate('picker');
+		var dataInSt = $(this).data('date').split('-');
+		picker.set('select', [dataInSt[0], dataInSt[1]-1, dataInSt[2]]);
+    });
 });
 

@@ -9,7 +9,6 @@
         $data["error"] = "errore nella connessione";
         die();
     }
-    $idtut = $_POST['idtut'];
     $fktir = $_POST['tirocinio'];
     $valTest = $_POST['commit'];
     $voto = $_POST['val'];
@@ -18,7 +17,7 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO quest_tutor (Voto, ValTest, FKTir, FKTutSc) VALUES($voto, $valTest, $fktir, $idtut);"; //query da sparare nel DB 
+    $query = "INSERT INTO quest_tutor (Voto, ValTest, FKTir) VALUES($voto, $valTest, $fktir);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

@@ -1,0 +1,12 @@
+TRUNCATE alunno;
+TRUNCATE azienda;
+TRUNCATE classe;
+TRUNCATE diario;
+TRUNCATE quest_tutor;
+TRUNCATE specializzazione;
+TRUNCATE tirocinio;
+TRUNCATE tutor_aziendale;
+TRUNCATE tutor_scolastico;
+TRUNCATE users;
+
+N.B: le credenziali del dirigente e il dirigente stesso vanno inserite manualmente nel DB nella tabella 'users'

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Inserimento Alternanza</title>
+  	<title>Inserimento - Alternanza</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Inserimento ">
@@ -305,11 +305,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                       <input name="sedeleg" id="sedeleg" type="text" required>
                       <label for="sedeleg">Sede Legale</label>
                     </div>
-                    <div class="input-field col s3 ">
+                    <div class="input-field col s1">
+                      <input name="prLeg" id="prLeg" type="text" required>
+                      <label for="prLeg">Provincia</label>
+                    </div>
+                    <div class="input-field col s2">
+                      <input name="citLeg" id="citLeg" type="text" required>
+                      <label for="citLeg">Città</label>
+                    </div>
+                    <div class="input-field col s2">
                       <input name="capLeg" id="capLeg" type="text" required>
                       <label for="capLeg">C.A.P. (sede Legale)</label>
                     </div>
@@ -321,13 +329,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s4">
                       <input name="sedetir" id="sedetir" type="text" >
                       <label for="sedetir">Sede Tirocinio (se uguale alla Sede Legale lasciare vuoto)</label>
                     </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s1">
+                      <input name="prTir" id="prTir" type="text">
+                      <label for="prTir">Provincia</label>
+                    </div>
+                    <div class="input-field col s2">
+                      <input name="citTir" id="citTir" type="text">
+                      <label for="citTir">Città</label>
+                    </div>
+                    <div class="input-field col s2">
                       <input name="capTir" id="capTir" type="text">
-                      <label for="capTir">C.A.P. (sede Tirocinio)</label>
+                      <label for="capTir">C.A.P.</label>
                     </div>
                     <div class="input-field col s1 offset-s1">
                       <input name="latTir" id="latTir" type="text" disabled class="input-disabled">
@@ -602,7 +618,7 @@
                                    $az = $row3[1];
                                    $idtir = $row3[2];
                               ?>
-                                  <div data-id="<?php echo $idtir; ?>" class="waves-effect waves-light btn modal-trigger" href="#modal">
+                                  <div data-id="<?php echo $idtir; ?>" data-date="<?php echo $inizio; ?>" class="waves-effect waves-light btn modal-trigger modal-diario" href="#modal">
                                     <?php echo $az . " | " . $inizio; ?>    
                                   </div>  
                               <?php 

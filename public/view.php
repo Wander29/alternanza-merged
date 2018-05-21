@@ -23,7 +23,7 @@
         <script src="../lib/materialize/materialize.min.js"></script>
         <script src="../assets/js/view_js.js"></script>
 
-        <title>Visualizzazione Alternanza</title>
+        <title>Visualizzazione - Alternanza</title>
     </head>
     <body>
         <nav class="nav-extended">
@@ -292,6 +292,30 @@
                                     <?php } ?>
                                   </div>
                                 </li>
+                                <?php if (strpos($_SESSION['permessi'], "IQST") !== false) { 
+                                  $query8b = "SELECT q.Voto, q.ValTest FROM quest_tutor AS q WHERE q.FKTir = {$idtir6}";
+                                        $result8b = mysqli_query($connection, $query8b);
+                                        if (!$result8b) {
+                                          die('Invalid query: ' . mysql_error());
+                                        }
+                                        if ($row8b = mysqli_fetch_array($result8b,MYSQLI_NUM)){
+                                         $voto8b = $row8b[0];
+                                         $valTest8b = $row8b[1];
+                                ?>
+                                  <li>
+                                    <div class="collapsible-header">
+                                      <i class="material-icons">chrome_reader_mode</i> Questionario Tutor Scolastico
+                                    </div>
+                                    <div class="collapsible-body">
+                                      <?php if ($valTest8b != ""){
+                                      ?>
+                                        <b>Valutazione testuale Tirocinio</b><br>
+                                      <?php echo $valTest8b ?><br><br>
+                                        <?php } ?>
+                                      <b>Voto Tirocinio:</b> <?php echo $voto8b ?>
+                                    </div>
+                                  </li>
+                                <?php }} ?>
                               </ul>
                             </div>
                           </li>

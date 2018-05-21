@@ -23,7 +23,7 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO diario (Data, TipoAtt, Descr, Ore, FKTir) VALUES($date, '$tipo','$descr', $ore, $idtir);"; //query da sparare nel DB 
+    $query = "INSERT INTO diario (Data, TipoAtt, Descr, Ore, FKTir) VALUES($date, '$tipo',$descr, $ore, $idtir);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

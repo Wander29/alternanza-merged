@@ -4,7 +4,7 @@
 }
 
 .compensatore{
-    height: 4%;
+    height: 10%;
 }
 
 #wrap-login{
@@ -47,4 +47,12 @@
     color: gray !important;
     cursor: pointer;
     padding: 10px;
+}
+
+.progress_cont{
+    position: fixed;
+    z-index: 9;
+    top: -8px;
+    left: 0vw;
+    width: 100vw;
 }

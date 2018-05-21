@@ -1,11 +1,15 @@
 # LUCA
 
 # LUDOVICO
-- su inserimento registro gironaliero dovrebbe mettere subito la data di inizio di default
-- questionario non svuota per bene i select
-- login con modal
 
 # CHANGELOG
+- view qst per dirigente e tutsc
+- login con modal in AJAX
+- modifica inserimento indirizzo con Provincia e Citta
+- su inserimento registro gironaliero dovrebbe mettere subito la data di inizio di default
+- azzeramento registro tipo attivita tra stage diversi
+- questionario non svuota per bene i select
+- query get aziende aggiornamento
 - bug inserimento tipo attivita non svuota bene scelta precedente
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
 - mettere link da ins azienda a tutor aziendale

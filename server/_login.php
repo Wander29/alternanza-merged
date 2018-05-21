@@ -1,8 +1,10 @@
 <?php
     require("db_info.php");
     session_start();
+    $data = array();   
     $connection = mysqli_connect("localhost", $username, $password, $database);
     if(!$connection){
+        $data["error"] = "errore nella connessione";
         die();
     }
     $mail = $psw = "";
@@ -42,12 +44,28 @@
 
         if($row2[0] != null){
             $_SESSION['name'] = $row2[0] . " " . $row2[1];
+        } else {
+            $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query2." . mysqli_error($connection);
+            $data['errore'] = "ERRORE, record non inserito";
+            $data['errore-login'] = "Utente non trovato. Riprova";
         }
-    } 
+    } else {
+        $data['query'] = "ERRORE: Non è stato possibile eseguire:  $query." . mysqli_error($connection);
+        $data['errore'] = "ERRORE, record non inserito";
+        $data['errore-login'] = "Utente non trovato. Riprova";
+    }
+
     if(!empty($_SESSION['permessi'])){
         if (strpos($_SESSION['permessi'], "HOME") !== false) { 
-            header('Location: ../public/home.php');
-        } else { require("../public/nega.php"); }
-    } else { require("../public/nega.php"); }
+            $data['login'] = true;
+        } else { 
+            $data['login'] = false;
+            $data['errore_login'] = "Non hai i permessi per accedere";
+        }
+    } else { 
+        $data['login'] = false;
+        $data['errore_login'] = "Utente non trovato. Riprova";
+     }
     mysqli_close($connection); 
+    echo json_encode($data);
 ?>
