@@ -44,8 +44,10 @@
             $_SESSION['name'] = $row2[0] . " " . $row2[1];
         }
     } 
-    if (strpos($_SESSION['permessi'], "HOME") !== false) { 
-        header('Location: ../public/home.php');
-    }
+    if(!empty($_SESSION['permessi'])){
+        if (strpos($_SESSION['permessi'], "HOME") !== false) { 
+            header('Location: ../public/home.php');
+        } else { require("../public/nega.php"); }
+    } else { require("../public/nega.php"); }
     mysqli_close($connection); 
 ?>

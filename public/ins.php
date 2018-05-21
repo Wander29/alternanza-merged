@@ -109,7 +109,7 @@
                 <div class="row">
 	                <div class="input-field col s12">
 	                    <select name="classe" id="classeAl">
-	                      <option selected disabled value="" required><i> Scegli la Classe</i></option>
+	                      <option selected disabled value="" required><i> ... scegli la Classe</i></option>
 	                      <?php
                           $queryGetData = 'SELECT NomeClasse, CodClas FROM classe ORDER BY NomeClasse;';
                           $result = mysqli_query($connection, $queryGetData);
@@ -220,7 +220,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkt" id="fkt">
-	                      <option selected disabled value="" required>Scegli il Tutor Scolastico</option>
+	                      <option selected disabled value="" required>... scegli il Tutor Scolastico</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM tutor_scolastico ORDER BY Cognome;';
@@ -250,7 +250,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fks" id="fks">
-	                      <option selected disabled value="" required>Scegli la Specializzazione</option>
+	                      <option selected disabled value="" required>... scegli la Specializzazione</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM specializzazione ORDER BY Nome;';
@@ -379,7 +379,7 @@
                   <div class="col s4">
                     <div class="input-field col s12">
                       <select name="classe_tir" id="classe_tir">
-                        <option selected disabled value="" required>Scegli la Classe</option>
+                        <option selected disabled value="" required>... scegli la Classe</option>
                         <?php
                           $queryGetData = 'SELECT NomeClasse, CodClas FROM classe ORDER BY NomeClasse';
                           $result = mysqli_query($connection, $queryGetData);
@@ -402,7 +402,7 @@
                   <div class="col s6 offset-s2">
                     <div class="input-field col s12" id="ff">
                       <select name="fkalu" id="fkalu" required>
-                        <option selected disabled value="">Scegli l'Alunno</option>
+                        <option selected disabled value="">... scegli l'Alunno</option>
                       </select>
                       <label for="fkalu">Alunno</label>
                     </div>
@@ -411,7 +411,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                       <select name="fkaz" id="fkaz">
-	                      <option selected disabled value="" required>Scegli l'Azienda</option>
+	                      <option selected disabled value="" required>... scegli l'Azienda</option>
 	                      <?php
 
 	                        $queryGetData = 'SELECT * FROM azienda ORDER BY Nome;';
@@ -508,7 +508,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                       <select name="fkazt" id="fkazt" required>
-                        <option selected disabled value="">Scegli l'Azienda</option>
+                        <option selected disabled value="">... scegli l'Azienda</option>
                         <?php
 
                           $queryGetData = 'SELECT * FROM azienda ORDER BY nome;';
@@ -631,10 +631,10 @@
             <div class="row">
                 <div class="input-field col s12">
                   <select name="idtutquesttut" id="idtutquesttut" required>
-                      <option selected disabled value="">Scegli il tutor Scolastico</option>
+                      <option selected disabled value="">... scegli il tutor Scolastico</option>
                       <?php
 
-                        $query90 = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
+                        $query90 = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Cognome';
 
                         $result90 = mysqli_query($connection, $query90);
                         if (!$result90) {
@@ -646,7 +646,7 @@
                            $nome90 = $row90[1];
                            $cognome90 = $row90[2];
                       ?>
-                                <option value="<?php echo $id;?>"><?php echo $nome90 . " " . $cognome90;?></option>
+                                <option value="<?php echo $id90;?>"><?php echo $nome90 . " " . $cognome90;?></option>
                       <?php 
                       } 
                       ?>
@@ -657,19 +657,19 @@
             <div class="row">
                 <div class="input-field col s4">
                   <select name="az" id="az">
-                      <option selected disabled value="" required>Scegli l'Azienda</option>
+                      <option selected disabled value="" required>... scegli l'Azienda</option>
                     </select>
                   <label for="az">Azienda</label>
                 </div>
                 <div class="input-field col s4">
                   <select name="al" id="al">
-                      <option selected disabled value="" required>Scegli l'Alunno</option>
+                      <option selected disabled value="" required>... scegli l'Alunno</option>
                     </select>
                   <label for="al">Alunno</label>
                 </div>
                 <div class="input-field col s4">
                   <select name="fktirquesttut" id="fktirquesttut">
-                      <option selected disabled value="" required>Scegli il Tirocinio</option>
+                      <option selected disabled value="" required>... scegli il Tirocinio</option>
                     </select>
                   <label for="fktirquesttut">Tirocino</label>
                 </div>

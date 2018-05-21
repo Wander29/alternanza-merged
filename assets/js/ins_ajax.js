@@ -253,7 +253,7 @@ $(document).ready(function() {
                     }));
                 });
 
-                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                html_appo = "<option disabled selected value=''>... scegli l'Alunno</option>";
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[2] +"'>" + item[0] + " "
                     + item[1] + "</option>";
@@ -274,7 +274,7 @@ $(document).ready(function() {
             'tutor' : questo.val() 
             };
         var type = "post";
-        var url = "../server/ins_getAlquest.php";
+        var url = "../server/ins_getAz.php";
 
         $.ajax({
             type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
@@ -286,7 +286,7 @@ $(document).ready(function() {
         .done(function(risp) {
             if(risp['query']){
 
-                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                html_appo = "<option disabled selected value=''>... scegli l'Azienda</option>";
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[0] +"'>" + item[1] + "</option>";
                     //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
@@ -330,8 +330,8 @@ $(document).ready(function() {
                     }));
                 });
 
-                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
-                risp['query'].forEach(function(item, index) {
+                html_appo = "<option disabled selected value=''>... scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {   
                     html_appo += "<option value='" + item[0] +"'>" + item[2] + " "
                     + item[1] + "</option>";
                     //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
@@ -374,7 +374,7 @@ $(document).ready(function() {
                     }));
                 });
 
-                html_appo = "<option disabled selected value=''>Scegli il Tirocinio</option>";
+                html_appo = "<option disabled selected value=''>... scegli il Tirocinio</option>";
                 risp['query'].forEach(function(item, index) {
                     html_appo += "<option value='" + item[0] +"'>" + item[1] + " | "
                     + item[2] + "</option>";
@@ -401,7 +401,7 @@ function svuota(form) {
     if (form.attr('id') == "questionario_tutor") {
         svuota_select('#fktirquesttut');
         svuota_select('#al');
-        //svuota_select('#az');
+        svuota_select('#az');
         $("#idtutquesttut option[value='']").prop('selected', true);
         $('#idtutquesttut').material_select();
     }
