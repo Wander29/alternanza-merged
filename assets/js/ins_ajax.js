@@ -268,6 +268,43 @@ $(document).ready(function() {
     return false;
     });
 
+    $("#idtutquesttut").change(function() { 
+        var questo = $(this);  
+        var data = { 
+            'tutor' : questo.val() 
+            };
+        var type = "post";
+        var url = "../server/ins_getAlquest.php";
+
+        $.ajax({
+            type        : type, // Definisce il metodo HTTP di invio dati utilizzato (post o get)
+            url         : url, // l'indirizzo della pagina cui inviare i dati
+            data        : data, // oggetto contenente tutti i dati, oppure stringa
+            dataType    : 'json', // Tipo di dati che ci si aspetta di ottenere come risposta dal Server
+            encode      : true
+        })
+        .done(function(risp) {
+            if(risp['query']){
+
+                html_appo = "<option disabled selected value=''>Scegli l'Alunno</option>";
+                risp['query'].forEach(function(item, index) {
+                    html_appo += "<option value='" + item[0] +"'>" + item[1] + "</option>";
+                    //$('<option>').val(item[2]).text('999').appendTo('#fkalu');
+                });
+                $("#az").html(html_appo);
+                $('select').material_select();
+                
+            }else{
+                //console.log(risp['fail']);
+            }
+        })
+        .fail(function(risp) {
+            console.log("ERRORE lato SERVER");
+            console.log(risp);
+        });
+    return false;
+    });
+
     $("#az").change(function() { 
         var questo = $(this);  
         var data = { 
