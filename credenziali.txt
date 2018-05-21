@@ -1,0 +1,18 @@
+[Nome DataBase: 'alternanza' ]
+###CREDENZIALI 
+
+_DIRIGENTE
+email: cinziafab@mail.it
+psw: cinzia
+
+_ALUNNO
+email: luca@alu
+psw: alu
+
+_TUTOR SCOLASTICO
+email: sara@admin
+psw: admin
+
+_TUTOR AZIENDALE
+email: ale@oca
+psw: oca12

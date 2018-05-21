@@ -6,6 +6,10 @@ $(document).ready(function() {
     var indirizzo = "";
     var sedetir = "";
     var sedeleg = "";
+    var tipo_att = "";
+    var formData = {};
+    var form;
+    var tipo
 
     $(".modal-trigger").click(function(){
         appoidtir = $(this).data("id");
@@ -67,7 +71,7 @@ $(document).ready(function() {
         var tipo = $(this).attr("id");
 
         if(tipo == "alunno"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'nome'              : $('#nome').val(),
                 'cognome'           : $('#cognome').val(),
                 'codfisc'           : $('#codfisc').val(),
@@ -78,7 +82,7 @@ $(document).ready(function() {
             };
         }
         if(tipo == "tutsco"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'nome'              : $('#nomet').val(),
                 'cognome'           : $('#cognomet').val(),
                 'codfisc'           : $('#codfisct').val(),
@@ -87,7 +91,7 @@ $(document).ready(function() {
             };
         }
         if(tipo == "classe"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'classe'            : $('#nomec').val(),
                 'annoSc'            : $('#annoSc').val(),
                 'tutor'             : $('#fkt').val(),
@@ -104,7 +108,7 @@ $(document).ready(function() {
                 long = $('#longTir').val();
             }
 
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'nomea'             : nomeAzienda,
                 'piva'              : $('#piva').val(),
                 'nomer'             : $('#nomer').val(),
@@ -122,7 +126,7 @@ $(document).ready(function() {
             /*if($.trim(descr).length>0) { } else { descr = null }
             if($.trim(vt).length>0) { } else { vt = null }*/
 
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'inizio'            : formatDate($('#inizio').val()),
                 'fine'              : formatDate($('#fine').val()),
                 'descr'             : descr,
@@ -134,7 +138,7 @@ $(document).ready(function() {
             };
         }
         if(tipo == "tutoraziendale"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'nome'              : $('#nometa').val(),
                 'cognome'           : $('#cognometa').val(),
                 'data'              : formatDate($('#datetut').val()),
@@ -146,33 +150,36 @@ $(document).ready(function() {
             };
         }
         if(tipo == "diario"){
-            var formData = { //valori del form inseriti
+            tipo_att = ftipo($('#typeat').val());
+            $('#typeat').val("");
+
+            formData = { //valori del form inseriti
                 'descr'             : $('#descrdia').val(),
                 'ore'               : $('#oredia').val(),
                 'data'              : formatDate($('#datedia').val()),
-                'tipo'              : ftipo($('#typeat').val()),
+                'tipo'              : tipo_att,
                 'idtir'             : appoidtir
             };
         }
         if(tipo == "autenticazione_alunno"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'mail'              : $('#maila').val(),
                 'psw'               : $('#pswa').val(),
             };
         }
         if(tipo == "autenticazione_professore"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'mail'              : $('#mailp').val(),
                 'psw'               : $('#pswp').val(),
             };
         }
         if(tipo == "specializzazione"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'spec'              : $('#spec').val()
             };
         }
         if(tipo == "questionario_tutor"){
-            var formData = { //valori del form inseriti
+            formData = { //valori del form inseriti
                 'idtut'                 : $('#idtutquesttut').val(),
                 'tirocinio'             : $('#fktirquesttut').val(),
                 'commit'                : $('#commitquesttut').val(),
@@ -193,9 +200,12 @@ $(document).ready(function() {
                     if(risp.sucquery){
                         if (risp.idAz !== undefined){
                             $("#fkazt option:selected").removeAttr("selected");
+                            $("#fkaz option:selected").removeAttr("selected");
                             html_appo = "<option value=" + risp.idAz + " selected>" + nomeAzienda + "</option>";
                             $("#fkazt").append(html_appo);
+                            $("#fkaz").append(html_appo);
                             $("#fkazt").material_select();
+                            $("#fkaz").material_select();
                             $("#tutorAzTab").trigger("click");
                         }
                         Materialize.toast(risp.query, 1000);
@@ -204,7 +214,7 @@ $(document).ready(function() {
                                 location.reload();
                             }, 1100);
                         } else {
-                            svuota(form[0]);
+                            svuota(form);
                         }   
                     }else{
                         Materialize.toast(risp.errore, 1000);
@@ -320,7 +330,6 @@ $(document).ready(function() {
         })
         .done(function(risp) {
             if(risp['query']){
-
                 $.each(risp['query'], function (i, item) {
                     $('#fktirquesttut').append($('<option>', { 
                         value: item[0],
@@ -350,7 +359,20 @@ $(document).ready(function() {
 
 function svuota(form) {
     Materialize.updateTextFields();
-    form.reset();
+    form.trigger("reset");
+
+    if (form.attr('id') == "questionario_tutor") {
+        svuota_select('#fktirquesttut');
+        svuota_select('#al');
+        //svuota_select('#az');
+    }
+}
+
+function svuota_select(id_select){
+    $(id_select + ' option').each(function() {
+        if ($(this).val() !== ""){ $(this).remove(); }
+    });
+    $(id_select).material_select();
 }
 
 function formatDate(inco){

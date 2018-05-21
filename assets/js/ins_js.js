@@ -10,13 +10,15 @@ $(document).ready(function(){
 	    container: undefined, // ex. 'body' will append picker to body
 	});
 	var data, picker;
-	$data = $('#dateAl').pickadate()
-	picker = $data.pickadate('picker')
-	picker.set('select', [1999, 01, 01]);
+	$data = $('#dateAl').pickadate();
+	picker = $data.pickadate('picker');
+	picker.set('select', [1999, 00, 01]);
+	$('#dateAl').val("");
 
 	$data = $('#datetut').pickadate()
-	picker = $data.pickadate('picker')
-	picker.set('select', [1970, 01, 01]);
+	picker = $data.pickadate('picker');
+	picker.set('select', [1980, 01, 01]);
+	$('#datetut').val("");
 
 	$('select').material_select();
 

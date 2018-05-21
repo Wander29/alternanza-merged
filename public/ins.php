@@ -631,25 +631,22 @@
             <div class="row">
                 <div class="input-field col s12">
                   <select name="idtutquesttut" id="idtutquesttut">
-                      <option selected disabled value="" required>Scegli il tutor per il questionario</option>
+                      <option selected disabled value="" required>Scegli il tutor Scolastico</option>
                       <?php
 
-                        $queryGetData = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
+                        $query90 = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
 
-                        $result = mysqli_query($connection, $queryGetData);
-                        if (!$result) {
+                        $result90 = mysqli_query($connection, $query90);
+                        if (!$result90) {
                           die('Invalid query: ' . mysql_error());
                         }
-                        //echo json_decode($aResult);
 
-                        $printcount = 0;
-
-                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                           $id = $row[0]; 
-                           $nome = $row[1];
-                           $cognome = $row[2];
+                        while($row90 = mysqli_fetch_array($result90,MYSQLI_NUM)){
+                           $id90 = $row90[0]; 
+                           $nome90 = $row90[1];
+                           $cognome90 = $row90[2];
                       ?>
-                                <option value="<?php echo $id;?>"><?php echo $nome . " " . $cognome;?></option>
+                                <option value="<?php echo $id;?>"><?php echo $nome90 . " " . $cognome90;?></option>
                       <?php 
                       } 
                       ?>
@@ -663,21 +660,18 @@
                       <option selected disabled value="" required>Scegli l'Azienda</option>
                       <?php
 
-                        $queryGetData = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
+                        $query91 = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
 
-                        $result = mysqli_query($connection, $queryGetData);
-                        if (!$result) {
+                        $result91 = mysqli_query($connection, $query91);
+                        if (!$result91) {
                           die('Invalid query: ' . mysql_error());
                         }
-                        //echo json_decode($aResult);
 
-                        $printcount = 0;
-
-                        while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                           $id = $row[0]; 
-                           $nome = $row[1];
+                        while($row91 = mysqli_fetch_array($result91,MYSQLI_NUM)){
+                           $id91 = $row91[0]; 
+                           $nome91 = $row91[1];
                       ?>
-                                <option value="<?php echo $id;?>"><?php echo $nome;?></option>
+                                <option value="<?php echo $id91;?>"><?php echo $nome91;?></option>
                       <?php 
                       } 
                       ?>

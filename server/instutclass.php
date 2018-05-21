@@ -39,7 +39,7 @@
                 if(mysqli_query($connection, $query4)){
                     $data['sucquery'] = true;
                     $data['query'] = "Record  Aggiunto correttamente"; 
-                    $data['reload'] = false;
+                    $data['reload'] = true;
                 }
             }
         }

@@ -18,7 +18,7 @@
 
     /********** Query **********/
     //eseguo una query utilizzando la connessione come parametro della funzione 
-    $query = "INSERT INTO quest_tutor (Voto, ValTest, FKTir, FKTutSc) VALUES($voto, '{$valTest}', $fktir, $idtut);"; //query da sparare nel DB 
+    $query = "INSERT INTO quest_tutor (Voto, ValTest, FKTir, FKTutSc) VALUES($voto, $valTest, $fktir, $idtut);"; //query da sparare nel DB 
 
     if(mysqli_query($connection, $query)){
         $data['sucquery'] = true;

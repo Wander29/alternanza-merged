@@ -1,8 +1,13 @@
 # LUCA
 
 # LUDOVICO
+- tutte richieste AJAX
+- su inserimento registro gironaliero dovrebbe mettere subito la data di inizio di default
+- questionario non svuota per bene i select
+- query get aziende sul questionario
 
 # CHANGELOG
+- bug inserimento tipo attivita non svuota bene scelta precedente
 - modifica visualizzazione da "Diario giornaliero" a "Registro"
 - mettere link da ins azienda a tutor aziendale
 - cambio key API google maps
