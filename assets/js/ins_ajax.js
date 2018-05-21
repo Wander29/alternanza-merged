@@ -365,6 +365,8 @@ function svuota(form) {
         svuota_select('#fktirquesttut');
         svuota_select('#al');
         //svuota_select('#az');
+        $("#idtutquesttut option[value='']").prop('selected', true);
+        $('#idtutquesttut').material_select();
     }
 }
 

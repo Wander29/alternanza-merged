@@ -448,7 +448,7 @@
                     </div>
                 </div>
                 <div class="row">
-                  <div class="labelval">Valutazione Tirocinio:</div>
+                  <div class="labelval">Valutazione Tirocinio</div>
                   <div class="contval">
                     <div class="values">1</div>
                     <div class="valued">5</div>
@@ -630,8 +630,8 @@
         <form class="inserimento" action="../server/insquest.php" method="post" enctype="multipart/form-data" autocomplete="off" id="questionario_tutor">
             <div class="row">
                 <div class="input-field col s12">
-                  <select name="idtutquesttut" id="idtutquesttut">
-                      <option selected disabled value="" required>Scegli il tutor Scolastico</option>
+                  <select name="idtutquesttut" id="idtutquesttut" required>
+                      <option selected disabled value="">Scegli il tutor Scolastico</option>
                       <?php
 
                         $query90 = 'SELECT CodTutSc, Nome, Cognome FROM tutor_scolastico ORDER BY Nome';
@@ -698,7 +698,7 @@
                 </div>
             </div>
             <div class="row">
-              <div class="labelval">Valutazione Azienda:</div>
+              <div class="labelval">Valutazione Azienda</div>
               <div class="contval">
                 <div class="values">1</div>
                 <div class="valued">5</div>
