@@ -658,23 +658,6 @@
                 <div class="input-field col s4">
                   <select name="az" id="az">
                       <option selected disabled value="" required>Scegli l'Azienda</option>
-                      <?php
-
-                        $query91 = 'SELECT CodAz, Nome FROM azienda ORDER BY Nome';
-
-                        $result91 = mysqli_query($connection, $query91);
-                        if (!$result91) {
-                          die('Invalid query: ' . mysql_error());
-                        }
-
-                        while($row91 = mysqli_fetch_array($result91,MYSQLI_NUM)){
-                           $id91 = $row91[0]; 
-                           $nome91 = $row91[1];
-                      ?>
-                                <option value="<?php echo $id91;?>"><?php echo $nome91;?></option>
-                      <?php 
-                      } 
-                      ?>
                     </select>
                   <label for="az">Azienda</label>
                 </div>
