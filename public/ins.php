@@ -129,7 +129,7 @@
 	                    <label for="esp">Classe</label>
 	                </div>
                 </div>
-              <button action="submit" name="action">INSERISCI</button>
+                <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -169,7 +169,7 @@
                       <label for="pswp">Password</label>
                     </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -186,7 +186,7 @@
             <label for="spec">Specializzazione</label>
           </div>
         </div>
-        <button action="submit" name="action">INSERISCI</button>
+        <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
       </form>
 
 			<h2>Inserimento Classe</h2>
@@ -276,7 +276,7 @@
                       <label for="fks">Specializzazione</label>
                     </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -473,7 +473,7 @@
                     </p>
                   </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
               </div>
             </form>
 
@@ -555,7 +555,7 @@
                       <label for="datetut">Data di Nascita</label>
                     </div>
                 </div>
-                <button action="submit" name="action">INSERISCI</button>
+                <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
             </form>
 		</div>
 	</div>
@@ -706,7 +706,7 @@
                 </p>
               </div>
             </div>
-            <button action="submit" name="action">INSERISCI</button>
+            <button action="submit" name="action" class="waves-effect waves-light btn">INSERISCI</button>
         </form>      
     </div>
   </div>
